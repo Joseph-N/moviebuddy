@@ -1,0 +1,30 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: moviebuddy_development
+  pool: 25
+  username: jose
+  password: "4114"
+  template: template0
+  host: localhost
+
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: moviebuddy_test
+  pool: 25
+  username: jose
+  password: "4114"
+  template: template0
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: moviebuddy_production
+  pool: 25
+  username: jose
+  password: "4114"
+  template: template0
+
+cucumber:
+  <<: *test

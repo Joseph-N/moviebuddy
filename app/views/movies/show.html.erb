@@ -1,0 +1,6 @@
+<b>Title</b> <%= @movie.title %><br />
+<%= image_tag @movie.poster %><br />
+<b>Overview</b><%= @movie.overview %><br />
+<b>Genres</b><%= @movie.genres.join(',') %><br />
+<b>Video</b><br />
+<%= raw(@trailer) %>

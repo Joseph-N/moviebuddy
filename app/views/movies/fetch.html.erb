@@ -1,0 +1,18 @@
+<h3><%= @movie["original_title"] %></h3>
+<p><%= @movie["release_date"] %></p>
+<%= image_tag(@tmdb.imageUrl('poster', "w185", @movie["poster_path"])) if @movie["poster_path"] %>
+<p><%= @movie["overview"] %></p>
+
+
+	<%= form_for(Movie.new) do |f| %>
+		<%= f.hidden_field :title, value: @movie["original_title"]  %>
+		<%= f.text_area :overview, value: @movie["overview"], :style=>"display:none;" %>
+		<%= f.hidden_field :poster, value: @tmdb.imageUrl('poster', "w185", @movie["poster_path"])  %>
+		<%= f.hidden_field :genres, value: @genres.join(',') %>
+		<%= f.hidden_field :youtube_id, value: @trailer  %>
+
+		<%= f.label :comment %>
+		<%= f.text_area :comment, placeholder: 'Your comment' %><br />
+
+		<%= f.submit "Add to my moves", id: "save-movie" %>
+	<% end %>
