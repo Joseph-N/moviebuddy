@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 	has_attached_file :avator, :styles => { :thumb => "150x150#" },
 		:url => "/assets/users/:id/:style/:basename.:extension",
 	  	:path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
-	  	:default_url => '/assets/users/default_user.jpg'
+	  	:default_url => 'default_user.jpg'
 
 	validates_presence_of :name
 	validates_attachment_size :avator, :less_than => 5.megabytes
