@@ -4,8 +4,19 @@
   <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   <%= link_to "My Movies", movies_path %>
   <br />
-  <%= image_tag @user.avator.url(:thumb) if@user.avator.present? %>
+  <%= image_tag @user.avator.url(:thumb)  %>
   <br />
+  <% for user in @users %>
+  	<p><%= link_to user.name, user_show_path(user) %> &rarr;
+	  	<span>
+	  		<% if current_user.following?(user) %>
+	  			<%= link_to "unfollow" ,user_unfollow_path(id: user.id) %>
+	  		<% else %>
+	  			<%= link_to "follow" ,user_follow_path(id: user.id) %>
+	  		<% end %>
+	  	</span>
+	 </p>
+  <% end %>
     
 <% else %>
   <%= link_to "Sign up", new_user_registration_path  %> |

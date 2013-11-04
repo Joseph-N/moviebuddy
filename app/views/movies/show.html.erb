@@ -1,6 +1,20 @@
+<%= @movie.comment if @movie.comment %><br /><br />
 <b>Title</b> <%= @movie.title %><br />
 <%= image_tag @movie.poster %><br />
+<%= render partial: 'shared/votes_info', locals: { movie: @movie } %>
 <b>Overview</b><%= @movie.overview %><br />
-<b>Genres</b><%= @movie.genres.join(',') %><br />
+<b>Genres</b><%= @movie.genres.join(',') unless @movie.genres.nil? %><br />
 <b>Video</b><br />
-<%= raw(@trailer) %>
+<%= raw(@trailer) %><br /><br />
+
+<h2>Comments</h2>
+<% unless @comments.nil? %>
+<ul id="comments">
+	<%= render @comments %>
+</ul>
+<% end %>
+
+<h2>Add a comment:</h2>
+<div id="comments">
+<%= render 'comments/form' %>
+</div>

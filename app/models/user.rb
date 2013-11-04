@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 	acts_as_voter 
+	acts_as_followable
+	acts_as_follower
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -7,15 +9,17 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
 	
-	has_many :movies	
+	has_many :movies
+	has_many :comments, through: :movies	
 
 	has_attached_file :avator, :styles => { :thumb => "150x150#" },
 		:url => "/assets/users/:id/:style/:basename.:extension",
-	  	:path => ":rails_root/public/assets/users/:id/:style/:basename.:extension"
+	  	:path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
+	  	:default_url => '/assets/users/default_user.jpg'
 
 	validates_presence_of :name
 	validates_attachment_size :avator, :less_than => 5.megabytes
-	validates_attachment_content_type :avator, :content_type => ['image/jpeg', 'image/png']
+	validates_attachment_content_type :avator, :content_type => ['image/jpeg', 'image/png','image/jpg']
 
 	def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 		user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -30,28 +34,27 @@ class User < ActiveRecord::Base
 		                        provider:auth.provider,
 		                        uid:auth.uid,
 		                        email:auth.info.email,
-		                        password:Devise.friendly_token[0,20],
+		                        password: 'password',
 		                      )
 		  end
 		   
 		end
 	end
 
-	def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
- 
+	def self.find_for_twitter_oauth(auth, signed_in_resource=nil) 
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
 	  if user
 	    return user
 	  else
-	    registered_user = User.where(:email => auth.uid + "@twitter.com").first
+	    registered_user = User.where(:email => auth.info.nickname + "@twitter.com").first
 	    if registered_user
 	      return registered_user
 	    else
 	      user = User.create(name:auth.info.name,
 	        provider:auth.provider,
 	        uid:auth.uid,
-	        email:auth.uid+"@twitter.com",
-	        password:Devise.friendly_token[0,20],
+	        email:auth.info.nickname + "@twitter.com",
+	        password:'password',
 	      )
 	    end
 	  end
@@ -71,7 +74,7 @@ class User < ActiveRecord::Base
 					provider:access_token.provider,
 					email: data["email"],
 					uid: access_token.uid ,
-					password: Devise.friendly_token[0,20],
+					password: 'password',
 				)
 			end
     	end

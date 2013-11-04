@@ -1,0 +1,4 @@
+<h4><%= @user.name %></h4>
+<p>Movies: <%= link_to @user.movies.count, user_movies_path(@user) %></p>
+<p>Followers: <%= link_to @user.followers_count, user_followers_path(@user) %></p>
+<p>Following: <%= link_to @user.follow_count, user_follows_path(@user) %></p>

@@ -17,6 +17,8 @@ class MoviesController < ApplicationController
 
 	def show
 		@movie = Movie.find(params[:id])
+		@comment = @movie.comments.build
+		@comments = @movie.comments
 		@trailer = youtubeVideo(@movie.youtube_id)
 	end
 
@@ -36,26 +38,29 @@ class MoviesController < ApplicationController
 		if @movie.save
 			respond_to do |format|
 				format.json { render json: {"url" => movies_path} }
+				format.html { redirect_to movies_path}
 			end
 		end
 	end
 
 	def vote
 		@movie = Movie.find(params[:id])
-		if params[:v] == 'up'
+		if params[:vote] == 'up'
 			if current_user.voted_on?(@movie)
 				current_user.vote_exclusively_for(@movie)
 			else
 				current_user.vote_for(@movie)
 			end
-			redirect_to movies_path
-		elsif params[:v] == 'down'
+		elsif params[:vote] == 'down'
 			if current_user.voted_on?(@movie)
         		current_user.vote_exclusively_against(@movie)
         	else
 				current_user.vote_against(@movie)
 			end
-			redirect_to movies_path
+		end
+		respond_to do |format|
+			format.html { redirect_to movie_path(@movie) }
+			format.js
 		end
 	end
 
@@ -74,7 +79,7 @@ class MoviesController < ApplicationController
 	        	video = JSON.parse(RestClient.get url)
 	        	video["html"]
 	        rescue => e
-	        	e.response
+	        	"Trailer could not be fetched"
 	        end
     	end
 end

@@ -10,27 +10,14 @@
 
 <div id="content">
 <% if params[:q] %>
-	<%= render 'movies' %>
+	<%= render 'results' %>
 	<% else %>
 	<h4>My Movies</h4>
 <% for movie in @movies %>
-	<%= movie.comment if movie.comment %><br />
+	
 	<%= link_to(image_tag(movie.poster), movie_path(movie)) %><br />
-	<b>Title</b><%= movie.title %><br />
-	<b>overview</b><%= movie.overview %><br />
-	<b>Genres:</b><%= movie.genres.join(",") %><br />
-	<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
-	<p><% if current_user.voted_how?(movie) == true %>
-		<%= link_to "Vote up" , '#' %> | <%= link_to 'Vote down', vote_movie_path(movie, v: 'down') %>
-		<% elsif current_user.voted_how?(movie) == false %>
-		<%= link_to "Vote up" , vote_movie_path(movie, v: 'up') %> |
-		 <%= link_to 'Vote down', '#' %>
-		 <% else %>
-		 
-		 <%= link_to "Vote up" , vote_movie_path(movie, v: 'up') %>  |
-		 <%= link_to 'Vote down', vote_movie_path(movie, v: 'down') %> 
 
-		<% end %> </p>
+	<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
 	<hr />
 <% end %>
 <% end %>

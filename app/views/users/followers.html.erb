@@ -1,0 +1,15 @@
+<% for follower in @followers %>
+	<p><%= link_to follower.name, user_show_path(follower) %> &rarr; 
+					  	<span>
+					  		<% unless current_user == follower %>
+	  		<% if current_user.following?(follower) %>
+	  			<%= link_to "unfollow" ,user_unfollow_path(id: follower.id) %>
+	  		<% else %>
+	  			<%= link_to "follow" ,user_follow_path(id: follower.id) %>
+	  		<% end %>
+	  		<% end %>
+	  	</span>
+
+	</p>
+
+<% end %>

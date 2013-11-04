@@ -1,0 +1,6 @@
+<% @movies.each do |movie| %>
+<b>Title</b> <%= movie.title %><br />
+<%= link_to image_tag(movie.poster), movie_path(movie) %><br />
+<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
+<hr />
+<% end %>

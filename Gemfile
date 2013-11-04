@@ -41,3 +41,9 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 gem "omniauth-twitter", "~> 1.0.1"
 gem "paperclip", "~> 3.0"
 gem "thumbs_up", "~> 0.6.7"
+gem "acts_as_follower"
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end

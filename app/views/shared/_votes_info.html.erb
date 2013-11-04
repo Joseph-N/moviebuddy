@@ -1,0 +1,13 @@
+<div id="vote-info-<%= movie.id %>">
+<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
+	<p><% if current_user.voted_how?(movie) == true %>
+		<%= link_to "Vote up" , '#' %> | <%= link_to 'Vote down', vote_movie_path(movie, vote: 'down'), class: "vote" %>
+		<% elsif current_user.voted_how?(movie) == false %>
+		<%= link_to "Vote up" , vote_movie_path(movie, vote: 'up'), class: "vote" %> |
+		 <%= link_to 'Vote down', '#' %>
+		 <% else %>		 
+		 <%= link_to "Vote up" , vote_movie_path(movie, vote: 'up'), class: "vote" %>  |
+		 <%= link_to 'Vote down', vote_movie_path(movie, vote: 'down'), class: "vote" %> 
+
+		<% end %> </p>
+	</div>

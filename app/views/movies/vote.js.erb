@@ -1,0 +1,1 @@
+$('#vote-info-<%= @movie.id %>').html('<%= escape_javascript(render(:partial => "shared/votes_info", locals: { movie: @movie })) %>');

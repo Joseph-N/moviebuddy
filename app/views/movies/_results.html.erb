@@ -1,0 +1,8 @@
+Found <b> <%= @movies.count %> </b> matches<br />
+<% @movies.each do |movie| %>
+	
+		<%= image_tag(@tmdb.imageUrl('poster', "w154", movie["poster_path"])) if movie["poster_path"] %>
+	<p>
+		<b><%= movie["original_title"] %> (<%= link_to "Movie Info", fetch_movie_path(movie["id"]) %>)</b>
+	</p>
+<% end %>

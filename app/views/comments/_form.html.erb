@@ -1,0 +1,15 @@
+<% if @comment.errors.any? %>
+        <% @comment.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+<% end %>
+
+<%= form_for([@movie, @comment]) do |f| %>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

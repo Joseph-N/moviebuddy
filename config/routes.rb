@@ -7,13 +7,22 @@ MovieBuddy::Application.routes.draw do
   # root 'welcome#index'
   root 'home#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_scope :users do
+    get 'users/:id' => 'users#show', as: :user_show
+    get 'users/:id/movies' => 'users#movies', as: :user_movies
+    get 'users/:id/following' => 'users#following', as: :user_follows
+    get 'users/:id/followers' => 'users#followers', as: :user_followers
+  end
   resources :movies do
+    resources :comments
     member do
       get 'vote'
     end
   end
 
   get '/fetch/:id' => 'movies#fetch', as: :fetch_movie
+  get '/follow' => 'users#follow', as: :user_follow
+  get '/unfollow' => 'users#unfollow', as: :user_unfollow
 
 
   # Example of regular route:
