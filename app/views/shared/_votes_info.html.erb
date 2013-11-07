@@ -1,13 +1,16 @@
 <div id="vote-info-<%= movie.id %>">
-<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
-	<p><% if current_user.voted_how?(movie) == true %>
-		<%= link_to "Vote up" , '#' %> | <%= link_to 'Vote down', vote_movie_path(movie, vote: 'down'), class: "vote" %>
+	<div class="col-xs-6 col-md-5">
+	  	<% if current_user.voted_how?(movie) == true %>
+			<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , '#', class: "btn btn-flat flat-success disabled btn-bordered" %>
+			<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %>
 		<% elsif current_user.voted_how?(movie) == false %>
-		<%= link_to "Vote up" , vote_movie_path(movie, vote: 'up'), class: "vote" %> |
-		 <%= link_to 'Vote down', '#' %>
+			<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %>
+		 	<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), '#', class: "btn btn-flat flat-danger disabled btn-bordered" %>
 		 <% else %>		 
-		 <%= link_to "Vote up" , vote_movie_path(movie, vote: 'up'), class: "vote" %>  |
-		 <%= link_to 'Vote down', vote_movie_path(movie, vote: 'down'), class: "vote" %> 
-
-		<% end %> </p>
+		 	<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %> 
+		 	<%= link_to raw('<i class="icon-thumbs-up"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %> 
+		<% end %>
 	</div>
+</div>
+
+

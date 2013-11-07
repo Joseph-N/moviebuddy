@@ -1,2 +1,5 @@
-$('ul#comments').append('<%= escape_javascript(render(:partial => @comment)) %>');
-$('#new_comment')[0].reset();
+var s = jQuery;
+s.noConflict();
+
+s('ul#comments').append('<%= escape_javascript(render(:partial => @comment)) %>');
+s('#new_comment')[0].reset();

@@ -2,38 +2,74 @@
 All this logic will automatically be available in application.js.
 You can use CoffeeScript in this file: http://coffeescript.org/ */
 
-$(document).ready(function(){
+var s = jQuery;
+s.noConflict();
+
+s(document).ready(function(){
+	s('.youtube').fitVids();
+
+	// Isotope Portfolio
+    var container = s('#isotope-portfolio-container');
+    var filter = s('.portfolio-filter');
+    s(window).load(function () {
+        // Initialize Isotope
+        container.isotope({
+            itemSelector: '.portfolio-item-wrapper'
+        });
+        s('.portfolio-filter a').click(function () {
+            var selector = s(this).attr('data-filter');
+            container.isotope({ filter: selector });
+            return false;
+        });
+        filter.find('a').click(function () {
+            var selector = s(this).attr('data-filter');
+            filter.find('a').parent().removeClass('active');
+            s(this).parent().addClass('active');
+        });
+    });
+    s(window).smartresize(function () {
+        container.isotope('reLayout');
+    });   
 
 	// when a user searches for movies
-	$('#movie_search').submit(function(){
-		$('#loading').show();
-		$.ajax({
+	s('#movie_search').submit(function(){
+		s('#loading').show();
+		s.ajax({
 			type: "GET",
-  			url: $(this).attr('action'),
-  			data: $(this).serialize(),
+  			url: s(this).attr('action'),
+  			data: s(this).serialize(),
   			dataType: "script",
   			success: function(){
-  				$('#loading').hide();
+  				s('#loading').hide();
   			}
 		});
 		return false;
 	});
 
 	// when user wants to save a movie
-	$('#save-movie').click(function(e){
+	s('#save-movie').click(function(e){
 		e.preventDefault();
 
-		var title = $('#movie_title').val();
-		var overview = $('#movie_overview').val();
-		var poster= $('#movie_poster').val();
-		var comment = $('#movie_comment').val();
-		var genres = $('#movie_genres').val().split(",");
-		var video_id = $('#movie_youtube_id').val();
+		var title = s('#movie_title').val();
+		var overview = s('#movie_overview').val();
+		var poster= s('#movie_poster').val();
+		var comment = s('#movie_comment').val();
+		var genres = s('#movie_genres').val().split(",");
+		var video_id = s('#movie_youtube_id').val();
+		var budget = s('#movie_budget').val();
+		var homepage = s('#movie_homepage').val();
+		var r_date = s('#movie_release_date').val();
+		var tagline = s('#movie_tag_line').val();
+		var backdrop = s('#movie_backdrop').val();
 
-		$.ajax({
+		s.ajax({
 			type: "POST",
-  			url: $('#new_movie').attr('action'),
-  			data: {"movie[title]" : title, "movie[overview]": overview, "movie[poster]": poster, "movie[comment]" : comment, "movie[youtube_id]" : video_id,"movie[genres]": genres },
+  			url: s('#new_movie').attr('action'),
+  			data: {"movie[title]" : title, "movie[overview]": overview, "movie[poster]": poster,
+  				"movie[comment]" : comment, "movie[youtube_id]" : video_id,"movie[genres]": genres,
+  				"movie[budget]" : budget, "movie[homepage]" : homepage, "movie[release_date]" : r_date,
+  				"movie[tag_line]" : tagline, "movie[backdrop]" : backdrop
+  			},
   			success: function(data){
   				 window.location.href = data.url;
   			}
@@ -41,33 +77,29 @@ $(document).ready(function(){
 	});
 
 	// when use clicks the voting links
-	$(document).on('click', 'a.vote', function(e){
+	s(document).on('click', 'a.vote', function(e){
 		e.preventDefault();
 
-		$.ajax({
+		s.ajax({
 			type: "GET",
-  			url: $(this).attr('href'),
+  			url: s(this).attr('href'),
   			dataType: "script"
 		});	
 	});
 
 	// when a comment is posted
-	$('#new_comment').submit(function(e){
+	s('#new_comment').submit(function(e){
 		e.preventDefault();
-		if(!$.trim($('#comment_body').val())){
+		if(!s.trim(s('#comment_body').val())){
 			alert("Please fill some content")
 		}
 		else{
-			$.ajax({
+			s.ajax({
 				type: "POST",
-	  			url: $(this).attr('action'),
-	  			data: $(this).serialize(),
+	  			url: s(this).attr('action'),
+	  			data: s(this).serialize(),
 	  			dataType: "script"
 			});
 		}
 	})
 });
-
-$(function(){
-});
-

@@ -1,4 +1,87 @@
-<h4><%= @user.name %></h4>
-<p>Movies: <%= link_to @user.movies.count, user_movies_path(@user) %></p>
-<p>Followers: <%= link_to @user.followers_count, user_followers_path(@user) %></p>
-<p>Following: <%= link_to @user.follow_count, user_follows_path(@user) %></p>
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+            	<% if current_user == @user %>
+                	<h4>My Profile</h4>
+                <% else %>
+                	<h4><%= @user.name %>'s Profile</h4>
+                <% end %>
+            </div>
+            <!-- /.page-title -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+            <section id="item-content-wrapper" class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="portfolio-thumb wrapper-1">
+                            	<img src="http://preview.jumpstartthemes.com/canvas-admin/img/avatars/avatar-large-1.jpg" class="img-responsive" />
+                            </div>
+                            <% unless current_user == @user %>
+                                <% if current_user.following?(@user) %>
+                                    <%= link_to "Un Follow" ,user_unfollow_path(id: @user.id), class: "btn btn-flat flat-danger btn-lg btn-block" %>
+                                <% else %>
+                                    <%= link_to "Follow" ,user_follow_path(id: @user.id), class: "btn btn-flat flat-info btn-lg btn-block " %>
+                                <% end %> 
+                            <% end %> 
+                        </div>
+                        <div class="col-md-8 item-details">
+                        	<div class="wrapper-1 youtube">
+                        		<h2><%= @user.name %></h2>
+                        		<hr />
+                        		<div class="row">
+  <div class="col-xs-6 col-sm-4"><h4><span class="count"><%= @user.movies.count %></span> <%= link_to "Movies", user_movies_path(@user) %></h4></div>
+  <div class="col-xs-6 col-sm-4"><h4><span class="count"><%= @user.followers_count %></span> <%= link_to "Followers", user_followers_path(@user) %></h4></div>
+  <div class="col-xs-6 col-sm-4"><h4><span class="count"><%= @user.follow_count %></span> <%= link_to "Following", user_follows_path(@user) %></h4></div>
+</div>
+                        		<hr />
+                        		            	<div class="row">
+
+
+</div>
+
+                        	</div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+                        <section id="releted-items" class="section colored-wrapper">
+                <div class="container wrapper-2">
+                    <h5 class="subpage-title">
+                        <span>Recent Movies by <%= @user.name %></span>
+                        <!-- Controls -->
+                        <span id="portfolio-next" class="next black"><i class="icon-angle-right"></i></span>
+                        <span id="portfolio-prev" class="prev black"><i class="icon-angle-left"></i></span>
+                    </h5>
+                    <div class="row">
+                        <div id="caroufredsel-portfolio-container">
+                            <% for movie in @recent_movies %>
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <%= image_tag @tmdb.imageUrl('backdrop','w780', movie.backdrop), class: "img-responsive" %>
+                                        <div class="image-overlay"></div>
+                                         <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
+                                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5><%= movie.title %></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <% end %>
+                        </div>
+                        <!-- /.caroufredsel-portfolio-container -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </section>

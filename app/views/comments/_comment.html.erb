@@ -1,3 +1,16 @@
 <% unless comment.body.blank? %>
-	<li><%= comment.user.name %>&rarr; <%= comment.body %></li>
+    <li class="media">
+        <a class="pull-left" href="#">
+        <img class="media-object" width="64" height="64" src="http://placehold.it/64x64" alt="User Image">
+        </a>
+        <div class="media-body">
+            <h5 class="media-heading">
+                <%= link_to comment.user.name, user_show_path(comment.user) %>
+                <span class="comment-date"><%= format_time(comment.created_at) %></span>
+                
+            </h5>
+            <p><%= comment.body %></p>
+        </div>
+    </li>
 <% end %>
+

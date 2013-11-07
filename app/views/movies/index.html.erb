@@ -1,24 +1,85 @@
-<%= form_tag(movies_path, method: :get, id: "movie_search") do  %>
-  <p>
-    <%= text_field_tag :q, params[:q] %>
-  </p>
-    <%= submit_tag "Search", name: nil, id: "search" %>
-  </p>
-<% end %> 
+            <section id="page-title-wrapper" class="section page-title-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                        <h4>My Movies</h4>
+                    </div>
+                    <!-- /.page-title -->
+                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
+                    	<%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+                          <div class="form-group">
+                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
+                          </div>
+                          <% end %> 
+                    </div>
+                    <!-- /.breadcrumb-wrapper -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+        <section id="portfolio-2" class="section colored-wrapper">
+            <div class="container">
+                <ul class="portfolio-filter nav nav-pills">
+                    <li class="active"><a href="#" data-filter="*">All</a></li>
+                    <li><a href="#" data-filter=".action">Action</a></li>
+                    <li><a href="#" data-filter=".drama">Drama</a></li>
+                    <li><a href="#" data-filter=".crime">Crime</a></li>
+                    <li><a href="#" data-filter=".adventure">Adventure</a></li>
+                    <li><a href="#" data-filter=".thriller">Thriller</a></li>
+                    <li><a href="#" data-filter=".mystery">Mystery</a></li>
+                    <li><a href="#" data-filter=".romance">Romance</a></li>
+                    <li><a href="#" data-filter=".horror">Horror</a></li>
+                    <li><a href="#" data-filter=".science.fiction">Science Fiction</a></li>
+                </ul>
+                <!-- /.portfolio-filter -->
+                <div class="row">
+                     <div id="content">
+                        <div id="loading" style="display: none;"><%= image_tag "ajax-loader.gif" %></div>
+                    <div id="isotope-portfolio-container">
+                    	<% if params[:q] %>
+                    		<%= render 'results' %>
+                    	<% else %>
 
-<div id="loading" style="display: none;"><%= image_tag "ajax-loader.gif" %></div>
+                    	<% for movie in @movies %>
 
-<div id="content">
-<% if params[:q] %>
-	<%= render 'results' %>
-	<% else %>
-	<h4>My Movies</h4>
-<% for movie in @movies %>
-	
-	<%= link_to(image_tag(movie.poster), movie_path(movie)) %><br />
-
-	<p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
-	<hr />
+	                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper <%= movie.genres.join(" ").downcase  %>">
+                            <div class="portfolio-item">
+                                <div class="portfolio-thumb">
+                                	<%= image_tag(@tmdb.imageUrl('backdrop','w780', movie.backdrop)) %>
+                                    
+                                    <div class="image-overlay"></div>
+                                    <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
+                                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
+                                </div>
+                                <div class="portfolio-content">
+                                    <h5><%= movie.title %></h5>
+                                    <p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
+                                    <p><%= movie.comments.count %> comments </p>
+                                </div>
+                            </div>
+                        </div>
 <% end %>
+<div class="clearfix"></div>
 <% end %>
-</div>
+
+
+
+
+
+
+
+                    </div>
+                    <!-- /.isotope-portfolio-container -->
+                </div>
+                <!-- end content -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+
+
+
+
+

@@ -1,27 +1,15 @@
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  <%= link_to "My Movies", movies_path %>
-  <br />
-  <%= image_tag @user.avator.url(:thumb)  %>
-  <br />
-  <% for user in @users %>
-  	<p><%= link_to user.name, user_show_path(user) %> &rarr;
-	  	<span>
-	  		<% if current_user.following?(user) %>
-	  			<%= link_to "unfollow" ,user_unfollow_path(id: user.id) %>
-	  		<% else %>
-	  			<%= link_to "follow" ,user_follow_path(id: user.id) %>
-	  		<% end %>
-	  	</span>
-	 </p>
-  <% end %>
-    
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path  %> |
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> |
-   <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %> | 
-   <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
-  <%= link_to "Login", new_user_session_path  %>
-<% end %>
+ <section id="page-title-wrapper" class="section page-title-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                        <h4>Hi, <%= current_user.name %></h4>
+                    </div>
+                    <!-- /.page-title -->
+                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
+                    </div>
+                    <!-- /.breadcrumb-wrapper -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>

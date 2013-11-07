@@ -1,21 +1,145 @@
-<h2>Sign up</h2>
+            <!-- /.fullwidthbanner-container -->
+            <section id="our-services" class="section colored-wrapper">
+                <div class="container">
+                    <div class="row">
+                          <div class="col-md-6">
+                           
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+                          </div>
+  <div class="col-md-6">
+    <div class="register-login">
+                     <div class="cool-block">
+                        <div class="cool-block-bor">
+                        
+                           <h3><i class="icon-user"></i> Sign up here</h3>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:role=>"form"}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name, :autofocus => true %></div>
+                              <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class=> 'form-control', :autofocus => true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, :class=> 'form-control' %>
+  </div>
+    <div class="form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Register now', class: "btn btn-flat flat-inverse pull-right"%>
+  </div>
+  <legend>OR</legend>
+  <%= render "devise/shared/links" %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
 <% end %>
+                           
+                        </div>
+                     </div>   
+                  </div>
 
-<%= render "devise/shared/links" %>
+  </div>
+                    </div>
+
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </section>
+                        <section id="recent-works" class="section">
+                <div class="container wrapper-2">
+                    <h5 class="subpage-title">
+                        <span>Recent Works</span>
+                        <!-- Controls -->
+                        <span id="portfolio-next" class="next black"><i class="icon-angle-right"></i></span>
+                        <span id="portfolio-prev" class="prev black"><i class="icon-angle-left"></i></span>
+                    </h5>
+                    <div class="row">
+                        <div id="caroufredsel-portfolio-container">
+                            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <img src="http://placehold.it/531x354" class="img-responsive" alt="1st Portfolio Thumb">
+                                        <div class="image-overlay"></div>
+                                        <a href="http://placehold.it/531x354" rel="prettyPhoto[pp_gal]"  class="portfolio-zoom"><i class="icon-eye-open"></i></a>
+                                        <a href="portfolio-item-1.html" class="portfolio-link"><i class="icon-link"></i></a>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5>1st Portfolio Item</h5>
+                                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.portfolio-item-wrapper -->
+                            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <img src="http://placehold.it/531x354" class="img-responsive" alt="2nd Portfolio Thumb">
+                                        <div class="image-overlay"></div>
+                                        <a href="http://placehold.it/531x354" rel="prettyPhoto[pp_gal]" class="portfolio-zoom"><i class="icon-eye-open"></i></a>
+                                        <a href="portfolio-item-1.html" class="portfolio-link"><i class="icon-link"></i></a>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5>2nd Portfolio Item</h5>
+                                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.portfolio-item-wrapper -->
+                            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <img src="http://placehold.it/531x354" class="img-responsive" alt="3rd Portfolio Thumb">
+                                        <div class="image-overlay"></div>
+                                        <a href="http://placehold.it/531x354" rel="prettyPhoto[pp_gal]" class="portfolio-zoom"><i class="icon-eye-open"></i></a>
+                                        <a href="portfolio-item-1.html" class="portfolio-link"><i class="icon-link"></i></a>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5>3rd Portfolio Item</h5>
+                                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.portfolio-item-wrapper -->
+                            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <img src="http://placehold.it/531x354" class="img-responsive" alt="4th Portfolio Thumb">
+                                        <div class="image-overlay"></div>
+                                        <a href="http://placehold.it/531x354" rel="prettyPhoto[pp_gal]" class="portfolio-zoom"><i class="icon-eye-open"></i></a>
+                                        <a href="portfolio-item-1.html" class="portfolio-link"><i class="icon-link"></i></a>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5>4th Portfolio Item</h5>
+                                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.portfolio-item-wrapper -->
+                            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                                <div class="portfolio-item">
+                                    <div class="portfolio-thumb">
+                                        <img src="http://placehold.it/531x354" class="img-responsive" alt="5th Portfolio Thumb">
+                                        <div class="image-overlay"></div>
+                                        <a href="http://placehold.it/531x354" rel="prettyPhoto[pp_gal]" class="portfolio-zoom"><i class="icon-eye-open"></i></a>
+                                        <a href="portfolio-item-1.html" class="portfolio-link"><i class="icon-link"></i></a>
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h5>5th Portfolio Item</h5>
+                                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.portfolio-item-wrapper -->
+                        </div>
+                        <!-- /.caroufredsel-portfolio-container -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </section>

@@ -4,26 +4,35 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@recent_movies = @user.movies.last(5)
+		@tmdb = Tmdb.new
 	end
 
 	def movies
 		@user = User.find(params[:id])
-		@movies = @user.movies
+		if current_user == @user
+			redirect_to movies_path
+		else
+			@movies = @user.movies
+			@tmdb = Tmdb.new
+		end
 	end
 
 	def following
-		@following = User.find(params[:id]).all_following
+		@user = User.find(params[:id])
+		@following = @user.all_following
 	end
 
 	def followers
-		@followers = User.find(params[:id]).followers
+		@user = User.find(params[:id])
+		@followers = @user.followers
 	end
 
 	def follow
 		@user = User.find(params[:id])
 		if current_user.follow(@user)
 			flash[:notice] = "successfully followed #{@user.name}"
-			redirect_to root_path
+			redirect_to user_show_path(@user)
 		end
 	end
 
@@ -31,7 +40,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		if current_user.stop_following(@user)
 			flash[:notice] = "successfully unfollowed #{@user.name}"
-			redirect_to root_path
+			redirect_to user_show_path(@user)
 		end
 	end
 end

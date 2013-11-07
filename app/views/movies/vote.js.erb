@@ -1,1 +1,5 @@
-$('#vote-info-<%= @movie.id %>').html('<%= escape_javascript(render(:partial => "shared/votes_info", locals: { movie: @movie })) %>');
+var s = jQuery;
+s.noConflict();
+
+s('#vote-info-<%= @movie.id %>').html('<%= escape_javascript(render(:partial => "shared/votes_info", locals: { movie: @movie })) %>');
+s('#votes-progress').html('<%= escape_javascript(render(:partial => "votes_progress")) %>')

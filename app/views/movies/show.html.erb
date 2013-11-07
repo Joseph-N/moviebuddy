@@ -1,20 +1,97 @@
-<%= @movie.comment if @movie.comment %><br /><br />
-<b>Title</b> <%= @movie.title %><br />
-<%= image_tag @movie.poster %><br />
-<%= render partial: 'shared/votes_info', locals: { movie: @movie } %>
-<b>Overview</b><%= @movie.overview %><br />
-<b>Genres</b><%= @movie.genres.join(',') unless @movie.genres.nil? %><br />
-<b>Video</b><br />
-<%= raw(@trailer) %><br /><br />
+            <section id="page-title-wrapper" class="section page-title-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                            <h4><%= @movie.title %> &rarr; <small> <%= @movie.tag_line %></small></h4>
+                        </div>
+                                                    <%= form_tag(movies_path, method: :get, class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+                          <div class="form-group">
+                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
+                          </div>
+                          <% end %> 
+                        <!-- /.page-title -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </section>
 
-<h2>Comments</h2>
-<% unless @comments.nil? %>
-<ul id="comments">
-	<%= render @comments %>
-</ul>
-<% end %>
+                        <section id="item-content-wrapper" class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="portfolio-thumb wrapper-1">
+                            	 <%= image_tag @tmdb.imageUrl('backdrop', 'w780', @movie.poster), class: "img-responsive" %>
+                            </div>
+                            <ul class="project-details-list">
+                                    <li>
+                                        <h6>Name:</h6>
+                                        <div class="project-terms">
+                                            <%= @movie.title %>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Genres:</h6>
+                                        <div class="project-terms">
+                                            <%= @movie.genres ? @movie.genres.join(',') : "No genres available" %>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Release date:</h6>
+                                        <div class="project-terms">
+                                            <%= @movie.release_date %>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Budget:</h6>
+                                        <div class="project-terms">
+                                           <%= number_to_currency @movie.budget %>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h6>Homepage:</h6>
+                                        <div class="project-terms">
+                                            <%= @movie.homepage.present? ? @movie.homepage : "None" %>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<h6>My Opinion:</h6>
+                                    	<div class="project-terms">
+                                    		<%= @movie.comment.present? ? @movie.comment : "......" %>
+                                    	</div>
+                                    </li>
+                                </ul>
+                        </div>
+                        <div class="col-md-7 item-details">
+                        	<div class="wrapper-1 youtube">
+                        		<h5 class="subpage-title">Youtube Trailer</h5>
+                        		<%= raw(@trailer) %>
+                        		<br />
+                        		            	<div class="row">
+                        		            		<%= render partial: 'shared/votes_info', locals: { movie: @movie } %>
 
-<h2>Add a comment:</h2>
-<div id="comments">
-<%= render 'comments/form' %>
+  <div class="col-xs-12 col-md-7" id="votes-progress">
+  	<%= render :partial => 'votes_progress' %>
+  </div>
+
 </div>
+
+                        	</div>
+                            <div class="wrapper-1">
+                                <h5 class="subpage-title">Movie Overview</h5>
+                                <p><%= @movie.overview %></p>
+                            </div>
+                                                    <!-- comments -->
+                        <div class="post-comments">
+                                <h5 class="subpage-title" id="comment-count"><%= @comments.count %> Comments</h5>
+                                <ul class="media-list" id="comments">
+                                	<%= render @comments %>
+								</ul>
+								<!-- end comments -->
+                            </div>
+                    		<%= render 'comments/form' %>                            
+                        </div>
+
+                    </div>
+                </div>
+            </section>

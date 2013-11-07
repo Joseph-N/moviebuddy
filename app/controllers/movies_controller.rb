@@ -70,7 +70,7 @@ class MoviesController < ApplicationController
 		end
 
 		def movie_params
-			params.require(:movie).permit(:title, :overview, :poster, :comment, :youtube_id, genres: [])
+			params.require(:movie).permit(:title, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
 		end
 
 		def youtubeVideo(video_id)
@@ -79,7 +79,7 @@ class MoviesController < ApplicationController
 	        	video = JSON.parse(RestClient.get url)
 	        	video["html"]
 	        rescue => e
-	        	"Trailer could not be fetched"
+	        	"<div style='height: 30px;'>We did not find a trailer on youtube for this movie ;-)</div>"
 	        end
     	end
 end

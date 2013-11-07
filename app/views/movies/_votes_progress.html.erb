@@ -1,0 +1,14 @@
+<div class="progress">
+	<% percentage_likes = percent_of(@movie.votes_for, (@movie.votes_for + @movie.votes_against)) %>
+	<% percentage_dislikes = percent_of(@movie.votes_against, (@movie.votes_for + @movie.votes_against)) %>
+  <div class="progress-bar progress-bar-success" style="width: <%= percentage_likes %>%">
+    <%= percentage_likes %>%
+    <span class="sr-only"><%= percentage_likes %>% likes</span>
+  </div>
+  <div class="progress-bar progress-bar-danger" style="width: <%= percentage_dislikes %>%">
+    <%= percentage_dislikes %>%
+    <span class="sr-only"><%= percentage_dislikes %>% dislikes</span>
+  </div>
+</div>
+<span class="pull-right"><b>4546 views</b></span>
+<p><%= @movie.votes_for %> Upvotes | <%= @movie.votes_against %> Downvotes</p>
