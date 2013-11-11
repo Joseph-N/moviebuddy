@@ -7,14 +7,25 @@ MovieBuddy::Application.routes.draw do
   # root 'welcome#index'
   root 'home#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   devise_scope :users do
     get 'users/:id' => 'users#show', as: :user_show
     get 'users/:id/movies' => 'users#movies', as: :user_movies
     get 'users/:id/following' => 'users#following', as: :user_follows
     get 'users/:id/followers' => 'users#followers', as: :user_followers
+    get 'password/edit' => 'users#edit', as: :password_edit
+    patch 'password/edit' => 'users#update_password'
   end
+
   resources :movies do
     resources :comments
+    member do
+      get 'vote'
+    end
+  end
+
+  resources :updates, :only => [:create] do
+    resources :update_comments, :only => [:create]
     member do
       get 'vote'
     end

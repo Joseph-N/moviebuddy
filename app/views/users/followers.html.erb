@@ -2,7 +2,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                        <h4><%= @user.name %>'s Followers</h4>
+                        <% if @user == current_user %>
+                            <h4>Your Followers</h4>
+                        <% else %>
+                            <h4><%= @user.name %>'s Followers</h4>
+                        <% end %>
                     </div>
                     <!-- /.page-title -->
                     <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
@@ -20,10 +24,10 @@
 
                     	<% for follower in @followers %>
 
-	                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+	                        <div class="col-xs-12 col-sm-6 col-md-3 portfolio-item-wrapper">
                             <div class="portfolio-item">
                                 <div class="portfolio-thumb">
-                                	<%= image_tag("http://placehold.it/780x439") %>
+                                	<%= image_tag follower.avator.url(:medium), class: "img-responsive" %>
 
                                     <div class="image-overlay"></div>
                                     <%= link_to raw('<i class="icon-eye-open"></i>'), "http://placehold.it/780x439", rel: "prettyPhoto", class: "portfolio-zoom" %>

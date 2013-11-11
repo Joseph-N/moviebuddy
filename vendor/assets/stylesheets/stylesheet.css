@@ -3,7 +3,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
-    color: #95a5a6;
+    color: #606060;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -639,7 +639,7 @@ textarea {
 /* Progress
  * -------------------------- */
 .progress {
-    height: 20px;
+    height: 7px;
     margin-bottom: 5px;
     background-color: #f5f5f5;
     border-radius: 0;
@@ -1853,14 +1853,14 @@ textarea {
     list-style: none;
     padding: 20px;
     margin: 0;
-    border: 1px solid #ecf0f1;
+    border: 1px solid #E0E0E0;
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
 }
 
 .project-details-list li {
     padding: 10px 0;
-    border-bottom: 1px solid #ecf0f1;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .project-details-list li:first-child {
@@ -1876,7 +1876,7 @@ textarea {
     width: 100px;
     float: left;
     font-weight: normal;
-    color: #bdc3c7;
+    color: #808080;
     margin: 0;
     line-height: 1.428571429;
 }
@@ -2170,7 +2170,7 @@ textarea {
 
 a.comment-reply, .comment-date {
     font-size: 85%;
-    color: #bdc3c7;
+    color: #A0A0A0;
 }
 
 /* Post Author
@@ -2191,7 +2191,7 @@ a.comment-reply, .comment-date {
 }
 .media,
 .media .media {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 /* Google Map

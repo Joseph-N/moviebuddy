@@ -8,6 +8,7 @@ class MoviesController < ApplicationController
 			@movies = raw_movies["results"].delete_if { |x| x.nil? }
 		else
 			@movies = current_user.movies
+			@genres = user_movie_genres(current_user)
 		end
 		respond_to do |format|
 			format.html

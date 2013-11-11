@@ -3,7 +3,7 @@
 <head>
   <title>MovieBuddy</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="shortcut icon" href="assets/ico/favicon.png">
+   <link rel="shortcut icon" href="assets/favicon.png">
   <%= stylesheet_link_tag    "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -53,19 +53,19 @@
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav pull-right">
                             	<% if user_signed_in? %>
-                            	<li><%= link_to "My Movies", movies_path %></li>
-                            	<li><%= link_to current_user.name, user_show_path(current_user) %></li>
+                            	<li><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
+                            	<li><%= link_to raw("<i class='icon-user'></i> " + current_user.name), user_show_path(current_user) %></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i></a>
                                     <ul class="dropdown-menu">
-                                        <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-                                        <li><%= link_to('Log Out',  destroy_user_session_path, method: :delete)  %></li>
+                                        <li><%= link_to raw("<i class='icon-edit'></i> Edit Profile"), edit_user_registration_path %></li>
+                                        <li><%= link_to(raw("<i class='icon-signout'></i> Log Out"),  destroy_user_session_path, method: :delete)  %></li>
                                     </ul>
                                 </li>
                             	
                             	<% else %>
-                                <li><%= link_to('Sign in', new_user_session_path)  %></li>
-          						<li><%= link_to('Sign up', new_user_registration_path)  %></li> 
+                                <li><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
+          						<li><%= link_to(raw("<i class='icon-collapse-top'></i> Sign up"), new_user_registration_path)  %></li> 
                                 <% end %>                      
                             </ul>
                             <!-- /.nav -->
@@ -184,117 +184,6 @@
             <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 
         </div>
-              <script type="text/javascript">
-            var tpj = jQuery;
-            tpj.noConflict();
-            tpj(document).ready(function () {
-                // Revolution Slider
-                if (tpj.fn.cssOriginal != undefined)
-                    tpj.fn.css = tpj.fn.cssOriginal;
-                tpj('.fullwidthbanner').revolution({
-                    delay: 9000,
-                    startwidth: 1200,
-                    startheight: 400,
-            
-                    onHoverStop: "on",
-            
-                    thumbWidth: 100,
-                    thumbHeight: 50,
-                    thumbAmount: 3,
-            
-                    hideThumbs: 0,
-            
-                    navigationType: "none",
-                    navigationArrows: "solo",
-                    navigationStyle: "round",
-                    navigationHAlign: "left",
-                    navigationVAlign: "bottom",
-                    navigationHOffset: 30,
-                    navigationVOffset: 30,
-            
-                    soloArrowLeftHalign: "left",
-                    soloArrowLeftValign: "center",
-                    soloArrowLeftHOffset: 20,
-                    soloArrowLeftVOffset: 0,
-            
-                    soloArrowRightHalign: "right",
-                    soloArrowRightValign: "center",
-                    soloArrowRightHOffset: 20,
-                    soloArrowRightVOffset: 0,
-            
-                    stopAtSlide: -1,
-                    stopAfterLoops: -1,
-                    hideCaptionAtLimit: 0,
-                    hideAllCaptionAtLilmit: 0,
-                    hideSliderAtLimit: 0,
-            
-                    fullWidth: "on",
-                    fullScreen: "off",
-                    fullScreenOffsetContainer: "#topheader-to-offset",
-            
-                    shadow: 0
-                });
-                // PrettyPhoto
-                tpj("a[rel^='prettyPhoto']").prettyPhoto({
-                    theme: 'facebook',
-                    social_tools: false
-                });
-
-
-                // jQuery UItoTop
-                tpj().UItoTop({ easingType: 'easeOutQuart' });
-                // Skin Chooser
-                tpj(".color-skin").click(function () {
-                    var cls = this.id;
-                    tpj(".color-skin").removeClass("active");
-                    tpj(this).addClass("active");
-                    tpj("#main-wrapper").removeClass();
-                    tpj("#main-wrapper").addClass(cls);
-                });
-            });
-            // jQuery CarouFredSel
-            var caroufredsel = function () {
-                tpj('#caroufredsel-portfolio-container').carouFredSel({
-                    responsive: true,
-                    scroll: 1,
-                    circular: false,
-                    infinite: false,
-                    items: {
-                        visible: {
-                            min: 1,
-                            max: 3
-                        }
-                    },
-                    prev: '#portfolio-prev',
-                    next: '#portfolio-next',
-                    auto: {
-                        play: false
-                    }
-                });
-                tpj('#caroufredsel-clients-container').carouFredSel({
-                    responsive: true,
-                    scroll: 1,
-                    circular: false,
-                    infinite: false,
-                    items: {
-                        visible: {
-                            min: 1,
-                            max: 4
-                        }
-                    },
-                    prev: '#client-prev',
-                    next: '#client-next',
-                    auto: {
-                        play: false
-                    }
-                });
-            };
-            tpj(window).load(function () {
-                caroufredsel();
-            });
-            tpj(window).resize(function () {
-                caroufredsel();
-            });            
-        </script>
+        <%= render :partial => 'shared/modal' %>
 </body>
 </html>

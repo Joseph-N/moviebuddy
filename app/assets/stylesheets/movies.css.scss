@@ -1,3 +1,31 @@
 // Place all the styles related to the movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#search{
+	height: 36px;
+	padding-top: -3px;
+}
+
+.nav-pills > li > a {
+  padding: 5px 12px;
+  color: #444;
+  background-color: #eee;
+}
+.nav-pills > li > a:hover {
+  background-color: #e4e4e4;
+}
+
+textarea{
+   	resize:vertical;
+   	border-color: #999 !important;
+}
+
+.home{
+	color: #428bca !important;
+}
+
+textarea.cupdate{
+	height: 50px;
+	padding: 5px;
+}

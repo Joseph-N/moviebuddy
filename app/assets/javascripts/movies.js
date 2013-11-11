@@ -31,6 +31,73 @@ s(document).ready(function(){
         container.isotope('reLayout');
     });   
 
+        // PrettyPhoto
+    s("a[rel^='prettyPhoto']").prettyPhoto({
+        theme: 'facebook',
+        social_tools: false
+    });
+
+    // jQuery UItoTop
+    s().UItoTop({ easingType: 'easeOutQuart' });
+
+	// Skin Chooser
+	s(".color-skin").click(function () {
+	    var cls = this.id;
+	    s(".color-skin").removeClass("active");
+	    s(this).addClass("active");
+	    s("#main-wrapper").removeClass();
+	    s("#main-wrapper").addClass(cls);
+	});
+
+    // jQuery CarouFredSel
+    var caroufredsel = function () {
+        s('#caroufredsel-portfolio-container').carouFredSel({
+            responsive: true,
+            scroll: 1,
+            circular: false,
+            infinite: false,
+            items: {
+                visible: {
+                    min: 1,
+                    max: 3
+                }
+            },
+            prev: '#portfolio-prev',
+            next: '#portfolio-next',
+            auto: {
+                play: false
+            }
+        });
+        s('#caroufredsel-clients-container').carouFredSel({
+            responsive: true,
+            scroll: 1,
+            circular: false,
+            infinite: false,
+            items: {
+                visible: {
+                    min: 1,
+                    max: 4
+                }
+            },
+            prev: '#client-prev',
+            next: '#client-next',
+            auto: {
+                play: false
+            }
+        });
+    };
+    s(window).load(function () {
+        caroufredsel();
+    });
+    s(window).resize(function () {
+        caroufredsel();
+    });  
+
+
+    /*
+     *----------------- AJAX CALLS ------------------ *
+     			                    				  */
+
 	// when a user searches for movies
 	s('#movie_search').submit(function(){
 		s('#loading').show();
@@ -91,7 +158,7 @@ s(document).ready(function(){
 	s('#new_comment').submit(function(e){
 		e.preventDefault();
 		if(!s.trim(s('#comment_body').val())){
-			alert("Please fill some content")
+			s('#modal').modal();
 		}
 		else{
 			s.ajax({

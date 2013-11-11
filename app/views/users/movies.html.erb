@@ -17,15 +17,13 @@
             <div class="container">
                 <ul class="portfolio-filter nav nav-pills">
                     <li class="active"><a href="#" data-filter="*">All</a></li>
-                    <li><a href="#" data-filter=".action">Action</a></li>
-                    <li><a href="#" data-filter=".drama">Drama</a></li>
-                    <li><a href="#" data-filter=".crime">Crime</a></li>
-                    <li><a href="#" data-filter=".adventure">Adventure</a></li>
-                    <li><a href="#" data-filter=".thriller">Thriller</a></li>
-                    <li><a href="#" data-filter=".mystery">Mystery</a></li>
-                    <li><a href="#" data-filter=".romance">Romance</a></li>
-                    <li><a href="#" data-filter=".horror">Horror</a></li>
-                    <li><a href="#" data-filter=".science.fiction">Science Fiction</a></li>
+                    <% @genres.each do |genre| %>
+                        <% if genre.split.size > 1 %>
+                            <li><a href="#" data-filter=".<%= genre.split.join(".").downcase %>"><%= genre.capitalize %></a></li>
+                        <% else %>
+                            <li><a href="#" data-filter=".<%= genre.downcase %>"><%= genre.capitalize %></a></li>
+                        <% end %>
+                    <% end %>
                 </ul>
                 <!-- /.portfolio-filter -->
                 <div class="row">

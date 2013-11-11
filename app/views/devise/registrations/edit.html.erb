@@ -1,34 +1,135 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+              <h4>Edit Profile</h4>
+            </div>
+            <!-- /.page-title -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
-  <%= devise_error_messages! %>
+            <section id="item-content-wrapper" class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                          <ul id="myTab" class="nav nav-pills nav-stacked">
+                <li class="active">
+                  <a href="#profile-tab" data-toggle="tab">
+                    <i class="icon-user"></i> 
+                    &nbsp;&nbsp;Profile Settings
+                  </a>
+                </li>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name, :autofocus => true %></div>
+                                <li class="">
+                  <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
+                </li>
+              </ul>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+                        </div>
+                        <div class="col-md-8 item-details">
+                          <div class="wrapper-1">
 
-  <div><br /><%= f.file_field :avator %></div><br />
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => "form-horizontal" }) do |f| %>  
+  <%= devise_error_messages! %>                  
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+                    <div class="form-group">
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+                      <label class="col-md-3">Avatar</label>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+                      <div class="col-md-7">
+                    <div class="thumbnail" style="width: 180px; height: 180px;">
+                      <%= image_tag @user.avator.url(:profile) %>
+                    </div>
+                    <div style="margin-bottom: 5px; margin-top: 10px;">
+                     <%= f.file_field :avator %>
+                    </div>
+                      </div> <!-- /.col -->
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+                    </div> <!-- /.form-group -->
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+                    <div class="form-group">
+                      <%= f.label :name, :class => "col-md-3" %>
 
-<%= link_to "Back", :back %>
+                      <div class="col-md-7">
+                        <%= f.text_field :name, :class => "form-control", :autofocus => true %>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                      
+
+                    <div class="form-group">
+                      <%= f.label :email, :class =>"col-md-3" %>
+
+                      <div class="col-md-7">
+                        <%= f.email_field :email, :class => "form-control" %>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                      
+                    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                    <% end %>
+
+                    <div class="form-group">
+                      <%= f.label :password, :class => "col-md-3" %> 
+
+                      <div class="col-md-7">
+                        <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                      
+
+                    <div class="form-group">
+                      <%= f.label "Confirm Password", :class =>"col-md-3" %>
+
+                      <div class="col-md-7">
+                        <%= f.password_field :password_confirmation, :class => "form-control" %>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                      
+
+                    <div class="form-group">
+
+                      <%= f.label :current_password, :class =>"col-md-3" %>
+
+                      <div class="col-md-7">
+                        <%= f.password_field :current_password, :class => "form-control" %>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                     
+
+                    <div class="form-group">
+
+                      <div class="col-md-7 col-md-push-3">
+                        <%= f.submit "Save Changes", :class => "btn btn-primary" %>
+                        &nbsp;
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                      </div> <!-- /.col -->
+
+                    </div> <!-- /.form-group -->
+
+                 <% end %>
+
+
+
+
+                          </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>

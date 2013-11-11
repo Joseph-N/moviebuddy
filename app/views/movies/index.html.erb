@@ -6,11 +6,12 @@
                     </div>
                     <!-- /.page-title -->
                     <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                    	<%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+                                                <%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
                           <div class="form-group">
-                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
-                          </div>
-                          <% end %> 
+                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
+                            </div>
+                            <button class="btn btn-flat btn-bordered btn-default" id="search" type="submit"><i class="icon-search"></i></button>
+                          <% end %>
                     </div>
                     <!-- /.breadcrumb-wrapper -->
                 </div>
@@ -20,18 +21,18 @@
         </section>
         <section id="portfolio-2" class="section colored-wrapper">
             <div class="container">
+                <% unless params[:q] %>
                 <ul class="portfolio-filter nav nav-pills">
                     <li class="active"><a href="#" data-filter="*">All</a></li>
-                    <li><a href="#" data-filter=".action">Action</a></li>
-                    <li><a href="#" data-filter=".drama">Drama</a></li>
-                    <li><a href="#" data-filter=".crime">Crime</a></li>
-                    <li><a href="#" data-filter=".adventure">Adventure</a></li>
-                    <li><a href="#" data-filter=".thriller">Thriller</a></li>
-                    <li><a href="#" data-filter=".mystery">Mystery</a></li>
-                    <li><a href="#" data-filter=".romance">Romance</a></li>
-                    <li><a href="#" data-filter=".horror">Horror</a></li>
-                    <li><a href="#" data-filter=".science.fiction">Science Fiction</a></li>
+                    <% @genres.each do |genre| %>
+                        <% if genre.split.size > 1 %>
+                            <li><a href="#" data-filter=".<%= genre.split.join(".").downcase %>"><%= genre.capitalize %></a></li>
+                        <% else %>
+                            <li><a href="#" data-filter=".<%= genre.downcase %>"><%= genre.capitalize %></a></li>
+                        <% end %>
+                    <% end %>
                 </ul>
+                <% end %>
                 <!-- /.portfolio-filter -->
                 <div class="row">
                      <div id="content">
@@ -54,7 +55,7 @@
                                 </div>
                                 <div class="portfolio-content">
                                     <h5><%= movie.title %></h5>
-                                    <p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
+                                    <p><i class="icon-thumbs-up"></i> <%= movie.votes_for %> | <i class="icon-thumbs-down"></i> <%= movie.votes_against %></p>
                                     <p><%= movie.comments.count %> comments </p>
                                 </div>
                             </div>

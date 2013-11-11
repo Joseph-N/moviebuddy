@@ -10,16 +10,19 @@ class User < ActiveRecord::Base
 
 	
 	has_many :movies
-	has_many :comments, through: :movies	
+	has_many :comments, through: :movies
+	has_many :updates
+	has_many :update_comments, through: :updates	
 
-	has_attached_file :avator, :styles => { :thumb => "150x150#" },
+	has_attached_file :avator, :styles => { :thumb => "64x64#", :profile => "290x290#", :medium => "210x180#" },
 		:url => "/assets/users/:id/:style/:basename.:extension",
 	  	:path => ":rails_root/public/assets/users/:id/:style/:basename.:extension",
-	  	:default_url => 'default_user.jpg'
+	  	:default_url => ':style_default.png'
 
 	validates_presence_of :name
 	validates_attachment_size :avator, :less_than => 5.megabytes
 	validates_attachment_content_type :avator, :content_type => ['image/jpeg', 'image/png','image/jpg']
+
 
 	def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 		user = User.where(:provider => auth.provider, :uid => auth.uid).first

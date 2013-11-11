@@ -1,4 +1,4 @@
-<section id="page-title-wrapper" class="section page-title-wrapper">
+<section id="page-title-wrapper" class="section page-title-wrapper clearfix">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 page-title">
@@ -20,14 +20,16 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="portfolio-thumb wrapper-1">
-                            	<img src="http://preview.jumpstartthemes.com/canvas-admin/img/avatars/avatar-large-1.jpg" class="img-responsive" />
+                                <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
                             </div>
-                            <% unless current_user == @user %>
+                            <%  unless current_user == @user %>
                                 <% if current_user.following?(@user) %>
                                     <%= link_to "Un Follow" ,user_unfollow_path(id: @user.id), class: "btn btn-flat flat-danger btn-lg btn-block" %>
                                 <% else %>
                                     <%= link_to "Follow" ,user_follow_path(id: @user.id), class: "btn btn-flat flat-info btn-lg btn-block " %>
                                 <% end %> 
+                            <% else %>
+                                <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-flat flat-info btn-lg btn-block " %>
                             <% end %> 
                         </div>
                         <div class="col-md-8 item-details">
@@ -56,7 +58,11 @@
                         <section id="releted-items" class="section colored-wrapper">
                 <div class="container wrapper-2">
                     <h5 class="subpage-title">
-                        <span>Recent Movies by <%= @user.name %></span>
+                        <% if current_user == @user %>
+                            <span>My Recent Movies</span>
+                        <% else  %>
+                            <span>Recent Movies by <%= @user.name %></span>
+                        <% end %>
                         <!-- Controls -->
                         <span id="portfolio-next" class="next black"><i class="icon-angle-right"></i></span>
                         <span id="portfolio-prev" class="prev black"><i class="icon-angle-left"></i></span>
