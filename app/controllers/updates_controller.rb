@@ -1,4 +1,9 @@
 class UpdatesController < ApplicationController
+	def index
+		following_user_ids = get_following << current_user.id
+		@updates = Update.where(user_id: following_user_ids).where("created_at > ?", Time.at(params[:after].to_i + 1))
+	end
+
 	def create
 		@update = current_user.updates.build(update_params)
 		if @update.save

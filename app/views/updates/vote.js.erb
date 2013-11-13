@@ -1,0 +1,4 @@
+var s = jQuery;
+s.noConflict();
+
+s('#stats-<%= @update.id %>').html("<%= escape_javascript(render(:partial => 'updates/comment_stats', locals: {update: @update })) %>");

@@ -1,4 +1,8 @@
 class CommentsController < ApplicationController
+	def index
+		@comments = Comment.where("movie_id = ? and created_at > ?", params[:movie_id], Time.at(params[:after].to_i + 1))
+    end
+
 	def create
 		@movie = Movie.find(params[:movie_id])
 		@comment = @movie.comments.build(comment_params)
@@ -9,6 +13,10 @@ class CommentsController < ApplicationController
 				format.js
 			end
 		else
+			@movie = Movie.find(params[:movie_id])
+			@tmdb = Tmdb.new
+			@comments = @movie.comments
+			@trailer = youtubeVideo(@movie.youtube_id)
 			render 'movies/show'
 		end
 	end

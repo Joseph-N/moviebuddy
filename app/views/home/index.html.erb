@@ -1,140 +1,63 @@
- <section id="page-title-wrapper" class="section page-title-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                        <h4>Hi, <%= current_user.name %></h4>
-                    </div>
-                    <!-- /.page-title -->
-                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                    </div>
-                    <!-- /.breadcrumb-wrapper -->
-                </div>
-                <!-- /.row -->
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+         <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                <h4>Hi, <%= current_user.name %></h4>
             </div>
-            <!-- /.container -->
-        </section>
+            <!-- /.page-title --> 
+            <div class="col-xs-6 hidden-xs breadcrumb-wrapper"></div>
+            <!-- /.breadcrumb-wrapper --> 
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container --> 
+</section>
 
- <section id="item-content-wrapper" class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="portfolio-thumb wrapper-1">
-                                <%= form_for(@update, :html => {:role => 'form' }) do |f| %>
-  <div class="form-group">
-    <%= f.text_area :content, placeholder: "What's the latest?...", class: "form-control", rows: 3 %>
-  </div>
-  <div class="form-group">
-    <%= f.submit "Post", class: "btn btn-flat btn-sm flat-inverse pull-right" %>
-  </div>
-<% end %>
-
-<div class="post-comments">
-                                <h5 class="subpage-title">Recent Feed</h5>
-                                <ul class="media-list">
-                                    <% @updates.each do |update| %>
-                                     <li class="media">
-                                        <%= link_to image_tag(update.user.avator.url(:thumb)), user_show_path(update.user), class: "pull-left" %>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">
-                                                <%= link_to update.user.name, user_show_path(update.user) %>                                           
-                                            </h5>
-                                            <p><%= update.content %></p>
-                                            <span>
-                                                <% if current_user.voted_how?(update) == true %>
-                                                <%= link_to "Unlike", vote_update_path(update, :vote => "down"), class: "home" %> . <a href="#" class="home">Comment</a>
-                                                <% elsif current_user.voted_how?(update) == false %>
-                                                <%= link_to "Like", vote_update_path(update, :vote => "up"), class: "home" %> . <a href="#" class="home">Comment</a> 
-                                                <% else %>
-                                                <%= link_to "Like", vote_update_path(update, :vote => "up"), class: "home" %> . <a href="#" class="home">Comment</a> 
-                                                <% end %>
-                                            </span> 
-                                            <span style="margin-left: 5px;"> . <i class="icon-thumbs-up"></i> <%= update.votes_for %> &nbsp; . &nbsp;<i class="icon-comments"></i> <%= update.update_comments.count %></span>
-                                            &nbsp; . &nbsp;
-                                            <span class="comment-date"><%= time_ago_in_words(update.created_at) %> ago</span>
-
-                                            <% update.update_comments.each do |comment| %>
-                                            <!-- Nested media object -->
-                                            <div class="media">
-                                                 <%= link_to image_tag(comment.user.avator.url(:thumb), width: "50px", height: "50px"), user_show_path(comment.user), class: "pull-left" %>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading">
-                                                        <%= link_to comment.user.name, user_show_path(comment.user) %>
-                                                    </h5>
-                                                    <%= comment.content %>
-                                                    <br>
-                                                    <span class="comment-date"><%= time_ago_in_words(comment.created_at) %> ago</span>
-                                                </div>
-                                            </div>
-                                            <% end %>
-
-                                             <div class="media">
-                                                <%= link_to image_tag(current_user.avator.url(:thumb), width: "50px", height: "50px"), user_show_path(current_user), class: "pull-left" %>
-                                                <div class="media-body">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <%= form_for([update, update.update_comments.build]) do |f| %>
-                                                            <%= f.text_area :content, class: "cupdate btn-block" %>                       
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <%= f.submit "Comment" %>
-                                                        </div>
-                                                        <% end %>
-                                                    </div>                                    
-                                                   
-                                                </div>
-                                            </div>
-                                        </div>
-                                                                                   
-                                    </li>
-                                    <hr>
-                                    <% end %>
-                                </ul>
-                            </div>
-
-
-                            </div>
-                        </div>
-                        <div class="col-md-4 item-details">
-                            <div class="wrapper-1">
-                                <h5 class="subpage-title">Project Description</h5>
-                                <p>Lorem ipsum dolor sit amet, habeo persecuti ad usu, tota eruditi accusam ad cum. Eu his illum feugait, nam no idque indoctum electram. Cum ea aliquid delenit cotidieque, sed impedit ullamcorper at. Ei nam omnis maiorum, usu ferri convenire expetendis an, vim adhuc senserit recteque at. Ea ius tota delicata, cu odio habemus officiis vel. Possim copiosae his te.</p>
-                            </div>
-                            <div class="wrapper-1">
-                                <h5 class="subpage-title">Project Details</h5>
-                                <ul class="project-details-list">
-                                    <li>
-                                        <h6>Company:</h6>
-                                        <div class="project-terms">
-                                            WrapMarket LLC
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Categories:</h6>
-                                        <div class="project-terms">
-                                            Design, Photography, Creativity, Web Development
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Date:</h6>
-                                        <div class="project-terms">
-                                            30 August, 2013
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Skills:</h6>
-                                        <div class="project-terms">
-                                            HTML5, CSS3, JavaScript, jQuery, Twitter Bootstrap
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Website:</h6>
-                                        <div class="project-terms">
-                                            <a href="#">WrapMarket.com</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+<section id="item-content-wrapper" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="portfolio-thumb wrapper-1">
+                    <% if notice %>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <%= notice %>
+                    </div>
+                    <% elsif alert %>
+                    <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <%= alert %>
+                    </div>
+                    <% end %>
+                    <%= render 'updates/form' %>
+                    <div class="post-comments">
+                        <h5 class="subpage-title">Recent Feed</h5>
+                        <ul class="media-list">
+                            <%= render @updates unless @updates.nil? %>
+                        </ul>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div class="col-md-4 item-details">
+                <div class="wrapper-1">
+                        <ul class="recent-posts">
+                                                                <li>
+                                        <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
+                                        <h5>
+                                            <%= link_to current_user.name, user_show_path(current_user) %>
+                                            <small><%= link_to "Edit Profile", "#" %></small>
+                                        </h5>
+                                    </li>
+                        </ul>
+                </div>
+                <div class="widget popular-posts">
+                                <h5 class="subpage-title">Popular Users</h5>
+                                <ul class="recent-posts">
+                                    <%= render @users %>
+                                </ul>
+                            </div>
+            </div>
+        </div>
+    </div>
+</section>

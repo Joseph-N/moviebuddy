@@ -24,7 +24,7 @@ MovieBuddy::Application.routes.draw do
     end
   end
 
-  resources :updates, :only => [:create] do
+  resources :updates, :only => [:create, :index] do
     resources :update_comments, :only => [:create]
     member do
       get 'vote'

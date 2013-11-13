@@ -28,6 +28,7 @@ GEM
     acts_as_follower (0.2.0)
     arel (4.0.1)
     atomic (1.1.14)
+    autolink (3.0.0)
     bcrypt-ruby (3.1.2)
     better_errors (0.7.2)
       coderay (>= 1.0.0)
@@ -176,6 +177,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_follower
+  autolink (~> 3.0.0)
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)

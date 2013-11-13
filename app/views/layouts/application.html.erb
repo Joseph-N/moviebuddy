@@ -3,7 +3,7 @@
 <head>
   <title>MovieBuddy</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="shortcut icon" href="assets/favicon.png">
+   <%= favicon_link_tag 'favicon.png' %>
   <%= stylesheet_link_tag    "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -15,8 +15,9 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-8 header-info-wrapper">
                             <ul class="list-inline">
-                                <li><i class="icon-mobile-phone"></i> Mobile: (123) 456-7890</li>
-                                <li><i class="icon-envelope"></i> Mail: <a href="mailto:contact@example.com">contact@example.com</a></li>
+                                <li><i class="icon-film"></i>
+                                    Movie will solve all of your troubles!!
+                                </li>
                             </ul>
                             <!-- /.list-inline -->
                         </div>
@@ -49,6 +50,7 @@
                             </button>
                             <%= link_to raw("Movie<span>Buddy.</span>"), root_path, class: "navbar-brand" %>
                         </div>
+                        
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav pull-right">
@@ -184,6 +186,6 @@
             <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 
         </div>
-        <%= render :partial => 'shared/modal' %>
+        <%= render :partial => 'layouts/modal' %>
 </body>
 </html>

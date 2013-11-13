@@ -1,0 +1,11 @@
+var s = jQuery;
+s.noConflict();
+
+//prepend new update
+s('ul.media-list').prepend('<%= escape_javascript(render(:partial => @update)) %>');
+
+//hide the comment form
+s('.media.update-comment-form').hide();
+
+//reset the form
+s('#new_update')[0].reset();

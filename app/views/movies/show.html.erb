@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div class="portfolio-thumb wrapper-1">
-                            	 <%= image_tag @tmdb.imageUrl('backdrop', 'w780', @movie.poster), class: "img-responsive" %>
+                            	 <%= image_tag @tmdb.imageUrl('backdrop', 'w780', @movie.poster), class: "img-responsive" unless @movie.nil? %>
                             </div>
                             <ul class="project-details-list">
                                     <li>
@@ -71,7 +71,7 @@
                         		            		<%= render partial: 'shared/votes_info', locals: { movie: @movie } %>
 
   <div class="col-xs-12 col-md-7" id="votes-progress">
-  	<%= render :partial => 'votes_progress' %>
+  	<%= render :partial => 'movies/votes_progress' %>
   </div>
 
 </div>
@@ -85,7 +85,7 @@
                         <div class="post-comments">
                                 <h5 class="subpage-title" id="comment-count"><i class="icon-comments"></i> <%= @comments.count %> Comments</h5>
                                 <ul class="media-list" id="comments">
-                                	<%= render @comments %>
+                                	<%= render @comments unless @comments.nil? %>
 								</ul>
 								<!-- end comments -->
                             </div>
@@ -95,3 +95,4 @@
                     </div>
                 </div>
             </section>
+            <div id="comments-path"><%= movie_comments_path(params[:id]) %></div>

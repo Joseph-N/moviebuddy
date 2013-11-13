@@ -17,4 +17,20 @@ class ApplicationController < ActionController::Base
 		user.movies.each {|x| genres << x.genres }
 		genres.flatten.uniq
 	end
+
+	def youtubeVideo(video_id)
+		url = "http://www.youtube.com/oembed?url=http://youtube.com/watch?v=#{video_id}&format=json"
+        begin
+        	video = JSON.parse(RestClient.get url)
+        	video["html"]
+        rescue => e
+        	"<div style='height: 30px;'>We did not find a trailer on youtube for this movie ;-)</div>"
+        end
+	end
+
+	def get_following
+		ids = []
+		current_user.all_following.each{|x| ids << x.id }
+		ids
+	end
 end

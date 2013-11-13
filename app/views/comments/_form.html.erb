@@ -1,7 +1,11 @@
 <% if @comment.errors.any? %>
-        <% @comment.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>
+	<div class="alert alert-danger alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	    <strong>Oh noo!</strong>
+	    <% @comment.errors.full_messages.each do |msg| %>
+			<p><%= msg %></p>
+		<% end %>
+	</div>
 <% end %>
 
 <%= form_for([@movie, @comment], :html => {:role => 'form' }) do |f| %>

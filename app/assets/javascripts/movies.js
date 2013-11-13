@@ -7,6 +7,7 @@ s.noConflict();
 
 s(document).ready(function(){
 	s('.youtube').fitVids();
+  s('#comments-path').hide();
 
 	// Isotope Portfolio
     var container = s('#isotope-portfolio-container');
@@ -168,5 +169,29 @@ s(document).ready(function(){
 	  			dataType: "script"
 			});
 		}
-	})
+	});
+
+  //when a user follows another user
+  s('.follow-unfollow').click(function(e){
+    e.preventDefault();
+    s.ajax({
+      type: "GET",
+        url: s(this).attr('href'),
+        dataType: "script"
+    });    
+  });
+
+  // poll 4 changes
+  if (s('ul#comments').children().size() > 0) {
+    setTimeout(updateComments, 20000);
+  }
+
 });
+
+
+function updateComments() {
+  var after = s('.media:last').attr('data-time');
+  s.getScript(s('#comments-path').text() + '.js?after=' + after);
+  setTimeout(updateComments, 20000);
+}
+

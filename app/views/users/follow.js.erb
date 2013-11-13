@@ -1,0 +1,8 @@
+var s = jQuery;
+s.noConflict();
+
+s('.follow-unfollow').removeClass('flat-info').addClass('flat-danger').
+attr('href', '<%= escape_javascript(user_unfollow_path(id: @user.id)) %>').
+text('UNFOLLOW');
+
+s('#user-stats').html('<%= escape_javascript(render(:partial => "user_stats",  locals: {user: @user }))%>');

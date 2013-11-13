@@ -1,0 +1,6 @@
+var s = jQuery;
+s.noConflict();
+
+s('<%= escape_javascript(render(:partial => @updates)) %>').hide().prependTo('ul.media-list').fadeIn('slow');
+
+//s('.media.update-comment-form').hide();

@@ -12,6 +12,13 @@
                         <div class="cool-block-bor">
                         
                            <h3><i class="icon-user"></i> Log in to your account</h3>
+                           <% if alert %>
+                           <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <strong>Oh snap!</strong>
+                                <%= alert %>
+                            </div>
+                            <% end %>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:role=>"form"}) do |f| %>                      
                            
@@ -28,12 +35,27 @@
   	<% if devise_mapping.rememberable? -%>
     	<%= f.check_box :remember_me %> <%= f.label :remember_me %>
   	<% end -%>
+    <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right" %>
   </div>
   <div class="form-group">
     <%= f.submit 'Sign In', class: "btn btn-flat flat-inverse pull-right"%>
   </div>
-  <legend>OR</legend>
-  <%= render "devise/shared/links" %>
+  <h3 class="clearfix"><i class="icon-level-down"></i> Alternatively</h3>
+  <div class="row">
+  <div class="col-md-4 space">
+    <%= link_to image_tag("facebook.png"), user_omniauth_authorize_path(:facebook) %>
+  </div>
+  <div class="col-md-4 col-md-offset-2 space">
+     <%= link_to image_tag("twitter.png"), user_omniauth_authorize_path(:twitter) %>
+  </div>
+</div>
+<div class="row space">
+  <div class="col-md-6">
+    <%= link_to image_tag("google.png"), user_omniauth_authorize_path(:google_oauth2) %>
+  </div>
+</div>
+ 
+  
 
 <% end %>
                            

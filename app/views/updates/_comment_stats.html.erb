@@ -1,0 +1,13 @@
+<span id="stats-<%= update.id %>">
+	<% if current_user.voted_how?(update) == true %>
+	<%= link_to "Unlike", vote_update_path(update, :vote => "down"), class: "home like-dislike" %> . <a href="#" class="home com" id="comment-<%= update.id %>">Comment</a>
+<% elsif current_user.voted_how?(update) == false %>
+	<%= link_to "Like", vote_update_path(update, :vote => "up"), class: "home like-dislike" %> . <a href="#" class="home com" id="comment-<%= update.id %>">Comment</a> 
+<% else %>
+	<%= link_to "Like", vote_update_path(update, :vote => "up"), class: "home like-dislike" %> . <a href="#" class="home com" id="comment-<%= update.id %>">Comment</a> 
+<% end %>
+<span style="margin-left: 5px;"> . <i class="icon-thumbs-up"></i> <%= update.votes_for %> &nbsp; . &nbsp;<i class="icon-comments"></i> <%= update.update_comments.count %></span>
+        &nbsp; . &nbsp;
+        <span class="comment-date"><%= time_ago_in_words(update.created_at) %> ago</span>
+</span>
+

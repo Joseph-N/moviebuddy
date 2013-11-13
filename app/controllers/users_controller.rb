@@ -49,7 +49,10 @@ class UsersController < ApplicationController
 		url = request.referer
 		if current_user.follow(@user)
 			flash[:notice] = "successfully followed #{@user.name}"
-			redirect_to url
+			respond_to do |format|
+				format.html { redirect_to url }
+				format.js
+			end
 		end
 	end
 
@@ -58,7 +61,10 @@ class UsersController < ApplicationController
 		url = request.referer
 		if current_user.stop_following(@user)
 			flash[:notice] = "successfully unfollowed #{@user.name}"
-			redirect_to url
+			respond_to do |format|
+				format.html { redirect_to url}
+				format.js
+			end
 		end
 	end
 

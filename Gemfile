@@ -42,6 +42,7 @@ gem "omniauth-twitter", "~> 1.0.1"
 gem "paperclip", "~> 3.0"
 gem "thumbs_up", "~> 0.6.7"
 gem "acts_as_follower"
+gem "autolink", "~> 3.0.0"
 
 group :development do
   gem 'better_errors'
