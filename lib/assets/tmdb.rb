@@ -25,7 +25,7 @@ class Tmdb
 		config = JSON.parse(@@config)
 		base_url = config['images']['base_url']
 		if config['images'][type + '_sizes'].include?(size)
-			"#{base_url + size + file_path}"
+			base_url + size + file_path
 		end
 	end
 
