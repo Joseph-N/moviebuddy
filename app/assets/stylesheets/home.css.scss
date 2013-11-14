@@ -5,3 +5,24 @@
 .space{
 	margin-top: 5px;
 }
+.signin-facebook, .signin-google, .signin-twitter{
+	background: url(sprites.png) no-repeat;
+}
+
+.signin-facebook{
+	background-position: 0 0;
+	width: 162px;
+	height: 29px;
+}
+
+.signin-google{
+	background-position: 0 -62px ;
+	width: 162px;
+	height: 29px;
+}
+
+.signin-twitter{
+	background-position: 0 -31px ;
+	width: 162px;
+	height: 29px;
+}

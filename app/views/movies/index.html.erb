@@ -1,84 +1,68 @@
-            <section id="page-title-wrapper" class="section page-title-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                        <h4>My Movies</h4>
-                    </div>
-                    <!-- /.page-title -->
-                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                                                <%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
-                          <div class="form-group">
-                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
-                            </div>
-                            <button class="btn btn-flat btn-bordered btn-default" id="search" type="submit"><i class="icon-search"></i></button>
-                          <% end %>
-                    </div>
-                    <!-- /.breadcrumb-wrapper -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container -->
-        </section>
-        <section id="portfolio-2" class="section colored-wrapper">
-            <div class="container">
-                <% unless params[:q] %>
-                <ul class="portfolio-filter nav nav-pills">
-                    <li class="active"><a href="#" data-filter="*">All</a></li>
-                    <% @genres.each do |genre| %>
-                        <% if genre.split.size > 1 %>
-                            <li><a href="#" data-filter=".<%= genre.split.join(".").downcase %>"><%= genre.capitalize %></a></li>
-                        <% else %>
-                            <li><a href="#" data-filter=".<%= genre.downcase %>"><%= genre.capitalize %></a></li>
-                        <% end %>
-                    <% end %>
-                </ul>
-                <% end %>
-                <!-- /.portfolio-filter -->
-                <div class="row">
-                     <div id="content">
-                        <div id="loading" style="display: none;"><%= image_tag "ajax-loader.gif" %></div>
-                    <div id="isotope-portfolio-container">
-                    	<% if params[:q] %>
-                    		<%= render 'results' %>
-                    	<% else %>
-
-                    	<% for movie in @movies %>
-
-	                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper <%= movie.genres.join(" ").downcase  %>">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                	<%= image_tag(@tmdb.imageUrl('backdrop','w780', movie.backdrop)) %>
-                                    
-                                    <div class="image-overlay"></div>
-                                    <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
-                                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
-                                </div>
-                                <div class="portfolio-content">
-                                    <h5><%= movie.title %></h5>
-                                    <p><i class="icon-thumbs-up"></i> <%= movie.votes_for %> | <i class="icon-thumbs-down"></i> <%= movie.votes_against %></p>
-                                    <p><%= movie.comments.count %> comments </p>
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                <% if params[:q] %>
+                    <h4>Found <%= pluralize(@movies.count, "match") %></h4>
+                <% else %>
+                    <div class="row">
+                        <div class="col-md-1 loading">
+                             <%= image_tag "ajax-loader.gif" %>
+                        </div>
+                        <div class="col-md-11">
+                            <div id="loading">
+                                <div class="loading">
+                                    <h4>Searching....this might take a while</h4>
                                 </div>
                             </div>
                         </div>
-<% end %>
-<div class="clearfix"></div>
-<% end %>
-
-
-
-
-
-
-
                     </div>
-                    <!-- /.isotope-portfolio-container -->
-                </div>
-                <!-- end content -->
-                </div>
-                <!-- /.row -->
+                    <h4 id="movies">My Movies</h4>
+                <% end %>
             </div>
-            <!-- /.container -->
-        </section>
+
+            <!-- /.page-title -->
+            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
+                <%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+                    <div class="form-group">
+                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
+                    </div>
+                    <button class="btn btn-flat btn-bordered btn-default" id="search" type="submit">
+                        <i class="icon-search"></i>
+                    </button>
+                <% end %>
+            </div>
+            <!-- /.breadcrumb-wrapper -->
+        </div>
+        <!-- /.row -->
+    </div>
+<!-- /.container -->
+</section>
+
+<section id="portfolio-2" class="section colored-wrapper">
+    <div class="container">
+        <% unless params[:q] %>
+            <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+        <% end %>
+        <!-- /.portfolio-filter -->
+        <div class="row">
+            <div id="content">
+                <div id="isotope-portfolio-container">
+                	<% if params[:q] %>
+                		<%= render 'results' %>
+                	<% else %>
+                        <%= render @movies %>
+                        <div class="clearfix"></div>
+                    <% end %>
+                </div>
+                <!-- /.isotope-portfolio-container -->
+            </div>
+            <!-- end content -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 
 
 

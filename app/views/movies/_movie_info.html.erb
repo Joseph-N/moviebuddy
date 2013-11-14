@@ -1,0 +1,42 @@
+<div class="portfolio-thumb wrapper-1">
+	 <%= image_tag 'ajax-loader-2.gif', class: "img-responsive" unless @movie.nil? %>
+     Waiting for image
+</div>
+<ul class="project-details-list">
+    <li>
+        <h6>Name:</h6>
+        <div class="project-terms">
+            <%= @movie.title %>
+        </div>
+    </li>
+    <li>
+        <h6>Genres:</h6>
+        <div class="project-terms">
+            <%= @movie.genres ? @movie.genres.join(',') : "No genres available" %>
+        </div>
+    </li>
+    <li>
+        <h6>Release date:</h6>
+        <div class="project-terms">
+            <%= @movie.release_date %>
+        </div>
+    </li>
+    <li>
+        <h6>Budget:</h6>
+        <div class="project-terms">
+           <%= number_to_currency @movie.budget %>
+        </div>
+    </li>
+    <li>
+        <h6>Homepage:</h6>
+        <div class="project-terms">
+            <%= @movie.homepage.present? ? @movie.homepage : "None" %>
+        </div>
+    </li>
+    <li>
+    	<h6>My Opinion:</h6>
+    	<div class="project-terms">
+    		<%= @movie.comment.present? ? @movie.comment : "......" %>
+    	</div>
+    </li>
+</ul>

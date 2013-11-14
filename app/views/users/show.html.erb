@@ -15,78 +15,30 @@
     <!-- /.container -->
 </section>
 
-            <section id="item-content-wrapper" class="section">
-                <div class="container">
+<section id="item-content-wrapper" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="portfolio-thumb wrapper-1">
+                    <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
+                </div>
+                <%= render :partial => 'follow_stats' %>
+            </div>
+            <div class="col-md-8 item-details">
+            	<div class="wrapper-1 youtube">
+            		<h2><%= @user.name %></h2>
+
+                    <div id="user-stats">
+                        <%= render :partial => 'user_stats', locals: {user: @user } %>
+                    </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="portfolio-thumb wrapper-1">
-                                <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
-                            </div>
-                            <%  unless current_user == @user %>
-                                <% if current_user.following?(@user) %>
-                                    <%= link_to "Un Follow" ,user_unfollow_path(id: @user.id), class: "btn btn-flat flat-danger btn-lg btn-block follow-unfollow" %>
-                                <% else %>
-                                    <%= link_to "Follow" ,user_follow_path(id: @user.id), class: "btn btn-flat flat-info btn-lg btn-block follow-unfollow" %>
-                                <% end %> 
-                            <% else %>
-                                <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-flat flat-info btn-lg btn-block " %>
-                            <% end %> 
-                        </div>
-                        <div class="col-md-8 item-details">
-                        	<div class="wrapper-1 youtube">
-                        		<h2><%= @user.name %></h2>
 
-                                <div id="user-stats">
-                                    <%= render :partial => 'user_stats', locals: {user: @user } %>
-                                </div>
-
-
-                        		            	<div class="row">
-
-
-</div>
-
-                        	</div>
-
-                        </div>
 
                     </div>
-                </div>
-            </section>
+            	</div>
+            </div>
 
-                        <section id="releted-items" class="section colored-wrapper">
-                <div class="container wrapper-2">
-                    <h5 class="subpage-title">
-                        <% if current_user == @user %>
-                            <span>My Recent Movies</span>
-                        <% else  %>
-                            <span>Recent Movies by <%= @user.name %></span>
-                        <% end %>
-                        <!-- Controls -->
-                        <span id="portfolio-next" class="next black"><i class="icon-angle-right"></i></span>
-                        <span id="portfolio-prev" class="prev black"><i class="icon-angle-left"></i></span>
-                    </h5>
-                    <div class="row">
-                        <div id="caroufredsel-portfolio-container">
-                            <% for movie in @recent_movies %>
-                                                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-thumb">
-                                        <%= image_tag @tmdb.imageUrl('backdrop','w780', movie.backdrop), class: "img-responsive" %>
-                                        <div class="image-overlay"></div>
-                                         <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
-                                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
-                                    </div>
-                                    <div class="portfolio-content">
-                                        <h5><%= movie.title %></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <% end %>
-                        </div>
-                        <!-- /.caroufredsel-portfolio-container -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container -->
-            </section>
+        </div>
+    </div>
+</section>
+<%= render :partial => 'shared/recent_works' %>

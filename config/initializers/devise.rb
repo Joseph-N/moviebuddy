@@ -261,11 +261,17 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   # config for facebook
-  config.omniauth :facebook, "1432996973586926", "fb4eedfa886fae39eed6bca70b59253f"
+  config.omniauth :facebook, "1432996973586926", "fb4eedfa886fae39eed6bca70b59253f",
+  {
+    :image_size => {:width => 290, :height => 290 }
+  }
 
   # config for google
   config.omniauth :google_oauth2, "716264842816.apps.googleusercontent.com", "-QDZoTN2WlAMdjdDdrL_UVDE", { access_type: "offline", approval_prompt: "" }
 
   # config for twitter
-  config.omniauth :twitter ,"ZVr2HVObe2nUROkEC8u2A", "UvYQ6sCD3SgJN0kRJbvlGj4rm528XP55nug1jbxCaM"
+  config.omniauth :twitter ,"ZVr2HVObe2nUROkEC8u2A", "UvYQ6sCD3SgJN0kRJbvlGj4rm528XP55nug1jbxCaM",
+  {
+    :image_size => 'original'
+  }
 end

@@ -36,13 +36,14 @@ gem "json", "~> 1.8.1"
 gem "rest-client", "~> 1.6.7"
 gem "omniauth", "~> 1.1.4"
 gem "devise", "~> 3.1.1"
-gem "omniauth-facebook", "~> 1.4.1"
+gem 'omniauth-facebook',:git => 'https://github.com/mkdynamic/omniauth-facebook.git'
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem "omniauth-twitter", "~> 1.0.1"
 gem "paperclip", "~> 3.0"
 gem "thumbs_up", "~> 0.6.7"
 gem "acts_as_follower"
 gem "autolink", "~> 3.0.0"
+gem "thin"
 
 group :development do
   gem 'better_errors'

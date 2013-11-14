@@ -362,6 +362,12 @@ textarea {
    padding:15px;
 }
 
+@media (min-width: 992px) {
+    .twitter{
+        margin-left: -8px;
+    }
+}
+
 /*
 @media (min-width: 992px) {
     .cool-block{

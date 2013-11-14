@@ -6,6 +6,8 @@
         </h5>
         <%= update_comment.content %>
         <br>
-        <span class="comment-date"><%= time_ago_in_words(update_comment.created_at) %> ago</span>
+        <span class="comment-date">
+        	<%= time_ago_in_words(update_comment.created_at) %> ago
+        </span>
     </div>
 </div>

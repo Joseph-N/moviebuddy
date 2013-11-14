@@ -22,7 +22,10 @@ production:
   encoding: unicode
   database: moviebuddy_production
   pool: 25
+  username: jose
+  password: "4114"
   template: template0
+  host: localhost
 
 cucumber:
   <<: *test

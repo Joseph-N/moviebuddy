@@ -1,87 +1,89 @@
-	            <section id="page-title-wrapper" class="section page-title-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                            <h4><%= @movie["original_title"] %> &rarr; <small> <%= @movie["tagline"] %></small></h4>
-                        </div>
-                                                    <%= form_tag(movies_path, method: :get, class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
-                          <div class="form-group">
-                            <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
-                          </div>
-                          <% end %> 
-                        <!-- /.page-title -->
-                    </div>
-                    <!-- /.row -->
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                <h4>
+                    <%= @movie["original_title"] %> &rarr; <small> <%= @movie["tagline"] %></small>
+                </h4>
+            </div>
+            <%= form_tag(movies_path, method: :get, class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+                <div class="form-group">
+                    <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
                 </div>
-                <!-- /.container -->
-            </section>
+            <% end %> 
+            <!-- /.page-title -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 
-                        <section id="item-content-wrapper" class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="portfolio-thumb wrapper-1">
-                            	 <%= image_tag @tmdb.imageUrl('poster', 'w342', @movie["poster_path"]), class: "img-responsive" if @movie["poster_path"] %>
-                            </div>
-                            <ul class="project-details-list">
-                                    <li>
-                                        <h6>Name:</h6>
-                                        <div class="project-terms">
-                                            <%= @movie["original_title"] %>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Release date:</h6>
-                                        <div class="project-terms">
-                                            <%= @movie["release_date"]%>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Budget:</h6>
-                                        <div class="project-terms">
-                                           <%= number_to_currency @movie["budget"] %>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6>Homepage:</h6>
-                                        <div class="project-terms">
-                                        	<%= @movie["homepage"] %>                                     
-                                        </div>
-                                    </li>
-                                </ul>
+<section id="item-content-wrapper" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="portfolio-thumb wrapper-1">
+                	 <%= image_tag @tmdb.imageUrl('poster', 'w342', @movie["poster_path"]), class: "img-responsive" if @movie["poster_path"] %>
+                </div>
+                <ul class="project-details-list">
+                    <li>
+                        <h6>Name:</h6>
+                        <div class="project-terms">
+                            <%= @movie["original_title"] %>
                         </div>
-                        <div class="col-md-7 item-details">
-                            <div class="wrapper-1">
-                                <h5 class="subpage-title">Movie Overview</h5>
-                                <p><%= @movie["overview"] %></p>
-                            </div>
-                    		
+                    </li>
+                    <li>
+                        <h6>Release date:</h6>
+                        <div class="project-terms">
+                            <%= @movie["release_date"]%>
+                        </div>
+                    </li>
+                    <li>
+                        <h6>Budget:</h6>
+                        <div class="project-terms">
+                           <%= number_to_currency @movie["budget"] %>
+                        </div>
+                    </li>
+                    <li>
+                        <h6>Homepage:</h6>
+                        <div class="project-terms">
+                        	<%= @movie["homepage"] %>                                     
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-7 item-details">
+                <div class="wrapper-1">
+                    <h5 class="subpage-title">Movie Overview</h5>
+                    <p><%= @movie["overview"] %></p>
+                </div>
+        		
             	<%= form_for(Movie.new, :html => {:role => 'form' }) do |f| %>
-		<%= f.hidden_field :title, value: @movie["original_title"]  %>
-		<%= f.text_area :overview, value: @movie["overview"], :style=>"display:none;" %>
-		<%= f.hidden_field :poster, value: @movie["poster_path"]  %>
-		<%= f.hidden_field :genres, value: @genres.join(',') %>
-		<%= f.hidden_field :youtube_id, value: @trailer  %>
-		<%= f.hidden_field :budget, value: @movie["budget"] %>
-		<%= f.hidden_field :homepage, value: @movie["homepage"] %>
-		<%= f.hidden_field :release_date, value: @movie["release_date"] %>
-		<%= f.hidden_field :tag_line, value: @movie["tagline"] %>
-		<%= f.hidden_field :backdrop, value: @movie["backdrop_path"] %>
+                    <%= f.hidden_field :title, value: @movie["original_title"]  %>
+                    <%= f.text_area :overview, value: @movie["overview"], :style=>"display:none;" %>
+                    <%= f.hidden_field :poster, value: @movie["poster_path"]  %>
+                    <%= f.hidden_field :genres, value: @genres.join(',') %>
+                    <%= f.hidden_field :youtube_id, value: @trailer  %>
+                    <%= f.hidden_field :budget, value: @movie["budget"] %>
+                    <%= f.hidden_field :homepage, value: @movie["homepage"] %>
+                    <%= f.hidden_field :release_date, value: @movie["release_date"] %>
+                    <%= f.hidden_field :tag_line, value: @movie["tagline"] %>
+                    <%= f.hidden_field :backdrop, value: @movie["backdrop_path"] %>
 
-		<div class="form-group">
-		<%= f.label "What do you think of this movie?" %>
-		</div>
-		  <div class="form-group">
-		<%= f.text_area :comment, placeholder: 'Your comment', class: "form-control", rows: 3 %>
-	</div>
-
-	  <div class="form-group">
-
-		<%= f.submit "Add to my Collection", id: "save-movie", class: "btn btn-flat btn-sm flat-inverse pull-right" %>
-	</div>
-	<% end %>                          
-                        </div>
-
+                    <div class="form-group">
+                        <%= f.label "What do you think of this movie?" %>
                     </div>
-                </div>
-            </section>
+
+                    <div class="form-group">
+                        <%= f.text_area :comment, placeholder: 'Your comment', class: "form-control", rows: 3 %>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.submit "Add to my Collection", id: "save-movie", class: "btn btn-flat btn-sm flat-inverse pull-right" %>
+                    </div>
+                <% end %>                          
+            </div>
+        </div>
+    </div>
+</section>

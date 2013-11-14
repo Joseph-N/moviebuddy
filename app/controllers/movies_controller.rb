@@ -37,6 +37,8 @@ class MoviesController < ApplicationController
 		@movie = Movie.new(movie_params)
 		@movie.user_id = current_user.id
 		if @movie.save
+			create_update(@movie)
+
 			respond_to do |format|
 				format.json { render json: {"url" => movies_path} }
 				format.html { redirect_to movies_path}
@@ -66,11 +68,19 @@ class MoviesController < ApplicationController
 	end
 
 	private
+		def movie_params
+			params.require(:movie).permit(:title, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
+		end
+
 		def init_tmdb
 			@tmdb = Tmdb.new
 		end
 
-		def movie_params
-			params.require(:movie).permit(:title, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
+		def create_update(movie)
+			if movie.comment?
+				current_user.updates.create(content: "Added <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b> to my collection <p> #{movie.comment}</p>", poster: @movie.poster)
+			else
+				current_user.updates.create(content: "Added <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b> to my collection", poster: @movie.poster)
+			end
 		end
 end

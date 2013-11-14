@@ -1,64 +1,31 @@
  <section id="page-title-wrapper" class="section page-title-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                        <h4><%= @user.name %>'s Movies</h4>
-                    </div>
-                    <!-- /.page-title -->
-                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                    </div>
-                    <!-- /.breadcrumb-wrapper -->
-                </div>
-                <!-- /.row -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                <h4><%= @user.name %>'s Movies</h4>
             </div>
-            <!-- /.container -->
-        </section>
-        <section id="portfolio-2" class="section colored-wrapper">
-            <div class="container">
-                <ul class="portfolio-filter nav nav-pills">
-                    <li class="active"><a href="#" data-filter="*">All</a></li>
-                    <% @genres.each do |genre| %>
-                        <% if genre.split.size > 1 %>
-                            <li><a href="#" data-filter=".<%= genre.split.join(".").downcase %>"><%= genre.capitalize %></a></li>
-                        <% else %>
-                            <li><a href="#" data-filter=".<%= genre.downcase %>"><%= genre.capitalize %></a></li>
-                        <% end %>
-                    <% end %>
-                </ul>
-                <!-- /.portfolio-filter -->
-                <div class="row">
-                    <div id="isotope-portfolio-container">
-
-                    	<% for movie in @movies %>
-
-	                        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper <%= movie.genres.join(" ").downcase  %>">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                	<%= image_tag(@tmdb.imageUrl('backdrop','w780', movie.backdrop)) %>
-                                    
-                                    <div class="image-overlay"></div>
-                                    <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
-                                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
-                                </div>
-                                <div class="portfolio-content">
-                                    <h5><%= movie.title %></h5>
-                                    <p><%= movie.votes_for %> Upvotes | <%= movie.votes_against %> Downvotes</p>
-                                    <p><%= movie.comments.count %> comments </p>
-                                </div>
-                            </div>
-                        </div>
-<% end %>
-
-
-
-
-
-
-
-                    </div>
-                    <!-- /.isotope-portfolio-container -->
-                </div>
-                <!-- /.row -->
+            <!-- /.page-title -->
+            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
             </div>
-            <!-- /.container -->
-        </section>
+            <!-- /.breadcrumb-wrapper -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<section id="portfolio-2" class="section colored-wrapper">
+    <div class="container">
+        <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+        <div class="row">
+            <div id="isotope-portfolio-container">
+
+                <%= render @movies %>
+
+            </div>
+            <!-- /.isotope-portfolio-container -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>

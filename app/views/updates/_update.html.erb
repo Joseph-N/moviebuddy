@@ -2,16 +2,24 @@
     <%= link_to image_tag(update.user.avator.url(:thumb)), user_show_path(update.user), class: "pull-left" %>
     <div class="media-body">
         <h5 class="media-heading">
-            <%= link_to update.user.name, user_show_path(update.user) %>                                           
+            <%= link_to update.user.name, user_show_path(update.user) %>           
         </h5>
-        <p><%= update.content %></p>
+
+        <p><%= raw(update.content) %></p>
+
+        <% unless update.poster.nil? %>
+            <p>
+                <%= image_tag @tmdb.imageUrl('poster', 'w185', update.poster), class: "img-responsive thumbnail" %>
+            </p>
+        <% end %>
+
         <%= render :partial => 'updates/comment_stats', locals: {update: update} %>
 
         <!-- Nested media object -->
         <% @update_comments = update.update_comments %>
         <%= render @update_comments %>
 
-         <div class="media update-comment-form" id="form-<%= update.id %>">
+        <div class="media update-comment-form" id="form-<%= update.id %>">
             <%= link_to image_tag(current_user.avator.url(:thumb), width: "50px", height: "50px"), user_show_path(current_user), class: "pull-left" %>
             <div class="media-body">
                 <div class="row">
@@ -23,8 +31,7 @@
                         <%= f.submit "Comment", id: update.id.to_s, class: "update-comment" %>
                     </div>
                     <% end %>
-                </div>                                    
-               
+                </div>  
             </div>
         </div>
     </div>                                           

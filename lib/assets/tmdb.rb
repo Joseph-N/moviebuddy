@@ -6,18 +6,23 @@ class Tmdb
 
 	API_URL = "http://api.themoviedb.org/3/"
 
+	@@config = nil
+
 	def initialize
 		@key = "29588c40b1a3ef6254fd1b6c86fbb9a9"
 		@params = { "api_key" => @key }
+		if @@config == nil
+			getConfig
+		end
 	end
 
 	def getConfig
 		url = buildUrl("configuration", @params)
-		RestClient.get url
+		@@config = RestClient.get url
 	end
 
 	def imageUrl(type, size, file_path)
-		config = JSON.parse(getConfig)
+		config = JSON.parse(@@config)
 		base_url = config['images']['base_url']
 		if config['images'][type + '_sizes'].include?(size)
 			base_url + size + file_path

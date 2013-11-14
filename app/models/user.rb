@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
 	
-	has_many :movies
+	has_many :movies, dependent: :destroy
 	has_many :comments, through: :movies
-	has_many :updates
+	has_many :updates, dependent: :destroy
 	has_many :update_comments, through: :updates	
 
 	has_attached_file :avator, :styles => { :thumb => "64x64#", :profile => "290x290#", :medium => "210x180#" },
@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 		                        provider:auth.provider,
 		                        uid:auth.uid,
 		                        email:auth.info.email,
+		                        avator: URI.parse(auth.info.image),
 		                        password: 'password',
 		                      )
 		  end
@@ -57,6 +58,7 @@ class User < ActiveRecord::Base
 	        provider:auth.provider,
 	        uid:auth.uid,
 	        email:auth.info.nickname + "@twitter.com",
+	        avator: URI.parse(auth.info.image),
 	        password:'password',
 	      )
 	    end

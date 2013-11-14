@@ -8,6 +8,7 @@ s.noConflict();
 s(document).ready(function(){
 	s('.youtube').fitVids();
   s('#comments-path').hide();
+  s('.loading').hide();
 
 	// Isotope Portfolio
     var container = s('#isotope-portfolio-container');
@@ -101,14 +102,16 @@ s(document).ready(function(){
 
 	// when a user searches for movies
 	s('#movie_search').submit(function(){
-		s('#loading').show();
+		s('.loading').show();
+    s('h4#movies').remove();
+
 		s.ajax({
 			type: "GET",
   			url: s(this).attr('action'),
   			data: s(this).serialize(),
   			dataType: "script",
   			success: function(){
-  				s('#loading').hide();
+  				s('.loading').hide();
   			}
 		});
 		return false;
@@ -194,4 +197,3 @@ function updateComments() {
   s.getScript(s('#comments-path').text() + '.js?after=' + after);
   setTimeout(updateComments, 20000);
 }
-

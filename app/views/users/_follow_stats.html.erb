@@ -1,0 +1,9 @@
+<%  unless current_user == @user %>
+    <% if current_user.following?(@user) %>
+        <%= link_to "Un Follow" ,user_unfollow_path(id: @user.id), class: "btn btn-flat flat-danger btn-lg btn-block follow-unfollow" %>
+    <% else %>
+        <%= link_to "Follow" ,user_follow_path(id: @user.id), class: "btn btn-flat flat-info btn-lg btn-block follow-unfollow" %>
+    <% end %> 
+<% else %>
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-flat flat-info btn-lg btn-block " %>
+<% end %> 

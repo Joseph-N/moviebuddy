@@ -6,6 +6,7 @@
    <%= favicon_link_tag 'favicon.png' %>
   <%= stylesheet_link_tag    "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
   <%= javascript_include_tag "application" %>
+  <%= yield(:head) %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -50,7 +51,7 @@
                             </button>
                             <%= link_to raw("Movie<span>Buddy.</span>"), root_path, class: "navbar-brand" %>
                         </div>
-                        
+
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav pull-right">

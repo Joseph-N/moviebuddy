@@ -1,63 +1,31 @@
  <section id="page-title-wrapper" class="section page-title-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 page-title">                 
-                        <% if @user == current_user %>
-                            <h4>Users you're following</h4>
-                        <% else %>
-                             <h4>Users <%= @user.name %> is Following</h4>
-                        <% end %>                       
-                    </div>
-                    <!-- /.page-title -->
-                    <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                    </div>
-                    <!-- /.breadcrumb-wrapper -->
-                </div>
-                <!-- /.row -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">                 
+                <% if @user == current_user %>
+                    <h4>Users you're following</h4>
+                <% else %>
+                     <h4>Users <%= @user.name %> is Following</h4>
+                <% end %>                       
             </div>
-            <!-- /.container -->
-        </section>
-        <section id="portfolio-2" class="section colored-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div id="isotope-portfolio-container">
-
-                    	<% for follow in @following %>
-
-	                        <div class="col-xs-12 col-sm-6 col-md-3 portfolio-item-wrapper">
-                            <div class="portfolio-item">
-                                <div class="portfolio-thumb">
-                                	<%= image_tag follow.avator.url(:medium), class: "img-responsive" %>
-
-                                    <div class="image-overlay"></div>
-                                    <%= link_to raw('<i class="icon-eye-open"></i>'), "http://placehold.it/780x439", rel: "prettyPhoto", class: "portfolio-zoom" %>
-                                    <%= link_to raw('<i class="icon-link"></i>'), user_show_path(follow), class: "portfolio-link" %>
-                                </div>
-                                <div class="portfolio-content">
-                                    <h5><%= follow.name %></h5>
-                                    <p><%= follow.movies.count %> Movies</p>
-                                    					  		<% unless current_user == follow %>
-	  		<% if current_user.following?(follow) %>
-	  			<%= link_to "unfollow" ,user_unfollow_path(id: follow.id) %>
-	  		<% else %>
-	  			<%= link_to "follow" ,user_follow_path(id: follow.id) %>
-	  		<% end %>
-	  		<% end %>
-                                </div>
-                            </div>
-                        </div>
-<% end %>
-
-
-
-
-
-
-
-                    </div>
-                    <!-- /.isotope-portfolio-container -->
-                </div>
-                <!-- /.row -->
+            <!-- /.page-title -->
+            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
             </div>
-            <!-- /.container -->
-        </section>
+            <!-- /.breadcrumb-wrapper -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<section id="portfolio-2" class="section colored-wrapper">
+    <div class="container">
+        <div class="row">
+            <div id="isotope-portfolio-container">
+                <%= render :partial => 'users', locals: { users: @following } %>
+            </div>
+            <!-- /.isotope-portfolio-container -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
