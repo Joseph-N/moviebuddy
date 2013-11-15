@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
 					provider:access_token.provider,
 					email: data["email"],
 					uid: access_token.uid ,
+					avator: URI.parse(data["image"]),
 					password: 'password',
 				)
 			end

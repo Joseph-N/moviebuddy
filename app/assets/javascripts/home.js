@@ -6,6 +6,12 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
+	// hide loading div
+	s('div#dvLoading').hide()
+
+	//apply backdrop
+	s('.section.colored-wrapper.b').addClass('backdrop');
+
 	//hide comment forms
 	s('.media.update-comment-form').hide();
 

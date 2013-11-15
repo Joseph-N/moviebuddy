@@ -1,7 +1,7 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+            <div class="col-xs-6 col-sm-3 col-md-2 page-title">
                 <% if params[:q] %>
                     <h4>Found <%= pluralize(@movies.count, "match") %></h4>
                 <% else %>
@@ -22,15 +22,13 @@
             </div>
 
             <!-- /.page-title -->
-            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
-                <%= form_tag(movies_path, method: :get, id: "movie_search", class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
+            <div class="col-xs-6 col-sm-9 col-md-10">
+                                                    <%= form_tag(movies_path, method: :get, id: "movie_search", class: "pull-right ", :html => {:role => 'search'}) do  %>
                     <div class="form-group">
                         <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
                     </div>
-                    <button class="btn btn-flat btn-bordered btn-default" id="search" type="submit">
-                        <i class="icon-search"></i>
-                    </button>
                 <% end %>
+
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>

@@ -1,18 +1,20 @@
-<% for movie in movies %>
-    <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-        <div class="portfolio-item">
-            <div class="portfolio-thumb">
-                <%= image_tag @tmdb.imageUrl('backdrop','w780', movie.backdrop), class: "img-responsive" %>
-            <div class="image-overlay"></div>
-                <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
-                <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
-            </div>
-            <div class="portfolio-content">
-                <h5><%= movie.title %></h5>
-                <% if controller_name == "sessions" || controller_name == "registrations" %>
-                    <p>Movie by: <%= movie.user.name %></p>
-                <% end %>
+<% unless movies.nil? %>
+    <% for movie in movies %>
+        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+            <div class="portfolio-item">
+                <div class="portfolio-thumb">
+                    <%= image_tag @tmdb.imageUrl('backdrop','w780', movie.backdrop), class: "img-responsive" %>
+                <div class="image-overlay"></div>
+                    <%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie.backdrop), rel: "prettyPhoto", class: "portfolio-zoom" %>
+                    <%= link_to raw('<i class="icon-link"></i>'), movie_path(movie), class: "portfolio-link" %>
+                </div>
+                <div class="portfolio-content">
+                    <h5><%= movie.title %></h5>
+                    <% if controller_name == "sessions" || controller_name == "registrations" %>
+                        <p>Movie by: <%= movie.user.name %></p>
+                    <% end %>
+                </div>
             </div>
         </div>
-    </div>
+    <% end %>
 <% end %>

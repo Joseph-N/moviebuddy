@@ -1,192 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MovieBuddy</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <%= favicon_link_tag 'favicon.png' %>
-  <%= stylesheet_link_tag    "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= yield(:head) %>
-  <%= csrf_meta_tags %>
+    <title>MovieBuddy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag 'favicon.png' %>
+    <%= stylesheet_link_tag  "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= yield(:head) %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
-        <div id="main-wrapper" class="color-skin-3">
-            <header id="header-1" class="header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-8 header-info-wrapper">
-                            <ul class="list-inline">
-                                <li><i class="icon-film"></i>
-                                    Movie will solve all of your troubles!!
-                                </li>
-                            </ul>
-                            <!-- /.list-inline -->
-                        </div>
-                        <!-- /.header-info-wrapper -->
-                        <div class="col-xs-12 col-sm-4 social-link-wrapper">
-                            <ul class="social-links">
-                                <li><a href="https://www.facebook.com/Your.Movie.Buddy" target="_blank"><i class="icon-facebook"></i></a></li>
-                                <li><a href="https://plus.google.com/b/115556272872532573673/?hl=en" target="_blank"><i class="icon-google-plus"></i></a></li>
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                            </ul>
-                            <!-- /.social-links -->
-                        </div>
-                        <!-- /.social-link-wrapper -->
+    <div id="main-wrapper" class="color-skin-3">
+        <header id="header-1" class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 header-info-wrapper">
+                        <ul class="list-inline">
+                            <li><i class="icon-film"></i>
+                                Movie will solve all of your troubles!!
+                            </li>
+                        </ul>
+                        <!-- /.list-inline -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.header-info-wrapper -->
+                    <div class="col-xs-12 col-sm-4 social-link-wrapper">
+                        <%= render :partial => 'layouts/social_links' %>
+                    </div>
+                    <!-- /.social-link-wrapper -->
                 </div>
-                <!-- /.container -->
-            </header>
-                        <!-- /.header-1 -->
-            <header id="header-2" class="header">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            </button>
-                            <%= link_to raw("Movie<span>Buddy.</span>"), root_path, class: "navbar-brand" %>
-                        </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse navbar-ex1-collapse">
-                            <ul class="nav navbar-nav pull-right">
-                            	<% if user_signed_in? %>
-                            	<li><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
-                            	<li><%= link_to raw("<i class='icon-user'></i> " + current_user.name), user_show_path(current_user) %></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><%= link_to raw("<i class='icon-edit'></i> Edit Profile"), edit_user_registration_path %></li>
-                                        <li><%= link_to(raw("<i class='icon-signout'></i> Log Out"),  destroy_user_session_path, method: :delete)  %></li>
-                                    </ul>
-                                </li>
-                            	
-                            	<% else %>
-                                <li><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
-          						<li><%= link_to(raw("<i class='icon-collapse-top'></i> Sign up"), new_user_registration_path)  %></li> 
-                                <% end %>                      
-                            </ul>
-                            <!-- /.nav -->
-                        </div>
-                        <!-- /.navbar-collapse -->
-                    </div>
-                    <!-- /.container -->
-                </nav>
-                <!-- /.navbar -->
-            </header>
-            <!-- /#header-2 -->
-
-            	<!-- <p class="notice"><% notice %></p>
-       <p class="alert"><%=alert %></p> -->
-
-
-<%= yield %>
-
- <footer id="footer-2" class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 footer-info-wrapper">
-                            <span>FlatPoint © 2013. Powered by <a href="#">Firework</a></span>                        
-                        </div>
-                        <!-- /.footer-info-wrapper -->
-                        <div class="col-xs-12 col-sm-6 social-link-wrapper">
-                            <ul class="social-links">
-                                <li><a href="https://www.facebook.com/Your.Movie.Buddy"><i class="icon-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon-google-plus"></i></a></li>
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-pinterest"></i></a></li>
-                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- /.social-link-wrapper -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.container -->
-            </footer>
-            <!-- /#footer-2 -->
-            <div id="skin-chooser-container" class="skin-chooser-container">
-                <a data-toggle="modal" href="#myModal" class="skin-chooser hidden-xs"><i class="icon-cogs"></i></a>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">CHOOSE COLOR SKIN</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="skins-wrapper">
-                                    <ul class="list-inline">
-                                        <li>
-                                            <div id="color-skin-1" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-2" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-3" class="color-skin active"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-4" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-5" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-6" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-7" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-8" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-9" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-10" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-11" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-12" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-13" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-14" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-15" class="color-skin"></div>
-                                        </li>
-                                        <li>
-                                            <div id="color-skin-16" class="color-skin"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
+                <!-- /.row -->
             </div>
-            <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
+            <!-- /.container -->
+        </header>
+        <!-- /.header-1 -->
 
+        <header id="header-2" class="header">
+            <%= render :partial => "layouts/navigation" %>
+        </header>
+        <!-- /#header-2 -->
+
+
+        <%= yield %>
+
+        <footer id="footer-2" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 footer-info-wrapper">
+                    <span>MovieBuddy © 2013. Design by <a href="#">Joseph</a></span>                        
+                </div>
+                <!-- /.footer-info-wrapper -->
+                <div class="col-xs-12 col-sm-6 social-link-wrapper">
+                    <%= render :partial => 'layouts/social_links' %>
+                </div>
+                <!-- /.social-link-wrapper -->
+            </div>
+            <!-- /.row -->
         </div>
-        <%= render :partial => 'layouts/modal' %>
+        <!-- /.container -->
+        </footer>
+        <!-- /#footer-2 -->
+
+        <%= render :partial => 'layouts/skin_chooser' %>
+
+        <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
+
+    </div>
+    <%= render :partial => 'layouts/modal' %>
 </body>
 </html>

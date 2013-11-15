@@ -267,7 +267,13 @@ Devise.setup do |config|
   }
 
   # config for google
-  config.omniauth :google_oauth2, "716264842816.apps.googleusercontent.com", "-QDZoTN2WlAMdjdDdrL_UVDE", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, "716264842816.apps.googleusercontent.com", "-QDZoTN2WlAMdjdDdrL_UVDE", 
+  { 
+    :access_type => "offline",
+    :approval_prompt => "",
+    :prompt => "select_account",
+    :image_size => 290
+  }
 
   # config for twitter
   config.omniauth :twitter ,"ZVr2HVObe2nUROkEC8u2A", "UvYQ6sCD3SgJN0kRJbvlGj4rm528XP55nug1jbxCaM",

@@ -1,5 +1,5 @@
            <!-- /.fullwidthbanner-container -->
-            <section id="our-services" class="section colored-wrapper">
+            <section id="our-services" class="section colored-wrapper b">
                 <div class="container">
                     <div class="row">
                           <div class="col-md-7">
@@ -38,21 +38,20 @@
     <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right" %>
   </div>
   <div class="form-group">
-    <%= f.submit 'Sign In', class: "btn btn-flat flat-inverse pull-right"%>
+    <%= f.submit 'Sign In', class: "btn btn-flat flat-inverse btn-block"%>
   </div>
+  <div class="clearfix"></div>
+  <h4>OR</h4>
   <div class="row">
-    <div class="col-md-6 space">
+    <div class="col-xs-12 col-sm-4 col-md-6 space">
     <%= link_to image_tag("transparent.gif", class: "signin-facebook"), user_omniauth_authorize_path(:facebook) %>
   </div>
-      <div class="col-md-6 space">
+      <div class="col-xs-12 col-sm-4 col-md-6 space">
      <%= link_to image_tag("transparent.gif", class: "signin-twitter"), user_omniauth_authorize_path(:twitter) %>
    </div>
-  </div>
-    <div class="row">
-      <div class="col-md-12 space">
+         <div class="col-xs-12 col-sm-4 col-md-12 space">
          <%= link_to image_tag("transparent.gif", class: "signin-google"), user_omniauth_authorize_path(:google_oauth2) %>
        </div>
-  </div>
 </div>
  
   

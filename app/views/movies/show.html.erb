@@ -4,6 +4,7 @@
             var img = new Image();
             s(img).load(function() {
               s(".img-responsive").attr("src",img.src);
+              s(".loading-text").hide();
             });
             img.src = '<%= @tmdb.imageUrl("poster", "w500", @movie.poster) %>';
         });
@@ -16,12 +17,6 @@
             <div class="col-xs-12 col-sm-6 col-md-6 page-title">
                 <h4><%= @movie.title %> &rarr; <small> <%= @movie.tag_line %></small></h4>
             </div>
-
-            <%= form_tag(movies_path, method: :get, class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
-                <div class="form-group">
-                    <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
-                </div>
-            <% end %> 
             <!-- /.page-title -->
         </div>
         <!-- /.row -->

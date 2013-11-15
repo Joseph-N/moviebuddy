@@ -363,9 +363,13 @@ textarea {
 }
 
 @media (min-width: 992px) {
-    .twitter{
-        margin-left: -8px;
+    .signin-twitter{
+        margin-left: -10px !important;
     }
+    .backdrop{
+        background: url('http://d3gtl9l2a4fn1j.cloudfront.net/t/p/original/b9OVFl48ZV2oTLzACSwBpNrCUhJ.jpg');
+    }
+
 }
 
 /*
