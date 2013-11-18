@@ -51,6 +51,17 @@ class Tmdb
 		end
 	end
 
+	def popularMovies
+		pop_movies = []
+
+		url = buildUrl("movie/popular", @params)
+		movies = JSON.parse(RestClient.get url)
+		movies["results"][1..5].each do |movie|
+			pop_movies << movieInfo(movie["id"])
+		end
+		pop_movies
+	end
+
 	private
 
 		# Return a full valid address with parameters

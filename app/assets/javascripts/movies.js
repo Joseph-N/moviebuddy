@@ -122,6 +122,7 @@ s(document).ready(function(){
 		e.preventDefault();
 
 		var title = s('#movie_title').val();
+    var tmdb_id = s('#movie_tmdb_id').val();
 		var overview = s('#movie_overview').val();
 		var poster= s('#movie_poster').val();
 		var comment = s('#movie_comment').val();
@@ -136,7 +137,7 @@ s(document).ready(function(){
 		s.ajax({
 			type: "POST",
   			url: s('#new_movie').attr('action'),
-  			data: {"movie[title]" : title, "movie[overview]": overview, "movie[poster]": poster,
+  			data: {"movie[tmdb_id]" : tmdb_id, "movie[title]" : title, "movie[overview]": overview, "movie[poster]": poster,
   				"movie[comment]" : comment, "movie[youtube_id]" : video_id,"movie[genres]": genres,
   				"movie[budget]" : budget, "movie[homepage]" : homepage, "movie[release_date]" : r_date,
   				"movie[tag_line]" : tagline, "movie[backdrop]" : backdrop

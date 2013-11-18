@@ -11,125 +11,115 @@
     <!-- /.container -->
 </section>
 
-            <section id="item-content-wrapper" class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                          <ul id="myTab" class="nav nav-pills nav-stacked">
-                <li class="active">
-                  <a href="#profile-tab" data-toggle="tab">
-                    <i class="icon-user"></i> 
-                    &nbsp;&nbsp;Profile Settings
-                  </a>
-                </li>
+<section id="item-content-wrapper" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <ul id="myTab" class="nav nav-pills nav-stacked">
+          <li class="active">
+            <a href="#profile-tab" data-toggle="tab">
+              <i class="icon-user"></i> 
+              &nbsp;&nbsp;Profile Settings
+            </a>
+          </li>
+          <li class="">
+            <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
+          </li>
+        </ul>
+      </div>
+    <div class="col-md-8 item-details">
+    <div class="wrapper-1">
 
-                                <li class="">
-                  <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
-                </li>
-              </ul>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => "form-horizontal" }) do |f| %>  
+          <%= devise_error_messages! %>                  
 
-                        </div>
-                        <div class="col-md-8 item-details">
-                          <div class="wrapper-1">
+          <div class="form-group">
+            <label class="col-md-3">Avatar</label>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => "form-horizontal" }) do |f| %>  
-  <%= devise_error_messages! %>                  
-
-                    <div class="form-group">
-
-                      <label class="col-md-3">Avatar</label>
-
-                      <div class="col-md-7">
-                    <div class="thumbnail" style="width: 180px; height: 180px;">
-                      <%= image_tag @user.avator.url(:profile) %>
-                    </div>
-                    <div style="margin-bottom: 5px; margin-top: 10px;">
-                     <%= f.file_field :avator %>
-                    </div>
-                      </div> <!-- /.col -->
-
-                    </div> <!-- /.form-group -->
+            <div class="col-md-7">
+              <div class="thumbnail" style="width: 180px; height: 180px;">
+                <%= image_tag @user.avator.url(:profile) %>
+              </div>
+              <div style="margin-bottom: 5px; margin-top: 10px;">
+                <%= f.file_field :avator %>
+              </div>
+            </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
 
+          <div class="form-group">
+            <%= f.label :name, :class => "col-md-3" %>
 
-                    <div class="form-group">
-                      <%= f.label :name, :class => "col-md-3" %>
+            <div class="col-md-7">
+              <%= f.text_field :name, :class => "form-control", :autofocus => true %>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7">
-                        <%= f.text_field :name, :class => "form-control", :autofocus => true %>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+            
 
-                      
+          <div class="form-group">
+            <%= f.label :email, :class =>"col-md-3" %>
 
-                    <div class="form-group">
-                      <%= f.label :email, :class =>"col-md-3" %>
+            <div class="col-md-7">
+              <%= f.email_field :email, :class => "form-control" %>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7">
-                        <%= f.email_field :email, :class => "form-control" %>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+            
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
 
-                      
-                    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-                    <% end %>
+          <div class="form-group">
+            <%= f.label :password, :class => "col-md-3" %> 
 
-                    <div class="form-group">
-                      <%= f.label :password, :class => "col-md-3" %> 
+            <div class="col-md-7">
+              <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7">
-                        <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+            
 
-                      
+          <div class="form-group">
+            <%= f.label "Confirm Password", :class =>"col-md-3" %>
 
-                    <div class="form-group">
-                      <%= f.label "Confirm Password", :class =>"col-md-3" %>
+            <div class="col-md-7">
+              <%= f.password_field :password_confirmation, :class => "form-control" %>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7">
-                        <%= f.password_field :password_confirmation, :class => "form-control" %>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+            
 
-                      
+          <div class="form-group">
 
-                    <div class="form-group">
+            <%= f.label :current_password, :class =>"col-md-3" %>
 
-                      <%= f.label :current_password, :class =>"col-md-3" %>
+            <div class="col-md-7">
+              <%= f.password_field :current_password, :class => "form-control" %>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7">
-                        <%= f.password_field :current_password, :class => "form-control" %>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+           
 
-                     
+          <div class="form-group">
 
-                    <div class="form-group">
+            <div class="col-md-7 col-md-push-3">
+              <%= f.submit "Save Changes", :class => "btn btn-primary" %>
+              &nbsp;
+              <button type="reset" class="btn btn-default">Cancel</button>
+            </div> <!-- /.col -->
 
-                      <div class="col-md-7 col-md-push-3">
-                        <%= f.submit "Save Changes", :class => "btn btn-primary" %>
-                        &nbsp;
-                        <button type="reset" class="btn btn-default">Cancel</button>
-                      </div> <!-- /.col -->
+          </div> <!-- /.form-group -->
 
-                    </div> <!-- /.form-group -->
+        <% end %>
 
-                 <% end %>
-
-
-
-
-                          </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

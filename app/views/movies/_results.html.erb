@@ -3,11 +3,11 @@
         <div class="portfolio-item">
             <div class="portfolio-thumb">
             	<% if movie["backdrop_path"] %>
-            		<%= image_tag(@tmdb.imageUrl('backdrop','w780', movie["backdrop_path"])) %>
+            		<%= image_tag(@tmdb.imageUrl('backdrop','w300', movie["backdrop_path"])) %>
             		<div class="image-overlay"></div>
             		<%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie["backdrop_path"]), rel: "prettyPhoto", class: "portfolio-zoom" %>
             	<% else %>
-            		<%= image_tag "http://placehold.it/780x439" %>
+            		<%= image_tag "http://placehold.it/300x169" %>
             		<div class="image-overlay"></div>
             		<%= link_to raw('<i class="icon-eye-open"></i>'), "http://placehold.it/780x439", class: "portfolio-zoom" %>
             	<% end %>         

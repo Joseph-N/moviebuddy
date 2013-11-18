@@ -32,7 +32,55 @@
                         <%= render :partial => 'user_stats', locals: {user: @user } %>
                     </div>
                     <div class="row">
-
+                    <section id="recent-works">
+                        <div class="container wrapper-2">
+                            <h5 class="subpage-title">
+                                <span>Recent Movies</span>
+                                <!-- Controls -->
+                                <span id="portfolio-next" class="next black">
+                                    <i class="icon-angle-right"></i>
+                                </span>
+                                <span id="portfolio-prev" class="prev black">
+                                    <i class="icon-angle-left"></i>
+                                </span>
+                            </h5>
+                            <div class="row">
+                                <div id="caroufredsel-portfolio-container">
+                                    <% if @recent_movies.any? %>
+                                        <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: "w300" } %>
+                                    <% else %>
+                                    <div class="col-md-12" style="margin-bottom: 40px;">
+                                        <p>Its lonely here....please add some movies</p>
+                                    </div>
+                                    <% end %>
+                                    <!-- /.portfolio-item-wlrapper -->
+                                </div>
+                                <!-- /.caroufredsel-portfolio-container -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.container -->
+                    </section>
+                        <div class="col-md-12">
+                            <h5 class="subpage-title">Recent Activity</h5>
+                            <% if current_user.following?(@user) || @user == current_user %>
+                                <% if @activities.any? %>
+                                    <table class="table recent-activity">
+                                        <tbody>
+                                            <%= render :partial => 'activities', locals: { activities: @activities } %>
+                                        </tbody>
+                                    </table>
+                                    <%= link_to "More", "#", class: "btn btn-flat flat-default btn-bordered btn-lg btn-block", id: "more-activity"  %>
+                                    <div class="more" style="text-align: center;"></div>
+                                <% else %>
+                                    <div class="col-md-12" style="margin-bottom: 40px;">
+                                        <p>No activity found....</p>
+                                    </div>
+                                <% end %>
+                            <% else %>
+                                <p class="post-title">Follow <%= @user.name %> to see his/her recent activity </p>
+                            <% end %>                            
+                        </div>
 
                     </div>
             	</div>
@@ -41,4 +89,6 @@
         </div>
     </div>
 </section>
-<%= render :partial => 'shared/recent_works' %>
+
+
+

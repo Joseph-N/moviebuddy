@@ -6,8 +6,53 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
-	// hide loading div
-	s('div#dvLoading').hide()
+
+    // Revolution Slider
+    if (s.fn.cssOriginal != undefined)
+        s.fn.css = s.fn.cssOriginal;
+    s('.fullwidthbanner').revolution({
+        delay: 9000,
+        startwidth: 1200,
+        startheight: 400,
+
+        onHoverStop: "on",
+
+        thumbWidth: 100,
+        thumbHeight: 50,
+        thumbAmount: 3,
+
+        hideThumbs: 0,
+
+        navigationType: "none",
+        navigationArrows: "solo",
+        navigationStyle: "round",
+        navigationHAlign: "left",
+        navigationVAlign: "bottom",
+        navigationHOffset: 30,
+        navigationVOffset: 30,
+
+        soloArrowLeftHalign: "left",
+        soloArrowLeftValign: "center",
+        soloArrowLeftHOffset: 20,
+        soloArrowLeftVOffset: 0,
+
+        soloArrowRightHalign: "right",
+        soloArrowRightValign: "center",
+        soloArrowRightHOffset: 20,
+        soloArrowRightVOffset: 0,
+
+        stopAtSlide: -1,
+        stopAfterLoops: -1,
+        hideCaptionAtLimit: 0,
+        hideAllCaptionAtLilmit: 0,
+        hideSliderAtLimit: 0,
+
+        fullWidth: "on",
+        fullScreen: "off",
+        fullScreenOffsetContainer: "#topheader-to-offset",
+
+        shadow: 0
+    });
 
 	//apply backdrop
 	s('.section.colored-wrapper.b').addClass('backdrop');
@@ -26,16 +71,25 @@ s(document).ready(function(){
 	// when a comment is posted
 	s(document).on('submit', '#new_update', function(e){
 		e.preventDefault();
+
 		if(!s.trim(s('#update_content').val())){
-		  s('#modal').modal();
+			s('#modal').modal();
 		}
 		else{
-		  s.ajax({
-		    type: "POST",
-		      url: s(this).attr('action'),
-		      data: s(this).serialize(),
-		      dataType: "script"
-		  });
+			s('.ajax-loading-gif').show();
+			s('#post-update').addClass('disabled');
+
+			s.ajax({
+			type: "POST",
+			  url: s(this).attr('action'),
+			  data: s(this).serialize(),
+			  dataType: "script",
+			  success: function(){
+			  	s('.ajax-loading-gif').hide();
+			  	s('#post-update').removeClass('disabled');
+
+			  }
+			});
 		}
 	});
 
@@ -82,4 +136,5 @@ function fetchUpdates() {
   	s.getScript('updates.js?after=' + after);
   	setTimeout(fetchUpdates, 20000);
 }
+
 

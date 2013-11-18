@@ -1,21 +1,17 @@
-<section id="page-title-wrapper" class="section page-title-wrapper">
-    <div class="container">
-         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                <h4>Hi, <%= current_user.name %></h4>
-            </div>
-            <!-- /.page-title --> 
-            <div class="col-xs-6 hidden-xs breadcrumb-wrapper"></div>
-            <!-- /.breadcrumb-wrapper --> 
-        </div>
-        <!-- /.row -->
+<section id="fullwidthbanner-container" class="section fullwidthbanner-container">
+    <div class="fullwidthbanner">
+        <ul>
+            <%= render :partial => 'slider' %>
+        </ul>
+        <div class="tp-bannertimer tp-bottom"></div>
     </div>
-    <!-- /.container --> 
+    <!-- /.fullwidthbanner -->
 </section>
+<!-- /.fullwidthbanner-container -->
 
 <section id="item-content-wrapper" class="section">
     <div class="container">
-        <div class="row">
+        <div class="row">            
             <div class="col-md-8">
                 <div class="portfolio-thumb wrapper-1">
                     <% if notice %>
@@ -25,10 +21,11 @@
                     </div>
                     <% elsif alert %>
                     <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <%= alert %>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <%= alert %>
                     </div>
                     <% end %>
+                    <%= image_tag "ajax-loader-3.gif", class: "ajax-loading-gif pull-right", style: "margin-bottom: 4px; display:none" %>
                     <%= render 'updates/form' %>
                     <div class="post-comments">
                         <h5 class="subpage-title">Recent Feed</h5>
@@ -42,21 +39,24 @@
             <div class="col-md-4 item-details">
                 <div class="wrapper-1">
                         <ul class="recent-posts">
-                                                                <li>
-                                        <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
-                                        <h5>
-                                            <%= link_to current_user.name, user_show_path(current_user) %>
-                                            <small><%= link_to "Edit Profile", "#" %></small>
-                                        </h5>
-                                    </li>
+                            <li>
+                                <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
+                                <h5>
+                                    <%= link_to current_user.name, user_show_path(current_user) %>
+                                    <small><%= link_to "Edit Profile", "#" %></small>
+                                </h5>
+                            </li>
                         </ul>
                 </div>
+                <div class="wrapper-1">
+                    <div class="poster-responsive"></div>
+                </div>
                 <div class="widget popular-posts">
-                                <h5 class="subpage-title">Popular Users</h5>
-                                <ul class="recent-posts">
-                                    <%= render @users %>
-                                </ul>
-                            </div>
+                    <h5 class="subpage-title">Popular Users</h5>
+                    <ul class="recent-posts">
+                        <%= render @users %>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

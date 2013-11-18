@@ -1,0 +1,38 @@
+<% transitions = %w(papercut, slideleft, boxslide, boxfade, slotzoom-horizontal, curtain-1, curtain-3) %>
+<% @recent_movies.each do |movie| %>
+    <li data-transition="<%= transitions.sample %>" data-slotamount="10" data-masterspeed="300">
+        <%= image_tag @tmdb.imageUrl('backdrop','original', movie.backdrop) %>
+        <div class="tp-caption theme_caption2 lft ltt"
+            data-x="145"
+            data-y="115"
+            data-speed="300"
+            data-start="2200"
+            data-easing="easeOutExpo"><%= movie.title %></div>
+        <div class="tp-caption theme_caption1 lfl ltl"
+            data-x="145"
+            data-y="180"
+            data-speed="600"
+            data-start="2400"
+            data-easing="easeOutExpo">Tagline</div>
+        <div class="tp-caption theme_caption4 lfl ltl"
+            data-x="145"
+            data-y="203"
+            data-speed="600"
+            data-start="2400"
+            data-easing="easeOutExpo"><%= movie.tag_line %></div>
+        <div class="caption btn btn-flat flat-inverse sfb stb"  
+            data-x="145"
+            data-y="260"
+            data-speed="300" 
+            data-start="2600"
+            data-easing="easeOutExpo"><%= link_to "View", movie_path(movie) %>
+        </div>
+        <div class="caption lfr ltr"
+            data-x="885"
+            data-y="70"
+            data-speed="300"
+            data-start="3000"
+            data-easing="easeOutExpo">
+            <%= image_tag @tmdb.imageUrl('poster','w185', movie.poster) %>
+    </li>
+<% end %>

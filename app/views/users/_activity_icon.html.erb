@@ -1,0 +1,17 @@
+<% if activity.trackable_type == "Comment" %>
+    <i class="icon-comment"></i> &nbsp;&nbsp;
+<% elsif activity.trackable_type == "Update" %>
+    <i class="icon-edit-sign"></i> &nbsp;&nbsp;
+<% elsif activity.trackable_type == "User" %>
+    <% if activity.key == "user.follow" || activity.key == "user.unfollow" %>
+        <i class="icon-user"></i> &nbsp;&nbsp;
+    <% end %>
+<% elsif activity.trackable_type == "Movie" %>
+    <% if activity.key == "movie.like" %>
+        <i class="icon-thumbs-up"></i> &nbsp;&nbsp;
+    <% elsif activity.key == "movie.dislike" %>
+        <i class="icon-thumbs-down"></i> &nbsp;&nbsp;
+    <% elsif activity.key == "movie.create" %>
+        <i class="icon-facetime-video"></i> &nbsp;&nbsp;                       
+    <% end %>                    
+<% end %>

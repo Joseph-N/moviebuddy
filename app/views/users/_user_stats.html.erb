@@ -1,19 +1,19 @@
 <hr />
-	<div class="row">
-		<div class="col-xs-6 col-sm-4">
-			<h4>
-				<span class="count"><%= user.movies.count %></span> <%= link_to "Movies", user_movies_path(user) %>
-			</h4>
-		</div>
-		<div class="col-xs-6 col-sm-4">
-			<h4>
-				<span class="count"><%= user.followers_count %></span> <%= link_to "Followers", user_followers_path(user) %>
-			</h4>
-		</div>
-		<div class="col-xs-6 col-sm-4">
-			<h4>
-				<span class="count"><%= user.follow_count %></span> <%= link_to "Following", user_follows_path(user) %>
-			</h4>
-		</div>
+<div class="row">
+	<div class="col-xs-6 col-sm-4 col-md-4">
+		<h4>
+			<span class="count"><%= user.movies.count %></span> <%= link_to "Movies", user_movies_path(user) %>
+		</h4>
 	</div>
+	<div class="col-xs-6 col-sm-4 col-md-4">
+		<h4>
+			<span class="count"><%= user.followers_count %></span> <%= link_to "Followers", user_followers_path(user) %>
+		</h4>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4">
+		<h4>
+			<span class="count"><%= user.follow_count %></span> <%= link_to "Following", user_follows_path(user) %>
+		</h4>
+	</div>
+</div>
 <hr />

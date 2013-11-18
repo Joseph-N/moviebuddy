@@ -1,4 +1,6 @@
 class Update < ActiveRecord::Base
+	include PublicActivity::Common
+	
 	acts_as_voteable
 	
 	belongs_to :user

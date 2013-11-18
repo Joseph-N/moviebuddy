@@ -44,6 +44,7 @@ gem "thumbs_up", "~> 0.6.7"
 gem "acts_as_follower"
 gem "autolink", "~> 3.0.0"
 gem "thin"
+gem 'public_activity'
 
 group :development do
   gem 'better_errors'

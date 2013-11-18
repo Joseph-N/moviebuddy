@@ -17,6 +17,7 @@ MovieBuddy::Application.routes.draw do
     get 'users/:id/movies' => 'users#movies', as: :user_movies
     get 'users/:id/following' => 'users#following', as: :user_follows
     get 'users/:id/followers' => 'users#followers', as: :user_followers
+    get 'users/:id/activity' => 'users#activity'
     get 'password/edit' => 'users#edit', as: :password_edit
     patch 'password/edit' => 'users#update_password'
   end

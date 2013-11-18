@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@recent_movies = @user.movies.first(5)
 		@tmdb = Tmdb.new
+		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(2)
 	end
 
 	def edit
@@ -48,6 +49,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		url = request.referer
 		if current_user.follow(@user)
+			@user.create_activity key: 'user.follow', owner: current_user, recipient: @user, action: 'follow'
+
 			flash[:notice] = "successfully followed #{@user.name}"
 			respond_to do |format|
 				format.html { redirect_to url }
@@ -60,11 +63,22 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		url = request.referer
 		if current_user.stop_following(@user)
+			@user.create_activity key: 'user.unfollow', owner: current_user, recipient: @user, action: 'unfollow'
+
 			flash[:notice] = "successfully unfollowed #{@user.name}"
 			respond_to do |format|
 				format.html { redirect_to url}
 				format.js
 			end
+		end
+	end
+
+	def activity
+		@activity_id = params[:activity_id]
+		@tmdb = Tmdb.new
+		@activities = PublicActivity::Activity.where("owner_id = ? and owner_type = ? and id < ?", params[:id], "User",@activity_id).order('created_at desc').limit(2)
+		respond_to do |format|
+			format.js
 		end
 	end
 

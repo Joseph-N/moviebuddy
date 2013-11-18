@@ -1,6 +1,8 @@
 class UpdateComment < ActiveRecord::Base
-  belongs_to :update
-  belongs_to :user
+	include PublicActivity::Common
+	
+	belongs_to :update
+	belongs_to :user
 
-  validates_presence_of :update_id, :user_id, :content
+	validates_presence_of :update_id, :user_id, :content
 end

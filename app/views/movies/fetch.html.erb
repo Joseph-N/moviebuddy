@@ -1,16 +1,19 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+            <div class="col-xs-6 col-sm-3 col-md-6 page-title">
                 <h4>
                     <%= @movie["original_title"] %> &rarr; <small> <%= @movie["tagline"] %></small>
                 </h4>
             </div>
-            <%= form_tag(movies_path, method: :get, class: "navbar-form navbar-left pull-right", :html => {:role => 'search'}) do  %>
-                <div class="form-group">
-                    <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search" %>
-                </div>
-            <% end %> 
+                        <div class="col-xs-6 col-sm-9 col-md-6">
+                                                    <%= form_tag(movies_path, method: :get, id: "movie_search", class: "pull-right ", :html => {:role => 'search'}) do  %>
+                    <div class="form-group">
+                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
+                    </div>
+                <% end %>
+
+            </div>
             <!-- /.page-title -->
         </div>
         <!-- /.row -->
@@ -60,7 +63,8 @@
                 </div>
         		
             	<%= form_for(Movie.new, :html => {:role => 'form' }) do |f| %>
-                    <%= f.hidden_field :title, value: @movie["original_title"]  %>
+                    <%= f.hidden_field :title, value: @movie["original_title"] %>
+                     <%= f.hidden_field :tmdb_id, value: @movie["id"]  %>
                     <%= f.text_area :overview, value: @movie["overview"], :style=>"display:none;" %>
                     <%= f.hidden_field :poster, value: @movie["poster_path"]  %>
                     <%= f.hidden_field :genres, value: @genres.join(',') %>

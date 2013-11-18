@@ -30,7 +30,7 @@
     <li>
         <h6>Homepage:</h6>
         <div class="project-terms">
-            <%= @movie.homepage.present? ? @movie.homepage : "None" %>
+            <%= @movie.homepage.present? ? link_to(@movie.homepage, @movie.homepage) : "None" %>
         </div>
     </li>
     <li>

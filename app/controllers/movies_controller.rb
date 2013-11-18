@@ -38,6 +38,7 @@ class MoviesController < ApplicationController
 		@movie.user_id = current_user.id
 		if @movie.save
 			create_update(@movie)
+			@movie.create_activity :create, owner: current_user
 
 			respond_to do |format|
 				format.json { render json: {"url" => movies_path} }
@@ -54,12 +55,16 @@ class MoviesController < ApplicationController
 			else
 				current_user.vote_for(@movie)
 			end
+			@movie.create_activity key: 'movie.like', owner: current_user, recipient: @movie, action: 'vote'
+
 		elsif params[:vote] == 'down'
 			if current_user.voted_on?(@movie)
         		current_user.vote_exclusively_against(@movie)
         	else
 				current_user.vote_against(@movie)
 			end
+			@movie.create_activity key: 'movie.dislike', owner: current_user, recipient: @movie, action: 'vote'
+
 		end
 		respond_to do |format|
 			format.html { redirect_to movie_path(@movie) }
@@ -69,7 +74,7 @@ class MoviesController < ApplicationController
 
 	private
 		def movie_params
-			params.require(:movie).permit(:title, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
+			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
 		end
 
 		def init_tmdb
@@ -78,9 +83,9 @@ class MoviesController < ApplicationController
 
 		def create_update(movie)
 			if movie.comment?
-				current_user.updates.create(content: "Added <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b> to my collection <p> #{movie.comment}</p>", poster: @movie.poster)
+				current_user.updates.create(content: "Added new movie: <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b><p> #{movie.comment}</p>", poster: @movie.poster)
 			else
-				current_user.updates.create(content: "Added <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b> to my collection", poster: @movie.poster)
+				current_user.updates.create(content: "Added new movie: <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b>", poster: @movie.poster)
 			end
 		end
 end

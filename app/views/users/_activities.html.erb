@@ -1,0 +1,74 @@
+<% activities.each do |activity| %>
+    <tr data-id="<%= activity.id %>">
+        <td width="50%">
+            <%= render :partial => 'activity_icon', locals: { activity: activity } %>
+            <%= activity.owner.name %>
+            <% if activity.trackable_type == "Comment"%>
+                commented on a <%= link_to "Movie", movie_path(activity.trackable.movie), class: "home" %>
+
+                <blockquote style="margin-top: 15px;">
+                    <p><%= activity.trackable.body %></p>
+                    <small>
+                        <cite title="Source Title">
+                            <%= activity.trackable.movie.title %>
+                        </cite>
+                    </small>
+                </blockquote>
+        </td>
+
+        <td align="right">
+            <%= link_to image_tag(@tmdb.imageUrl('poster', 'w92',activity.trackable.movie.poster)), movie_path(activity.trackable.movie) %>
+
+            <% elsif activity.trackable_type == "Movie" %>
+                <% if activity.key == "movie.create" %>
+                    added a new <%= link_to "Movie", movie_path(activity.trackable), class: "home" %> to his collection
+                <% elsif activity.key == "movie.like" %>
+                    likes a <%= link_to "Movie", movie_path(activity.trackable), class: "home" %>
+                <% elsif activity.key == "movie.dislike" %>
+                    dislikes a <%= link_to "Movie", movie_path(activity.trackable), class: "home" %>
+                <% end %>
+
+            <blockquote style="margin-top: 15px;">
+                <p><%= activity.trackable.title %></p>
+            </blockquote>
+        </td>
+
+        <td align="right">
+            <%= link_to image_tag(@tmdb.imageUrl('poster', 'w92',activity.trackable.poster)), movie_path(activity.trackable), class: "home" %>
+        
+            <% elsif activity.trackable_type == "Update" %>
+                updated his status
+                                      
+        </td>
+        <td>
+            <%= activity.trackable.content %>
+        </td>
+
+        <% elsif activity.trackable_type == "User" %>     
+
+            <%= activity.key == "user.follow" ? "followed" : "unfollowed" %>
+            <%= link_to activity.trackable.name, user_show_path(activity.trackable), class: "home" %>
+
+            <td align="right">
+                <%= link_to image_tag(activity.trackable.avator.url(:thumb)), user_show_path(activity.trackable) %>                          
+            </td>
+        <% elsif activity.trackable_type == "UpdateComment" %>     
+            commented on an <%= link_to "update", '#', class: "home" %>
+
+            <blockquote style="margin-top: 15px;">
+                <p><%= raw(activity.trackable.update.content) %></p>
+                <% if activity.trackable.update.poster %>
+                    <p><%= image_tag(@tmdb.imageUrl('poster','w92', activity.trackable.update.poster)) %></p>
+                <% end %>
+                <small>
+                    <cite title="Source Title">
+                        update by: <%= activity.trackable.update.user.name %>
+                    </cite>
+                </small>
+            </blockquote>
+            <td align="right">
+                <%= activity.trackable.content %>                          
+            </td>
+        <% end %>  
+    </tr>
+<% end %>
