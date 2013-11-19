@@ -2,19 +2,25 @@
   <script>
   if(s(window).width() > 992){
     s(window).load(function(){
-      s('.loading-gif').show();
+      var bg_image = '<%= @image %>';
+      if(bg_image){
+        s('.loading-gif').show();
       
-      var img = new Image();
-      s(img).load(function() {
-        s(".section.colored-wrapper.b").css({
-          "background-image" : "url('<%= @image %>')",
-          "background-repeat" : "no-repeat"
+        var img = new Image();
+        s(img).load(function() {
+          s(".section.colored-wrapper.b").css({
+            "background-image" : "url("+ bg_image + ")",
+            "background-repeat" : "no-repeat"
+          });
+          
+          s('.loading-gif').hide();
         });
-        
-        s('.loading-gif').hide();
-      });
 
-      img.src = '<%= @image %>';
+        img.src = bg_image;
+      }
+      else{
+        console.log("No backdrop");
+      }
     });
   }
   </script>
@@ -77,4 +83,4 @@
   </div>
 <!-- /.container -->
 </section>
-<%= render :partial => 'shared/recent_movies' %>
+<%= render :partial => 'shared/recent_movies', locals: { size: "w780"} %>

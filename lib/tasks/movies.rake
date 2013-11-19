@@ -15,14 +15,16 @@ namespace :movies do
   		end
   	}
 
-  	puts "Getting current list of popular movies...."
+  	puts "----> Contacting TMDB API for popular movies....."
   	movies = tmdb.popularMovies 
 
   	if movies
-  		puts "Success!! now saving the records!"
+  		puts "      Success!! now saving the records!"
+      puts "\n"
   		movies.each do |movie|
   			genres = []
-  			puts "----> Fetching trailer for #{movie["title"]}..."
+        puts "       -> New movie: #{movie["title"]}..."
+  			puts "       -> Fetching trailer for #{movie["title"]}..."
   			trailer = tmdb.movieTrailer(movie["id"])
 
   			params = movie.select{|key, value| cols.include?(key) }
@@ -44,10 +46,11 @@ namespace :movies do
 			  					)
 
   			if newMovie.save
-  				puts "----> Successfully added #{newMovie.title}"
+  				puts "       -> Successfully added #{newMovie.title}"
   				puts "\n"
   			end
   		end
+      puts "Regards, always at your service"
   	end
   end
 
