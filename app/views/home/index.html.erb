@@ -12,7 +12,7 @@
 <section id="item-content-wrapper" class="section">
     <div class="container">
         <div class="row">            
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="portfolio-thumb wrapper-1">
                     <% if notice %>
                     <div class="alert alert-success alert-dismissable">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 item-details">
+            <div class="col-md-5 item-details v-ruler">
                 <div class="wrapper-1">
                         <ul class="recent-posts">
                             <li>
@@ -48,9 +48,30 @@
                             </li>
                         </ul>
                 </div>
+                <hr>
                 <div class="wrapper-1">
-                    <div class="poster-responsive"></div>
+                    <h5 class="subpage-title">Upcoming Movies</h5>
+                        <ul class="recent-movies">
+                            <%= render :partial => 'movies', locals: { movies: @upcoming_movies } %>
+                        </ul>
                 </div>
+                <hr>
+
+                <div class="wrapper-1">
+                    <h5 class="subpage-title">Popular Movies</h5>
+                        <ul class="recent-movies">
+                            <%= render :partial => 'movies', locals: { movies: @popular_movies } %>
+                        </ul>
+                </div>
+                <hr>
+
+                <div class="wrapper-1">
+                    <h5 class="subpage-title">Highest Rated Movies</h5>
+                        <ul class="recent-movies">
+                          <%= render :partial => 'movies', locals: { movies: @highest_rated } %>  
+                        </ul>
+                </div>
+
                 <div class="widget popular-posts">
                     <h5 class="subpage-title">Popular Users</h5>
                     <ul class="recent-posts">

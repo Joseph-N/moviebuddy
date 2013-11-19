@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118061539) do
+ActiveRecord::Schema.define(version: 20131119154718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20131118061539) do
     t.string   "title"
     t.text     "overview"
     t.string   "poster"
-    t.string   "genres",                       array: true
+    t.string   "genres",                        array: true
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(version: 20131118061539) do
     t.string   "tag_line"
     t.string   "backdrop"
     t.integer  "tmdb_id"
-    t.boolean  "popular",      default: false
+    t.boolean  "popular",       default: false
+    t.boolean  "upcoming",      default: false
+    t.boolean  "highest_rated", default: false
   end
 
   add_index "movies", ["popular"], name: "index_movies_on_popular", using: :btree

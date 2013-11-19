@@ -56,10 +56,32 @@ class Tmdb
 
 		url = buildUrl("movie/popular", @params)
 		movies = JSON.parse(RestClient.get url)
-		movies["results"][1..5].each do |movie|
+		movies["results"].each do |movie|
 			pop_movies << movieInfo(movie["id"])
 		end
 		pop_movies
+	end
+
+	def upcomingMovies
+		upcoming_movies = []
+
+		url = buildUrl("movie/upcoming", @params)
+		movies = JSON.parse(RestClient.get url)
+		movies["results"].each do |movie|
+			upcoming_movies.push(movieInfo(movie["id"]))
+		end
+		upcoming_movies
+	end
+
+	def highest_rated
+		h_rated = []
+
+		url = buildUrl("movie/top_rated", @params)
+		movies = JSON.parse(RestClient.get url)
+		movies["results"].each do |movie|
+			h_rated.push(movieInfo(movie["id"]))
+		end
+		h_rated
 	end
 
 	private

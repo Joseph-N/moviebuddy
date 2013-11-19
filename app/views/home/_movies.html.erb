@@ -1,0 +1,12 @@
+<% movies.each do |movie| %>
+<li>
+    <%= link_to image_tag(@tmdb.imageUrl('poster','w92', movie.poster)), movie_path(movie) %>
+    <h5>
+        <a href="#"><%= link_to movie.title, movie_path(movie) %></a>
+        <small><%= movie.release_date %></small>
+    </h5>
+    <p>
+        <%= truncate(movie.overview, length: 165, omission: '... (continued)') %>
+    </p>
+</li>
+<% end %>

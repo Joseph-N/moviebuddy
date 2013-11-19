@@ -1,5 +1,5 @@
 <% transitions = %w(papercut, slideleft, boxslide, boxfade, slotzoom-horizontal, curtain-1, curtain-3) %>
-<% @recent_movies.each do |movie| %>
+<% @popular_movies.each do |movie| %>
     <li data-transition="<%= transitions.sample %>" data-slotamount="10" data-masterspeed="300">
         <%= image_tag @tmdb.imageUrl('backdrop','original', movie.backdrop) %>
         <div class="tp-caption theme_caption2 lft ltt"
