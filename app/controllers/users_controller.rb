@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@recent_movies = @user.movies.first(5)
 		@tmdb = Tmdb.new
-		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(2)
+		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(5)
 	end
 
 	def edit

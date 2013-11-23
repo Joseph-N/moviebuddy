@@ -129,6 +129,31 @@ s(document).ready(function(){
 	    setTimeout(fetchUpdates, 20000);
 	}
 
+	// poll for updates
+	if(s('li.media').size() > 0){
+
+		s('#more-updates').click(function(){
+			var after = s('li.media:last').attr('data-time');
+			var link = s(this);
+			s('div.more').show();
+			link.hide();
+
+			s.ajax({
+				type: "GET",
+	  			url: '/updates/more',
+	  			data: {"after" : after },
+	  			dataType: "script",
+	  			success: function(){
+	  				s('div.more').hide();
+	  				link.show();
+	  			}
+			});
+			return false;
+		});
+		
+	}
+
+
 });
 
 function fetchUpdates() {

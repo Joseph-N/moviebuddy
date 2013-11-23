@@ -32,6 +32,12 @@ class UpdatesController < ApplicationController
 		end
 	end
 
+	def more
+		following_user_ids = get_following << current_user.id
+		@tmdb = Tmdb.new
+		@updates = Update.where(user_id: following_user_ids).where("created_at < ?", Time.at(params[:after].to_i - 1)).limit(5)
+	end
+
 	private
 		def update_params
 			params.require(:update).permit(:content)

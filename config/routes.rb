@@ -21,6 +21,7 @@ MovieBuddy::Application.routes.draw do
     get 'users/:id/activity' => 'users#activity'
     get 'password/edit' => 'users#edit', as: :password_edit
     patch 'password/edit' => 'users#update_password'
+    get 'updates/more' => 'updates#more'
   end
 
   resources :movies do

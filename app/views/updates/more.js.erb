@@ -1,0 +1,4 @@
+var s = jQuery;
+s.noConflict();
+
+s('ul.media-list').append('<%= escape_javascript(render(:partial => @updates)) %>');
