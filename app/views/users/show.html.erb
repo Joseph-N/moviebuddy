@@ -1,3 +1,13 @@
+<% title "#{@user.name}'s Profile" %>
+
+<% content_for(:meta_tags) do %>
+    <meta property="og:title" content="<%= @user.name %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.url %>" />
+    <meta property="og:image" content="<%= @user.avator.url(:profile) %>" />
+    <meta name="description" content="<%= @user.name %>">
+<% end %>
+
 <section id="page-title-wrapper" class="section page-title-wrapper clearfix">
     <div class="container">
         <div class="row">

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MovieBuddy</title>
+    <title><%= content_for?(:title) ? yield(:title) : "MovieBuddy" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= yield(:meta_tags) if content_for?(:meta_tags)  %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag  "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>
     <%= javascript_include_tag "application" %>
+    <%= render 'layouts/google_analytics' if Rails.env.production? %>
     <%= yield(:head) %>
     <%= csrf_meta_tags %>
 </head>
@@ -17,14 +19,14 @@
                     <div class="col-xs-12 col-sm-8 header-info-wrapper">
                         <ul class="list-inline">
                             <li><i class="icon-film"></i>
-                                Movie will solve all of your troubles!!
+                                One movie is better than two of something else.
                             </li>
                         </ul>
                         <!-- /.list-inline -->
                     </div>
                     <!-- /.header-info-wrapper -->
                     <div class="col-xs-12 col-sm-4 social-link-wrapper">
-                        <%= render :partial => 'layouts/social_links' %>
+                        <%= render 'layouts/social_links' %>
                     </div>
                     <!-- /.social-link-wrapper -->
                 </div>
@@ -35,7 +37,7 @@
         <!-- /.header-1 -->
 
         <header id="header-2" class="header">
-            <%= render :partial => "layouts/navigation" %>
+            <%= render "layouts/navigation" %>
         </header>
         <!-- /#header-2 -->
 
@@ -49,7 +51,7 @@
                 </div>
                 <!-- /.footer-info-wrapper -->
                 <div class="col-xs-12 col-sm-6 social-link-wrapper">
-                    <%= render :partial => 'layouts/social_links' %>
+                    <%= render 'layouts/social_links' %>
                 </div>
                 <!-- /.social-link-wrapper -->
             </div>
@@ -59,11 +61,11 @@
         </footer>
         <!-- /#footer-2 -->
 
-        <%= render :partial => 'layouts/skin_chooser' %>
+        <%= render 'layouts/skin_chooser' %>
 
         <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 
     </div>
-    <%= render :partial => 'layouts/modal' %>
+    <%= render 'layouts/modal' %>
 </body>
 </html>
