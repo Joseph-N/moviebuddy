@@ -38,15 +38,30 @@
 
             <div class="col-md-5 item-details v-ruler">
                 <div class="wrapper-1">
-                        <ul class="recent-posts">
-                            <li>
-                                <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
-                                <h5>
-                                    <%= link_to current_user.name, user_show_path(current_user) %>
-                                    <small><%= link_to "Edit Profile", "#" %></small>
-                                </h5>
-                            </li>
+                    <ul class="recent-posts">
+                        <li>
+                            <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
+                            <h5>
+                                <%= link_to current_user.name, user_show_path(current_user) %>
+                                <small><%= link_to "Edit Profile", "#" %></small>
+                            </h5>
+                        </li>
+                    </ul>
+                    <div class="widget search">
+                         <%= render :partial => 'shared/search_form' %>
+                    </div>
+
+                    <div class="widget categories">
+                        <h5 class="subpage-title">Favourites</h5>
+                        <ul class="widget-list">
+                            <li><%= link_to "Browse Users", all_users_path %></li>
+                            <li><%= link_to "My Movies", movies_path %></li>
+                            <li><%= link_to "Followers", user_followers_path(current_user) %></li>
+                            <li><%= link_to "Following", user_follows_path(current_user) %></li>
                         </ul>
+                    </div>
+
+
                 </div>
                 <hr>
                 <div class="wrapper-1">

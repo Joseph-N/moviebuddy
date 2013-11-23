@@ -13,6 +13,7 @@ MovieBuddy::Application.routes.draw do
                       }
 
   devise_scope :users do
+    get 'users' => 'users#index', as: :all_users
     get 'users/:id' => 'users#show', as: :user_show
     get 'users/:id/movies' => 'users#movies', as: :user_movies
     get 'users/:id/following' => 'users#following', as: :user_follows

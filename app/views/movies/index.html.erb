@@ -23,12 +23,7 @@
 
             <!-- /.page-title -->
             <div class="col-xs-6 col-sm-9 col-md-6">
-                                                    <%= form_tag(movies_path, method: :get, id: "movie_search", class: "pull-right ", :html => {:role => 'search'}) do  %>
-                    <div class="form-group">
-                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Movies..." %>
-                    </div>
-                <% end %>
-
+                <%= render :partial => 'shared/search_form' %>
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>

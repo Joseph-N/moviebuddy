@@ -68,7 +68,7 @@
                   <% if devise_mapping.rememberable? -%>
                     <%= f.check_box :remember_me %> <%= f.label :remember_me %>
                   <% end -%>
-                  <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right" %>
+                  <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right home" %>
                 </div>
 
                 <div class="form-group">
@@ -91,6 +91,12 @@
                     <%= link_to image_tag("transparent.gif", class: "signin-google"), user_omniauth_authorize_path(:google_oauth2) %>
                   </div>
                 </div>
+                <div class="row">
+                  <h4>OR</h4>
+                  <div class="col-md-12">
+                    <%= link_to 'Create Account', new_user_registration_path , class: "btn btn-flat flat-inverse btn-block"%>
+                  </div>
+                </div>
               <% end %>               
             </div>
          </div>   
@@ -101,4 +107,4 @@
 </div>
 <!-- /.container -->
 </section>
-<%= render :partial => 'shared/recent_movies', locals: { size: "w780"} %>
+<%= render :partial => 'shared/recent_movies', locals: { size: "w300"} %>
