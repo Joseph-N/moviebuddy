@@ -73,7 +73,11 @@
 					</ul>
 					<!-- end comments -->
                 </div>
-        		<%= render 'comments/form' %>                            
+                <% if user_signed_in? %>
+        		  <%= render 'comments/form' %>  
+                <% else %>
+                    <p> <%= link_to "Log In", new_user_session_path %> in to leave a comment </p>
+                <% end %>                          
             </div>
         </div>
     </div>

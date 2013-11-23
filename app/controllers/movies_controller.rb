@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => [:show]
 	before_action :init_tmdb, only: [:index, :show, :fetch]
 
 	def index

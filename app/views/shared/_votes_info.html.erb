@@ -1,14 +1,18 @@
 <div id="vote-info-<%= movie.id %>">
 	<div class="col-xs-6 col-md-5">
-	  	<% if current_user.voted_how?(movie) == true %>
-			<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , '#', class: "btn btn-flat flat-success disabled btn-bordered" %>
-			<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %>
-		<% elsif current_user.voted_how?(movie) == false %>
-			<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %>
-		 	<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), '#', class: "btn btn-flat flat-danger disabled btn-bordered" %>
-		 <% else %>		 
-		 	<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %> 
-		 	<%= link_to raw('<i class="icon-thumbs-up"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %> 
+		<% if user_signed_in? %>
+		  	<% if current_user.voted_how?(movie) == true %>
+				<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , '#', class: "btn btn-flat flat-success disabled btn-bordered" %>
+				<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %>
+			<% elsif current_user.voted_how?(movie) == false %>
+				<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %>
+			 	<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), '#', class: "btn btn-flat flat-danger disabled btn-bordered" %>
+			 <% else %>		 
+			 	<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %> 
+			 	<%= link_to raw('<i class="icon-thumbs-up"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %> 
+			<% end %>
+		<% else %>
+			 <p> <%= link_to "Log In to like", new_user_session_path %> </p>
 		<% end %>
 	</div>
 </div>
