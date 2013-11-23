@@ -70,41 +70,7 @@
             
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-
-          <div class="form-group">
-            <%= f.label :password, :class => "col-md-3" %> 
-
-            <div class="col-md-7">
-              <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
-            </div> <!-- /.col -->
-
-          </div> <!-- /.form-group -->
-
-            
-
-          <div class="form-group">
-            <%= f.label "Confirm Password", :class =>"col-md-3" %>
-
-            <div class="col-md-7">
-              <%= f.password_field :password_confirmation, :class => "form-control" %>
-            </div> <!-- /.col -->
-
-          </div> <!-- /.form-group -->
-
-            
-
-          <div class="form-group">
-
-            <%= f.label :current_password, :class =>"col-md-3" %>
-
-            <div class="col-md-7">
-              <%= f.password_field :current_password, :class => "form-control" %>
-            </div> <!-- /.col -->
-
-          </div> <!-- /.form-group -->
-
-           
+          <% end %>           
 
           <div class="form-group">
 

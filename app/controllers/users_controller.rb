@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 	    @user = User.find(current_user.id)
 	    if @user.update_with_password(user_params)
 	      # Sign in the user by passing validation in case his password changed
+	      flash[:notice] = "Successfully updated password"
 	      sign_in @user, :bypass => true
 	      redirect_to root_path
 	    else
@@ -86,6 +87,6 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.required(:user).permit(:password, :password_confirmation)
+		params.required(:user).permit(:password, :password_confirmation, :current_password)
 	end
 end

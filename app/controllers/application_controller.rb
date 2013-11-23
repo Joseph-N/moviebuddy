@@ -9,7 +9,9 @@ class ApplicationController < ActionController::Base
 
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.for(:sign_up) << :name
-		devise_parameter_sanitizer.for(:account_update) << :avator << :name
+		devise_parameter_sanitizer.for(:account_update) do |u|
+			u.permit(:avator, :name, :email, :password, :password_confirmation)
+		end
 	end
 
   	def user_movie_genres(user)
