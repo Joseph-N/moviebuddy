@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		@recent_movies = @user.movies.first(5)
 		@tmdb = Tmdb.new
 		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(5)
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   	end
 
 	def movies
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		@genres = user_movie_genres(@user)
 		if current_user == @user
 			redirect_to movies_path
@@ -38,17 +38,17 @@ class UsersController < ApplicationController
 	end
 
 	def following
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		@following = @user.all_following
 	end
 
 	def followers
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		@followers = @user.followers
 	end
 
 	def follow
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		url = request.referer
 		if current_user.follow(@user)
 			@user.create_activity key: 'user.follow', owner: current_user, recipient: @user, action: 'follow'
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
 	end
 
 	def unfollow
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 		url = request.referer
 		if current_user.stop_following(@user)
 			@user.create_activity key: 'user.unfollow', owner: current_user, recipient: @user, action: 'unfollow'

@@ -1,7 +1,7 @@
 namespace :movies do
 
   desc "Fetch the latest popular movies from TMDB"
-  task fetch_popular: :environment do
+  task popular: :environment do
 
     tmdb = Tmdb.new
     cols = Movie.columns.map { |c| c.name }
@@ -25,40 +25,42 @@ namespace :movies do
   		puts "      Success!! now saving the records!"
       puts "\n"
   		movies.each do |movie|
-  			genres = []
-        puts "       -> New movie: #{movie["title"]}..."
-  			puts "       -> Fetching trailer for #{movie["title"]}..."
-  			trailer = tmdb.movieTrailer(movie["id"])
+        if movie["release_date"].to_date.year > 2010 && movie["backdrop_path"] != nil && movie["poster_path"] != nil
+    			genres = []
+          puts "       -> New movie: #{movie["title"]}..."
+    			puts "       -> Fetching trailer for #{movie["title"]}..."
+    			trailer = tmdb.movieTrailer(movie["id"])
 
-  			params = movie.select{|key, value| cols.include?(key) }
-  			params["genres"].each {|x| genres.push(x["name"])}
-  			
+    			params = movie.select{|key, value| cols.include?(key) }
+    			params["genres"].each {|x| genres.push(x["name"])}
+    			
 
-  			newMovie = Movie.new( title: params["title"],
-			  					  tmdb_id: params["id"],
-			  					  overview: params["overview"],
-			  					  poster: params["poster_path"],
-			  					  backdrop: params["backdrop_path"],
-			  					  genres: genres,
-			  					  youtube_id: trailer,
-			  					  budget: params["budget"],
-			  					  homepage: params["homepage"],
-			  					  release_date: params["release_date"],
-			  					  tag_line: params["tagline"],
-			  					  popular: true
-			  					)
+    			newMovie = Movie.new( title: params["title"],
+  			  					  tmdb_id: params["id"],
+  			  					  overview: params["overview"],
+  			  					  poster: params["poster_path"],
+  			  					  backdrop: params["backdrop_path"],
+  			  					  genres: genres,
+  			  					  youtube_id: trailer,
+  			  					  budget: params["budget"],
+  			  					  homepage: params["homepage"],
+  			  					  release_date: params["release_date"],
+  			  					  tag_line: params["tagline"],
+  			  					  popular: true
+  			  					)
 
-  			if newMovie.save
-  				puts "       -> Successfully added #{newMovie.title}"
-  				puts "\n"
-  			end
+    			if newMovie.save
+    				puts "       -> Successfully added #{newMovie.title}"
+    				puts "\n"
+    			end
+        end
   		end
       puts "Regards, always at your service"
   	end
   end
 
   desc "Fetch upcoming movies from TMDB"
-  task fetch_upcoming: :environment do
+  task upcoming: :environment do
     tmdb = Tmdb.new
     cols = Movie.columns.map { |c| c.name }
     cols.map! {|value|

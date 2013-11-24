@@ -45,6 +45,7 @@ gem "acts_as_follower"
 gem "autolink", "~> 3.0.0"
 gem "thin"
 gem 'public_activity'
+gem 'friendly_id', '~> 5.0.0'
 
 group :development do
   gem 'better_errors'

@@ -72,6 +72,8 @@ GEM
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    friendly_id (5.0.1)
+      activerecord (~> 4.0.0)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -213,6 +215,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 4.0.0)
   devise (~> 3.1.1)
+  friendly_id (~> 5.0.0)
   jbuilder (~> 1.2)
   jquery-rails
   json (~> 1.8.1)

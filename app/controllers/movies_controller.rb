@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
 	end
 
 	def show
-		@movie = Movie.find(params[:id])
+		@movie = Movie.friendly.find(params[:id])
 		@comment = @movie.comments.build
 		@comments = @movie.comments
 		@trailer = youtubeVideo(@movie.youtube_id)
@@ -48,7 +48,7 @@ class MoviesController < ApplicationController
 	end
 
 	def vote
-		@movie = Movie.find(params[:id])
+		@movie = Movie.friendly.find(params[:id])
 		if params[:vote] == 'up'
 			if current_user.voted_on?(@movie)
 				current_user.vote_exclusively_for(@movie)

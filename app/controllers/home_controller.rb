@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 		@update = Update.new
 		following_user_ids = get_following << current_user.id
 		@updates = Update.where(user_id: following_user_ids).limit(5)
-		@popular_movies = Movie.where(popular: true).sample(3)
+		@popular_movies = Movie.where.not(backdrop: nil, poster: nil).where(popular: true).sample(3)
 		@upcoming_movies = Movie.where(upcoming: true).sample(3)
 		@highest_rated = Movie.where(highest_rated: true).sample(3)
 		# @users = User.where.not(id: current_user.id)

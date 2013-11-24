@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 	include PublicActivity::Common
+
+	extend FriendlyId
+  	friendly_id :name, use: :slugged
 	
 	acts_as_voter 
 	acts_as_followable

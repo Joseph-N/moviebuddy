@@ -1,6 +1,9 @@
 class Movie < ActiveRecord::Base
 	include PublicActivity::Common
 
+	extend FriendlyId
+  	friendly_id :title, use: :slugged
+
 	acts_as_voteable
 
 	belongs_to :user
