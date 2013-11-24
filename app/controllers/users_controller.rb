@@ -77,8 +77,9 @@ class UsersController < ApplicationController
 
 	def activity
 		@activity_id = params[:activity_id]
+		@user = User.friendly.find(params[:id])
 		@tmdb = Tmdb.new
-		@activities = PublicActivity::Activity.where("owner_id = ? and owner_type = ? and id < ?", params[:id], "User",@activity_id).order('created_at desc').limit(2)
+		@activities = PublicActivity::Activity.where("owner_id = ? and owner_type = ? and id < ?", @user.id, "User",@activity_id).order('created_at desc').limit(2)
 		respond_to do |format|
 			format.js
 		end

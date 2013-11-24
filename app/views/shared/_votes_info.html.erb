@@ -12,7 +12,7 @@
 			 	<%= link_to raw('<i class="icon-thumbs-up"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %> 
 			<% end %>
 		<% else %>
-			 <p> <%= link_to "Log In to like", new_user_session_path %> </p>
+			 <p> <%= link_to "Log In to like", new_user_session_path, class: "btn btn-flat flat-info" %> </p>
 		<% end %>
 	</div>
 </div>

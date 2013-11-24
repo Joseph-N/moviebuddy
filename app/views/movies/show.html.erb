@@ -76,7 +76,7 @@
                 <% if user_signed_in? %>
         		  <%= render 'comments/form' %>  
                 <% else %>
-                    <p> <%= link_to "Log In", new_user_session_path %> in to leave a comment </p>
+                    <p> <%= link_to "Log In to leave a comment", new_user_session_path, class: "btn btn-flat flat-info" %> </p>
                 <% end %>                          
             </div>
         </div>

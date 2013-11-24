@@ -1,0 +1,11 @@
+<div class="col-xs-12 col-sm-4 col-md-6 space">
+	<%= link_to image_tag("transparent.gif", class: "signin-facebook"), user_omniauth_authorize_path(:facebook) %>
+</div>
+
+<div class="col-xs-12 col-sm-4 col-md-6 space">
+	<%= link_to image_tag("transparent.gif", class: "signin-twitter"), user_omniauth_authorize_path(:twitter) %>
+</div>
+
+<div class="col-xs-12 col-sm-4 col-md-12 space">
+	<%= link_to image_tag("transparent.gif", class: "signin-google"), user_omniauth_authorize_path(:google_oauth2) %>
+</div>
