@@ -40,7 +40,7 @@
                         <ul class="media-list">
                             <%= render @updates unless @updates.nil? %>
                         </ul>
-                        <%= link_to "More", "#", class: "btn btn-flat flat-default btn-bordered btn-lg btn-block", id: "more-updates" if @updates.any? && @updates.size > 5 %>
+                        <%= link_to "More", "#", class: "btn btn-flat flat-default btn-bordered btn-lg btn-block", id: "more-updates" if @updates.any? && @updates.size >= 5 %>
 
                         <div class="more" style="text-align: center; display:none">
                             <%= image_tag "ajax-loader-2.gif" %>
