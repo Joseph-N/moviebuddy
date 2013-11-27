@@ -1,14 +1,14 @@
 <% title @movie.title %>
 
-<% content_for(:meta_tags) do %>
- <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
-  <meta property="fb:app_id"      content="1432996973586926" /> 
-  <meta property="og:type"        content="video.movie" /> 
-  <meta property="og:url"         content="<%= request.url %>" /> 
-  <meta property="og:title"       content="<%= @movie.title %>" /> 
-  <meta property="og:image"       content="<%= @tmdb.imageUrl("poster", "w154", @movie.poster)%>" /> 
-  <meta property="og:description" content="<%= truncate(@movie.overview, :length => 200) %>" /> 
-  <meta name="description" content="<%= truncate(@movie.overview, :length => 200) %>">
+<% content_for(:meta_tags) do %>    
+    <meta name="description" content="<%= truncate(@movie.overview, :length => 200, omission: '... (continued)') %>">
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
+    <meta property="fb:app_id"      content="1432996973586926" /> 
+    <meta property="og:type"        content="video.movie" /> 
+    <meta property="og:url"         content="<%= request.url %>" /> 
+    <meta property="og:title"       content="<%= @movie.title %>" /> 
+    <meta property="og:image"       content="<%= @tmdb.imageUrl("poster", "w154", @movie.poster)%>" /> 
+    <meta property="og:description" content="<%= truncate(@movie.overview, :length => 250, omission: '... (continued)') %>" /> 
 <% end %>
 
 <% content_for(:head) do %>

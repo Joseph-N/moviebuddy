@@ -4,6 +4,7 @@ class Movie < ActiveRecord::Base
 	extend FriendlyId
   	friendly_id :title, use: :slugged
 
+  	before_save :check_genres
 	acts_as_voteable
 
 	belongs_to :user
@@ -21,5 +22,12 @@ class Movie < ActiveRecord::Base
 
 	def highest_rated?
 		self.highest_rated == false
+	end
+
+	private
+	def check_genres
+		if self.genres.nil?
+			self.genres = ["Unknown"]
+		end
 	end
 end

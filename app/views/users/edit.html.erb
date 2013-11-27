@@ -18,10 +18,8 @@
     <div class="row">
       <div class="col-md-4">
         <ul id="myTab" class="nav nav-pills nav-stacked">
-          <li class="">
-            <a href="#profile-tab" data-toggle="tab">
-              <i class="icon-user"></i> &nbsp;&nbsp;Profile Settings
-            </a>
+          <li class="">           
+              <%= link_to raw('<i class="icon-user"></i> &nbsp;&nbsp; Profile Settings'), edit_user_registration_path %>
           </li>
           <li class="active">
             <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>

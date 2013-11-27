@@ -34,16 +34,20 @@ class MoviesController < ApplicationController
 	end
 
 	def create
-		@movie = Movie.new(movie_params)
-		@movie.user_id = current_user.id
-		if @movie.save
-			create_update(@movie)
-			@movie.create_activity :create, owner: current_user
-
-			respond_to do |format|
-				format.json { render json: {"url" => movies_path} }
-				format.html { redirect_to movies_path}
+		@movie = current_user.movies.build(movie_params)
+		unless current_user.movies.where(:tmdb_id => @movie.tmdb_id).any?
+			if @movie.save
+				flash[:notice] = "Added #{@movie.title} successfully to your collection"
+				create_update(@movie)
+				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
 			end
+		else
+			flash[:alert] = "#{@movie.title} is already in your collection"
+		end
+
+		respond_to do |format|
+			format.json { render json: {"url" => movies_path} }
+			format.html { redirect_to movies_path}
 		end
 	end
 
@@ -55,7 +59,7 @@ class MoviesController < ApplicationController
 			else
 				current_user.vote_for(@movie)
 			end
-			@movie.create_activity key: 'movie.like', owner: current_user, recipient: @movie, action: 'vote'
+			ActivityWorker.perform_async("Movie", @movie.id, current_user.id, { key: "movie.like", action: "vote"})
 
 		elsif params[:vote] == 'down'
 			if current_user.voted_on?(@movie)
@@ -63,7 +67,7 @@ class MoviesController < ApplicationController
         	else
 				current_user.vote_against(@movie)
 			end
-			@movie.create_activity key: 'movie.dislike', owner: current_user, recipient: @movie, action: 'vote'
+			ActivityWorker.perform_async("Movie", @movie.id, current_user.id, { key: "movie.dislike", action: "vote"})
 
 		end
 		respond_to do |format|
@@ -87,5 +91,9 @@ class MoviesController < ApplicationController
 			else
 				current_user.updates.create(content: "Added new movie: <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b>", poster: @movie.poster)
 			end
+		end
+
+		def new_movie?(movie)
+			current_user.movies.find_by_tmdb_id(movie.tmdb_id).present?
 		end
 end

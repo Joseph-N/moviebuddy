@@ -8,7 +8,7 @@ class UpdatesController < ApplicationController
 	def create
 		@update = current_user.updates.build(update_params)
 		if @update.save
-			@update.create_activity :create, owner: current_user
+			ActivityWorker.perform_async("Update", @update.id, current_user.id)
 			respond_to do |format|
 				format.html { redirect_to root_path }
 				format.js

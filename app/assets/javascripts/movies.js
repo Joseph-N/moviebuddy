@@ -7,8 +7,6 @@ s.noConflict();
 
 s(document).ready(function(){
 	s('.youtube').fitVids();
-  s('#comments-path').hide();
-  s('.loading').hide();
 
 	// Isotope Portfolio
     var container = s('#isotope-portfolio-container');

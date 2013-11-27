@@ -1,11 +1,108 @@
-// Place all the styles related to the home controller here.
+/*// Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com/*/
 
-.space{
-	margin-top: 5px;
+/*
+Global Styles for social button
+------------------------------------------------------------ */
+ 
+a.button-facebook,
+a.button-googleplus,
+a.button-linkedin,
+a.button-twitter {
+	border-radius: 3px;
+	box-shadow: 0 1px 1px #999;
+	color: #fff !important;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 20px 10px 0;
+	margin: 0 2rem 2rem 0;
+	padding: 10px 15px;
+	padding: 1rem 1.5rem;
+	text-align: center;
+	width: 100%;
 }
 
+/*
+Facebook
+------------------------------------------------------------ */
+ 
+a.button-facebook {
+	background-color: #2b4170; /* fallback color */
+	background: -moz-linear-gradient(top, #3b5998, #2b4170);
+	background: -ms-linear-gradient(top, #3b5998, #2b4170);
+	background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+	border: 1px solid #2b4170;
+	text-shadow: 0 -1px -1px #1f2f52;
+}
+ 
+a.button-facebook:hover {
+	background-color: #3b5998; /* fallback color */
+	background: -moz-linear-gradient(top, #2b4170, #3b5998);
+	background: -ms-linear-gradient(top, #2b4170, #3b5998);
+	background: -webkit-linear-gradient(top, #2b4170, #3b5998);
+}
+
+/*
+Google+
+------------------------------------------------------------ */
+ 
+a.button-googleplus {
+	background-color: #c33219; /* fallback color */
+	background: -moz-linear-gradient(top, #e64522, #c33219);
+	background: -ms-linear-gradient(top, #e64522, #c33219);
+	background: -webkit-linear-gradient(top, #e64522, #c33219);
+	border: 1px solid #c33219;
+	text-shadow: 0 -1px -1px #972412;
+}
+ 
+a.button-googleplus:hover {
+	background-color: #e64522; /* fallback color */
+	background: -moz-linear-gradient(top, #c33219, #e64522);
+	background: -ms-linear-gradient(top, #c33219, #e64522);
+	background: -webkit-linear-gradient(top, #c33219, #e64522);
+}
+
+/*
+LinkedIn
+------------------------------------------------------------ */
+ 
+a.button-linkedin {
+	background-color: #0073b2; /* fallback color */
+	background: -moz-linear-gradient(top, #009cda, #0073b2);
+	background: -webkit-linear-gradient(top, #009cda, #0073b2);
+	border: 1px solid #0073b2;
+	text-shadow: 0 -1px -1px #005486;
+}
+ 
+a.button-linkedin:hover {
+	background-color: #009cda; /* fallback color */
+	background: -moz-linear-gradient(top, #0073b2, #009cda);
+	background: -ms-linear-gradient(top, #0073b2, #009cda);
+	background: -webkit-linear-gradient(top, #0073b2, #009cda);
+}
+
+/*
+Twitter
+------------------------------------------------------------ */
+ 
+a.button-twitter {
+	background-color: #0081ce; /* fallback color */
+	background: -moz-linear-gradient(top, #00aced, #0081ce);
+	background: -ms-linear-gradient(top, #00aced, #0081ce);
+	background: -webkit-linear-gradient(top, #00aced, #0081ce);
+	border: 1px solid #0081ce;
+	text-shadow: 0 -1px -1px #005ea3;
+}
+ 
+a.button-twitter:hover {
+	background-color: #00aced; /* fallback color */
+	background: -moz-linear-gradient(top, #0081ce, #00aced);
+	background: -ms-linear-gradient(top, #0081ce, #00aced);
+	background: -webkit-linear-gradient(top, #0081ce, #00aced);
+}
+
+/*
 .signin-facebook, .signin-google, .signin-twitter{
 	background: url("<%= asset_path('sprites.png') %>") no-repeat;
 }
@@ -27,6 +124,7 @@
 	width: 162px;
 	height: 29px;
 }
+*/
 
 .cool-block h4 {
 	color: #7E7E7E;
@@ -124,4 +222,8 @@
 
 .col-md-5.item-details.v-ruler hr {
 	margin: 5px 0px 5px 0px;
+}
+
+.tagline {
+	font-size: 11px;
 }

@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 		@user = User.friendly.find(params[:id])
 		url = request.referer
 		if current_user.follow(@user)
-			@user.create_activity key: 'user.follow', owner: current_user, recipient: @user, action: 'follow'
+			ActivityWorker.perform_async("User", @user.id, current_user.id, { key: "user.follow", action: "follow"} )
 
 			flash[:notice] = "successfully followed #{@user.name}"
 			respond_to do |format|
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 		@user = User.friendly.find(params[:id])
 		url = request.referer
 		if current_user.stop_following(@user)
-			@user.create_activity key: 'user.unfollow', owner: current_user, recipient: @user, action: 'unfollow'
+			#ActivityWorker.perform_async("User", @user.id, current_user.id, key = "user.unfollow", action = "unfollow")
 
 			flash[:notice] = "successfully unfollowed #{@user.name}"
 			respond_to do |format|

@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 MovieBuddy::Application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -5,7 +6,17 @@ MovieBuddy::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'home#index'
+  authenticated :user do
+    root "home#index"
+  end
+
+unauthenticated :user do
+  devise_scope :user do
+    get "/" => "devise/sessions#new"
+  end
+end
+
+  mount Sidekiq::Web => '/sidekiq'
   devise_for :users, :controllers => {
                         :omniauth_callbacks => "users/omniauth_callbacks",
                         :sessions => "sessions",
