@@ -27,8 +27,8 @@
                 </li>
             	
             	<% else %>
-                <li><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
-					<li><%= link_to(raw("<i class='icon-collapse-top'></i> Sign up"), new_user_registration_path)  %></li> 
+                <li class="<%= controller_name == 'sessions' ? "active" : '' %>"><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
+					<li class="<%= controller_name == 'registrations' ? "active" : '' %>"><%= link_to(raw("<i class='icon-collapse-top'></i> Sign up"), new_user_registration_path)  %></li> 
                 <% end %>                      
             </ul>
             <!-- /.nav -->

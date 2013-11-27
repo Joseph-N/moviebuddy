@@ -12,7 +12,7 @@ MovieBuddy::Application.routes.draw do
 
 unauthenticated :user do
   devise_scope :user do
-    get "/" => "devise/sessions#new"
+    get "/" => "sessions#new"
   end
 end
 
