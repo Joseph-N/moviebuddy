@@ -7,7 +7,7 @@
     <meta property="og:type"        content="video.movie" /> 
     <meta property="og:url"         content="<%= request.url %>" /> 
     <meta property="og:title"       content="<%= @movie.title %>" /> 
-    <meta property="og:image"       content="<%= @tmdb.imageUrl("backdrop", "w300", @movie.poster)%>" /> 
+    <meta property="og:image"       content="<%= @tmdb.imageUrl("backdrop", "w300", @movie.backdrop)%>" /> 
     <meta property="og:description" content="<%= truncate(@movie.overview, :length => 300, omission: '... (continued)') %>" /> 
 <% end %>
 
