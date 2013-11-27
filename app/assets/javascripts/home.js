@@ -151,7 +151,15 @@ s(document).ready(function(){
 			return false;
 		});
 		
-	}
+	} 
+
+	//show overlay for any ajax request
+	s('body').ajaxStart(function() {
+		ajaxOverlay();
+	}).ajaxStop(function(){
+		s('#overlay').hide();
+
+	});
 
 
 });
@@ -160,6 +168,14 @@ function fetchUpdates() {
   	var after = s('.media-list').children('li:first').attr('data-time');
   	s.getScript('updates.js?after=' + after);
   	setTimeout(fetchUpdates, 20000);
+}
+
+function ajaxOverlay(){
+	var docHeight = s(document).height();
+
+   	s("body").append("<div id='overlay'></div>");
+
+   	s("#overlay").show();
 }
 
 
