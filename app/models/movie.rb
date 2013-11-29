@@ -1,5 +1,9 @@
 class Movie < ActiveRecord::Base
 	include PublicActivity::Common
+  	
+  	scope :popular, -> { where(:popular => true) }
+  	scope :upcoming, -> { where(:upcoming => true) }
+  	scope :highest_rated, -> { where(:highest_rated => true) }
 
 	extend FriendlyId
   	friendly_id :title, use: :slugged

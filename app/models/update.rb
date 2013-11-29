@@ -1,5 +1,9 @@
 class Update < ActiveRecord::Base
 	include PublicActivity::Common
+
+	scope :from_movies, -> { where('movie != ?', 0) }
+
+	alias_attribute :name, :id
 	
 	acts_as_voteable
 	

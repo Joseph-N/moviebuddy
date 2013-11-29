@@ -12,5 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require comments
+//= require home
+//= require movies
+//= require update_comments
+//= require updates
+//= require users

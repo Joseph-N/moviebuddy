@@ -51,6 +51,8 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'foreman'
 gem "koala", "~> 1.8.0rc1"
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem "letter_opener", :group => :development
 
 group :development do
   gem 'better_errors'

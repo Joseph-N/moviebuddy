@@ -70,7 +70,7 @@
                     <%= f.text_area :overview, value: @movie["overview"], :style=>"display:none;" %>
                     <%= f.hidden_field :poster, value: @movie["poster_path"]  %>
                     <%= f.hidden_field :genres, value: @genres.join(',') %>
-                    <%= f.hidden_field :youtube_id, value: @trailer  %>
+                    <%= f.hidden_field :youtube_identifier, value: @trailer  %>
                     <%= f.hidden_field :budget, value: @movie["budget"] %>
                     <%= f.hidden_field :homepage, value: @movie["homepage"] %>
                     <%= f.hidden_field :release_date, value: @movie["release_date"] %>

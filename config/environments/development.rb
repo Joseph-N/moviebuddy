@@ -29,4 +29,7 @@ MovieBuddy::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # dont send emails in developement
+  config.action_mailer.delivery_method = :letter_opener
 end

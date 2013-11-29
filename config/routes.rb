@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 MovieBuddy::Application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,13 +12,16 @@ MovieBuddy::Application.routes.draw do
     root "home#index"
   end
 
-unauthenticated :user do
-  devise_scope :user do
-    get "/" => "sessions#new"
+  unauthenticated :user do
+    devise_scope :user do
+      get "/" => "sessions#new"
+    end
   end
-end
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :admin_user do
+    mount Sidekiq::Web => '/admin/sidekiq'    
+  end
+  
   devise_for :users, :controllers => {
                         :omniauth_callbacks => "users/omniauth_callbacks",
                         :sessions => "sessions",

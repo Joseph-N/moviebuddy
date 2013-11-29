@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
 		@movie = Movie.friendly.find(params[:id])
 		@comment = @movie.comments.build
 		@comments = @movie.comments
-		@trailer = youtubeVideo(@movie.youtube_id)
+		@trailer = youtubeVideo(@movie.youtube_identifier)
 	end
 
 	def fetch
@@ -78,7 +78,7 @@ class MoviesController < ApplicationController
 
 	private
 		def movie_params
-			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment, :youtube_id, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
+			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment, :youtube_identifier, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
 		end
 
 		def init_tmdb
