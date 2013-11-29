@@ -57,7 +57,7 @@
 
             <blockquote style="margin-top: 15px;">
                 <p><%= raw(activity.trackable.update.content) %></p>
-                <% if activity.trackable.update.movie %>
+                <% unless activity.trackable.update.movie.equal?(0) %>
                     <p><%= image_tag(@tmdb.imageUrl('poster','w92', Movie.find(activity.trackable.update.movie).poster)) %></p>
                 <% end %>
                 <small>
