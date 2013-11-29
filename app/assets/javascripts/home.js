@@ -129,7 +129,7 @@ s(document).ready(function(){
 	    setTimeout(fetchUpdates, 20000);
 	}
 
-	// poll for updates
+	// manually poll for past updates
 	if(s('li.media').size() > 0){
 
 		s('#more-updates').click(function(){
@@ -166,8 +166,14 @@ s(document).ready(function(){
 
 function fetchUpdates() {
   	var after = s('.media-list').children('li:first').attr('data-time');
-  	s.getScript('updates.js?after=' + after);
-  	setTimeout(fetchUpdates, 20000);
+	s.ajax({
+		type: "GET",
+		global: false,
+		url: '/updates.js',
+		data: {"after" : after },
+		dataType: "script",
+	});
+	setTimeout(fetchUpdates, 20000);            
 }
 
 function ajaxOverlay(){

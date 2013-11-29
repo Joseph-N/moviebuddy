@@ -19,7 +19,7 @@
               s(".img-responsive").attr("src",img.src);
               s(".loading-text").hide();
             });
-            img.src = '<%= @tmdb.imageUrl("poster", "w500", @movie.poster) %>';
+            img.src = '<%= @tmdb.imageUrl("poster", "w342", @movie.poster) %>';
         });
     </script>
 <% end %>
@@ -40,10 +40,10 @@
 <section id="item-content-wrapper" class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <%= render :partial => 'movie_info' %>
             </div>
-            <div class="col-md-7 item-details">
+            <div class="col-md-8 item-details">
             	<div class="wrapper-1 youtube">
             		<h5 class="subpage-title"><i class="icon-youtube-play"></i> Youtube Trailer</h5>
             		<%= raw(@trailer) %>

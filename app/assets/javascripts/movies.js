@@ -193,6 +193,12 @@ s(document).ready(function(){
 
 function updateComments() {
   var after = s('.media:last').attr('data-time');
-  s.getScript(s('#comments-path').text() + '.js?after=' + after);
+  s.ajax({
+    type: "GET",
+    global: false,
+    url: s('#comments-path').text() + '.js',
+    data: {"after" : after },
+    dataType: "script",
+  });
   setTimeout(updateComments, 20000);
 }

@@ -87,13 +87,9 @@ class MoviesController < ApplicationController
 
 		def create_update(movie)
 			if movie.comment?
-				current_user.updates.create(content: "Added new movie: <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b><p> #{movie.comment}</p>", poster: @movie.poster)
+				current_user.updates.create(content: movie.comment, movie: movie.id)
 			else
-				current_user.updates.create(content: "Added new movie: <b><a href=" + movie_path(movie) + ">#{movie.title}</a></b>", poster: @movie.poster)
+				current_user.updates.create(movie: movie.id)
 			end
-		end
-
-		def new_movie?(movie)
-			current_user.movies.find_by_tmdb_id(movie.tmdb_id).present?
 		end
 end

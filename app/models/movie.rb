@@ -10,18 +10,18 @@ class Movie < ActiveRecord::Base
 	belongs_to :user
 	has_many :comments, dependent: :destroy
 
-	validates_presence_of :user_id, :if => [:not_popular?, :upcoming?, :highest_rated?]
+	validates_presence_of :user_id, :unless => [:not_popular?, :upcoming?, :highest_rated?]
 
 	def not_popular?
-		self.popular == false
+		self.popular == true
 	end
 
 	def upcoming?
-		self.upcoming == false
+		self.upcoming == true
 	end
 
 	def highest_rated?
-		self.highest_rated == false
+		self.highest_rated == true
 	end
 
 	private

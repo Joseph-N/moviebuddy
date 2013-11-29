@@ -2415,7 +2415,7 @@ address {
     font-size: 14px;
     position: fixed;
     top: 200px;
-    left: 20px;
+    right: 20px;
     z-index: 1000;
     background-color: #ffffff;
 }

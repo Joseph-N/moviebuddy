@@ -2,15 +2,24 @@
     <%= link_to image_tag(update.user.avator.url(:thumb)), user_show_path(update.user), class: "pull-left" %>
     <div class="media-body">
         <h5 class="media-heading">
-            <%= link_to update.user.name, user_show_path(update.user) %>           
+            <%= link_to update.user.name, user_show_path(update.user) %>  
+            <small><% if update.movie? %>
+                added a new movie
+            <% end %> </small>      
         </h5>
-
         <p><%= raw(update.content) %></p>
-
-        <% unless update.poster.nil? %>
-            <p>
-                <%= image_tag @tmdb.imageUrl('poster', 'w154', update.poster), class: "img-responsive thumbnail" %>
-            </p>
+                <% unless update.movie.equal?(0) %>
+                <% movie = Movie.find(update.movie) %>
+            <div class="row updates">
+                <div class="col-md-3 col-sm-2 col-xs-6">
+                    <%= link_to image_tag(@tmdb.imageUrl('poster', 'w154', movie.poster), class: "img-responsive"), movie_path(movie) %>
+                </div>
+                <div class="col-md-8 col-sm-10 col-xs-6">
+                    <h6><%= link_to movie.title, movie_path(movie), class: "home" %></h6>
+              
+                <p><%= truncate(movie.overview,  length: 110, omission: '...') %></p>
+                </div>
+            </div>
         <% end %>
 
         <%= render :partial => 'updates/comment_stats', locals: {update: update} %>
