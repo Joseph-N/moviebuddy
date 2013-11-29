@@ -57,8 +57,8 @@
 
             <blockquote style="margin-top: 15px;">
                 <p><%= raw(activity.trackable.update.content) %></p>
-                <% if activity.trackable.update.poster %>
-                    <p><%= image_tag(@tmdb.imageUrl('poster','w92', activity.trackable.update.poster)) %></p>
+                <% if activity.trackable.update.movie %>
+                    <p><%= image_tag(@tmdb.imageUrl('poster','w92', Movie.find(activity.trackable.update.movie).poster)) %></p>
                 <% end %>
                 <small>
                     <cite title="Source Title">
