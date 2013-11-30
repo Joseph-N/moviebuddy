@@ -34,7 +34,6 @@ ActiveAdmin.register Movie do
   end
 
   sidebar :movie_comments do
-
   end
 
   filter :title

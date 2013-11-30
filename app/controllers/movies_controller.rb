@@ -46,7 +46,7 @@ class MoviesController < ApplicationController
 		end
 
 		respond_to do |format|
-			format.json { render json: {"url" => movies_path} }
+			format.json { render json: { :url => movies_path} }
 			format.html { redirect_to movies_path}
 		end
 	end

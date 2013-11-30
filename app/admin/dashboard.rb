@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
             column do
                 panel "Recent Movies" do
                     ul :class => "movies" do
-                        Movie.last(15).each do |movie|
+                        Movie.order('created_at desc').limit(15).each do |movie|
                             li link_to image_tag("http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92/#{movie.poster}"), admin_movie_path(movie)
                         end
                     end
@@ -33,6 +33,7 @@ ActiveAdmin.register_page "Dashboard" do
             column do
                 panel "Latest Updates" do
                     table_for Update.order('created_at desc').limit(10) do
+                        column :user
                         column :content do |update|
                             update.content? ? update.content : "Added new movie"
                         end

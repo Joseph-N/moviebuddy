@@ -7,8 +7,9 @@ ActiveAdmin.register Comment do
   index do
     selectable_column
     column :id
-    column :body
-    column :movie   
+    column :user
+    column "Comment", :body 
+    column :movie      
     column :created_at
     default_actions
   end

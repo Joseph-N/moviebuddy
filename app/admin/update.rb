@@ -24,6 +24,7 @@ ActiveAdmin.register Update do
   index do
     selectable_column
     column :id
+    column :user
     column :content
     column :created_at  
     column "Movie Id", :movie
