@@ -5,6 +5,8 @@ class Movie < ActiveRecord::Base
   	scope :upcoming, -> { where(:upcoming => true) }
   	scope :highest_rated, -> { where(:highest_rated => true) }
 
+  	default_scope -> { order('created_at desc') }
+
 	extend FriendlyId
   	friendly_id :title, use: :slugged
 
