@@ -32,7 +32,14 @@ class User < ActiveRecord::Base
 	def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 		user = User.where(:provider => auth.provider, :uid => auth.uid).first
 		if user
-		  return user
+			user.update_attributes(name:auth.extra.raw_info.name,
+				provider:auth.provider,
+                uid:auth.uid,
+                email:auth.info.email,
+                token: auth.credentials.token,
+                avator: URI.parse(auth.info.image),
+                )
+		  	return user
 		else
 		  registered_user = User.where(:email => auth.info.email).first
 		  if registered_user
