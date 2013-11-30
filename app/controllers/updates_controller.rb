@@ -9,6 +9,7 @@ class UpdatesController < ApplicationController
 		@update = current_user.updates.build(update_params)
 		if @update.save
 			ActivityWorker.perform_async("Update", @update.id, current_user.id)
+			ShareWorker.perform_async("facebook", "Update", current_user.id, @update.id)
 			respond_to do |format|
 				format.html { redirect_to root_path }
 				format.js

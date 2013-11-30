@@ -40,6 +40,7 @@ class MoviesController < ApplicationController
 				flash[:notice] = "Added #{@movie.title} successfully to your collection"
 				create_update(@movie)
 				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
+				ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { url: movie_url(@movie)})
 			end
 		else
 			flash[:alert] = "#{@movie.title} is already in your collection"
@@ -60,6 +61,7 @@ class MoviesController < ApplicationController
 				current_user.vote_for(@movie)
 			end
 			ActivityWorker.perform_async("Movie", @movie.id, current_user.id, { key: "movie.like", action: "vote"})
+			ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.like", url: movie_url(@movie)} )
 
 		elsif params[:vote] == 'down'
 			if current_user.voted_on?(@movie)

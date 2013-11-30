@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 		@comment.user_id = current_user.id
 		if @comment.save
 			ActivityWorker.perform_async("Comment", @comment.id, current_user.id)	
+			ShareWorker.perform_async("facebook", "Comment", current_user.id, @comment.id, { activity: "movie.comment", url: movie_url(@movie)})
 
 			respond_to do |format|
 				format.html { redirect_to movie_path(@movie) }

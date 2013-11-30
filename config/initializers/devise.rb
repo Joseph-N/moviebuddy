@@ -142,7 +142,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
-  config.password_length = 8..128
+  config.password_length = 5..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -263,7 +263,8 @@ Devise.setup do |config|
   # config for facebook
   config.omniauth :facebook, "1432996973586926", "fb4eedfa886fae39eed6bca70b59253f",
   {
-    :image_size => {:width => 290, :height => 290 }
+    :image_size => {:width => 290, :height => 290 },
+    :scope => 'email, publish_stream'
   }
 
   # config for google

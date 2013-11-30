@@ -42,8 +42,9 @@ class User < ActiveRecord::Base
 		                        provider:auth.provider,
 		                        uid:auth.uid,
 		                        email:auth.info.email,
+		                        token: auth.credentials.token,
 		                        avator: URI.parse(auth.info.image),
-		                        password: 'password',
+		                        password: Devise.friendly_token[0,20],
 		                      )
 		  end
 		   
@@ -63,8 +64,9 @@ class User < ActiveRecord::Base
 	        provider:auth.provider,
 	        uid:auth.uid,
 	        email:auth.info.nickname + "@twitter.com",
+	        token: auth.credentials.token,
 	        avator: URI.parse(auth.info.image),
-	        password:'password',
+	        password: Devise.friendly_token[0,20],
 	      )
 	    end
 	  end
@@ -84,10 +86,19 @@ class User < ActiveRecord::Base
 					provider:access_token.provider,
 					email: data["email"],
 					uid: access_token.uid ,
+					token: access_token.credentials.token,
 					avator: URI.parse(data["image"]),
-					password: 'password',
+					password: Devise.friendly_token[0,20],
 				)
 			end
     	end
+	end
+
+	def facebook
+		Koala::Facebook::API.new(self.token)
+	end
+
+	def connected_socially?
+		self.provider && self.uid != ""
 	end
 end
