@@ -10,18 +10,18 @@ class ShareWorker
 
 	  	if resource == "Movie"
 	  		unless options["activity"] == nil
-	  			content = "Liked #{ record.title } movie on #MovieBuddy #{ options['url'] }"
+	  			content = "Liked a movie on #Moviebuddy"
 	  		else
-	  			content = record.comment.present? ? "#{record.comment}  #{ options['url'] }" : "Added new movie on MovieBuddy'#{record.title}' #{ options['url'] }"
+	  			content = record.comment.present? ? "#{record.comment}" : "Added new movie on #MovieBuddy"
 	  		end
 	  	elsif resource == "Update"
 	  		content = "#{record.content} #MovieBuddy"
 	  	elsif resource == "Comment"
-	  		content = "#{ record.body } #{ options['url'] }"
+	  		content = "#{ record.body }"
 	  	end
 
 	  	graph = user.facebook
-	  	graph.put_connections("me","feed", :message => content)  
+	  	graph.put_connections("me","feed", :message => content, :link => options["url"])  
 	end  
   end
 end
