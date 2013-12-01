@@ -80,7 +80,7 @@ MovieBuddy::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # mailer url
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'http://moviebuddy.info' }
 
   # mailer configurations
   config.action_mailer.delivery_method = :smtp
