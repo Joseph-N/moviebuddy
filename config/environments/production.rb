@@ -78,4 +78,19 @@ MovieBuddy::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # mailer url
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # mailer configurations
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'moviebuddy.info',
+    user_name:            'notifications.at.moviebuddy@gmail.com',
+    password:             'HVJ4^3_>v/+*-LUE.,)4i5eDe',
+    authentication:       'plain',
+    enable_starttls_auto: true 
+  }
 end
