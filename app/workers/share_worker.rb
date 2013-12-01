@@ -20,8 +20,10 @@ class ShareWorker
 	  		content = "#{ record.body }"
 	  	end
 
-	  	graph = user.facebook
-	  	graph.put_connections("me","feed", :message => content, :link => options["url"])  
+	  	if service == "facebook" && user.provider == "facebook"
+	  		graph = user.facebook
+	  		graph.put_connections("me","feed", :message => content, :link => options["url"])  
+	  	end
 	end  
   end
 end

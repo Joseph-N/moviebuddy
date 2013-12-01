@@ -60,7 +60,7 @@
                                         <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: "w300" } %>
                                     <% else %>
                                     <div class="col-md-12" style="margin-bottom: 40px;">
-                                        <p>Its lonely here....please add some movies</p>
+                                        <%= current_user == @user ? "Its lonely here....please add some movies" : "#{@user.name} hasn't added any movies yet" %>
                                     </div>
                                     <% end %>
                                     <!-- /.portfolio-item-wlrapper -->
