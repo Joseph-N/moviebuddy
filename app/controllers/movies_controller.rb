@@ -62,6 +62,7 @@ class MoviesController < ApplicationController
 			end
 			ActivityWorker.perform_async("Movie", @movie.id, current_user.id, { key: "movie.like", action: "vote"})
 			ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.like", url: movie_url(@movie)} )
+			MailerWorker.perform_async(@movie.user.id, "movieLike", { actor_id: current_user.id, movie_id: @movie.id })
 
 		elsif params[:vote] == 'down'
 			if current_user.voted_on?(@movie)

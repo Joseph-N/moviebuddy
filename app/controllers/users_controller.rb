@@ -52,6 +52,7 @@ class UsersController < ApplicationController
 		url = request.referer
 		if current_user.follow(@user)
 			ActivityWorker.perform_async("User", @user.id, current_user.id, { key: "user.follow", action: "follow"} )
+			MailerWorker.perform_async(@user.id, "userFollow", { actor_id: current_user.id })
 
 			flash[:notice] = "successfully followed #{@user.name}"
 			respond_to do |format|

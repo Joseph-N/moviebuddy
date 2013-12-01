@@ -8,6 +8,11 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def create
+    super
+    MailerWorker.perform_async(@user.id, "registration") unless @user.invalid?
+  end
+
   def update
     @user = User.find(current_user.id)
 

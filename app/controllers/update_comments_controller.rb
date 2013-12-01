@@ -5,6 +5,7 @@ class UpdateCommentsController < ApplicationController
 		@update_comment.user_id = current_user.id
 		if @update_comment.save
 			ActivityWorker.perform_async("UpdateComment", @update_comment.id, current_user.id)
+			MailerWorker.perform_async(@update.user.id, "updateComment", { actor_id: current_user.id, update_id: @update.id, comment_id: @update_comment.id })
 
 			respond_to do |format|
 				format.html { redirect_to root_path }

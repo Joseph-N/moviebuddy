@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
 		if @comment.save
 			ActivityWorker.perform_async("Comment", @comment.id, current_user.id)	
 			ShareWorker.perform_async("facebook", "Comment", current_user.id, @comment.id, { activity: "movie.comment", url: movie_url(@movie)})
+			MailerWorker.perform_async(@movie.user.id, "movieComment", { actor_id: current_user.id, movie_id: @movie.id, comment_id: @comment.id })
 
 			respond_to do |format|
 				format.html { redirect_to movie_path(@movie) }

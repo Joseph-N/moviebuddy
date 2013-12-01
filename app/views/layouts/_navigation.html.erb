@@ -16,6 +16,7 @@
             <ul class="nav navbar-nav pull-right">
             	<% if user_signed_in? %>
                 <li class="<%= controller_name == 'home' ? "active" : '' %>"><%= link_to raw("<i class='icon-home'></i> Home"), root_path %></li>
+                <li class="<%= controller_name == 'users' && action_name == "index" ? "active" : "" %>"><%= link_to raw("<i class='icon-group'></i> Users"), all_users_path %></li>
             	<li class="<%= controller_name == 'movies' ? "active" : '' %>"><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
             	<li class="<%= controller_name == 'users' && action_name == "show" ? "active" : '' %>"><%= link_to raw("<i class='icon-user'></i> " + current_user.name.split(" ").first), user_show_path(current_user) %></li>
                 <li class="dropdown">
