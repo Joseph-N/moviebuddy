@@ -3,6 +3,7 @@
 <head>
     <title><%= content_for?(:title) ? yield(:title) : "MovieBuddy" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="moviebuddy, moviebuddy.info, movies">
     <%= yield(:meta_tags) if content_for?(:meta_tags)  %>
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag  "application", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700", media: "all" %>

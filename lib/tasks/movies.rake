@@ -80,6 +80,7 @@ namespace :movies do
 
     if movies
       movies.each do |movie|
+        if movie["release_date"].to_date.year > 2010 && movie["backdrop_path"] != nil && movie["poster_path"] != nil
         genres = []
         puts "       -> New movie: #{movie["title"]}..."
         puts "       -> Fetching trailer for #{movie["title"]}..."
