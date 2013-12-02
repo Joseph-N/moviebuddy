@@ -136,35 +136,36 @@ desc "Fetch highest rated movies from TMDB"
 
     if movies
       movies.each do |movie|
-        genres = []
-        puts "       -> New movie: #{movie["title"]}..."
-        puts "       -> Fetching trailer for #{movie["title"]}..."
-        trailer = tmdb.movieTrailer(movie["id"])
+        if movie["release_date"].to_date.year > 2010 && movie["backdrop_path"] != nil && movie["poster_path"] != nil
+          genres = []
+          puts "       -> New movie: #{movie["title"]}..."
+          puts "       -> Fetching trailer for #{movie["title"]}..."
+          trailer = tmdb.movieTrailer(movie["id"])
 
-        params = movie.select{|key, value| cols.include?(key) }
-        params["genres"].each {|x| genres.push(x["name"])}
-        
+          params = movie.select{|key, value| cols.include?(key) }
+          params["genres"].each {|x| genres.push(x["name"])}
+          
 
-        newMovie = Movie.new( title: params["title"],
-                    tmdb_id: params["id"],
-                    overview: params["overview"],
-                    poster: params["poster_path"],
-                    backdrop: params["backdrop_path"],
-                    genres: genres,
-                    youtube_identifier: trailer,
-                    budget: params["budget"],
-                    homepage: params["homepage"],
-                    release_date: params["release_date"],
-                    tag_line: params["tagline"],
-                    highest_rated: true
-                  )
+          newMovie = Movie.new( title: params["title"],
+                      tmdb_id: params["id"],
+                      overview: params["overview"],
+                      poster: params["poster_path"],
+                      backdrop: params["backdrop_path"],
+                      genres: genres,
+                      youtube_identifier: trailer,
+                      budget: params["budget"],
+                      homepage: params["homepage"],
+                      release_date: params["release_date"],
+                      tag_line: params["tagline"],
+                      highest_rated: true
+                    )
 
-        if newMovie.save
-          puts "       -> Successfully added #{newMovie.title}"
-          puts "\n"
+          if newMovie.save
+            puts "       -> Successfully added #{newMovie.title}"
+            puts "\n"
+          end
         end
       end
-
     end
   end
 
