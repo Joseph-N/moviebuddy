@@ -173,16 +173,6 @@ s(document).ready(function(){
 		}
 	});
 
-  //when a user follows another user
-  s('.follow-unfollow').click(function(e){
-    e.preventDefault();
-    s.ajax({
-      type: "GET",
-        url: s(this).attr('href'),
-        dataType: "script"
-    });    
-  });
-
   // poll 4 changes
   if (s('ul#comments').children().size() > 0) {
     setTimeout(updateComments, 20000);

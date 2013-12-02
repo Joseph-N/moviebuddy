@@ -13,9 +13,9 @@
                 <p><%= user.movies.count %> Movies</p><br />
                 <% unless current_user == user %>
                     <% if current_user.following?(user) %>
-                        <%= link_to "unfollow" ,user_unfollow_path(id: user.id), class: "btn btn-flat flat-danger btn-sm btn-block" %>
+                        <%= link_to "unfollow" ,user_unfollow_path(id: user.id), class: "btn btn-flat flat-danger btn-sm btn-block follow-unfollow", id: user.id %>
                     <% else %>
-                        <%= link_to "follow" ,user_follow_path(id: user.id), class: "btn btn-flat flat-info btn-sm btn-block" %>
+                        <%= link_to "follow" ,user_follow_path(id: user.id), class: "btn btn-flat flat-info btn-sm btn-block follow-unfollow", id: user.id %>
                     <% end %>
                 <% end %>
             </div>

@@ -28,18 +28,6 @@ MovieBuddy::Application.routes.draw do
                         :registrations => "registrations"
                       }
 
-  devise_scope :users do
-    get 'users' => 'users#index', as: :all_users
-    get 'users/:id' => 'users#show', as: :user_show
-    get 'users/:id/movies' => 'users#movies', as: :user_movies
-    get 'users/:id/following' => 'users#following', as: :user_follows
-    get 'users/:id/followers' => 'users#followers', as: :user_followers
-    get 'users/:id/activity' => 'users#activity'
-    get 'password/edit' => 'users#edit', as: :password_edit
-    patch 'password/edit' => 'users#update_password'
-    get 'updates/more' => 'updates#more'
-  end
-
   resources :movies do
     resources :comments
     member do
@@ -53,6 +41,16 @@ MovieBuddy::Application.routes.draw do
       get 'vote'
     end
   end
+
+  get 'users' => 'users#index', as: :all_users
+  get 'users/:id' => 'users#show', as: :user_show
+  get 'users/:id/movies' => 'users#movies', as: :user_movies
+  get 'users/:id/following' => 'users#following', as: :user_follows
+  get 'users/:id/followers' => 'users#followers', as: :user_followers
+  get 'users/:id/activity' => 'users#activity'
+  get 'password/edit' => 'users#edit', as: :password_edit
+  patch 'password/edit' => 'users#update_password'
+  get 'updates/more' => 'updates#more'
 
   get '/fetch/:id' => 'movies#fetch', as: :fetch_movie
   get '/follow' => 'users#follow', as: :user_follow

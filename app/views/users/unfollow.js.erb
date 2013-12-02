@@ -1,8 +1,16 @@
 var s = jQuery;
 s.noConflict();
 
-s('.follow-unfollow').removeClass('flat-danger').addClass('flat-info').
+s('#<%= @user.id %>.follow-unfollow').removeClass('flat-danger').addClass('flat-info').
 attr('href', '<%= escape_javascript(user_follow_path(id: @user.id))%>').
 text('FOLLOW');
 
-s('#user-stats').html('<%= escape_javascript(render(:partial => "user_stats",  locals: {user: @user }))%>');
+if(s('#user-stats').size() > 0 ){
+	s('#user-stats').html('<%= escape_javascript(render(:partial => "user_stats",  locals: {user: @user }))%>');
+}
+
+/*var flashNotice = "<%= flash.now[:notice] %>";
+if (flashNotice){
+  s(".alert.alert-success.alert-dismissable").html(flashNotice);
+}
+*/
