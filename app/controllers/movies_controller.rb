@@ -40,7 +40,9 @@ class MoviesController < ApplicationController
 				flash[:notice] = "Added #{@movie.title} successfully to your collection"
 				create_update(@movie)
 				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
-				ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
+				if params[:movie][:facebook] == "1"
+					ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
+				end
 			end
 		else
 			flash[:alert] = "#{@movie.title} is already in your collection"
@@ -81,7 +83,9 @@ class MoviesController < ApplicationController
 
 	private
 		def movie_params
-			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment, :youtube_identifier, :tag_line, :release_date, :homepage,  :backdrop, :budget, genres: [])
+			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment,
+											:youtube_identifier, :tag_line, :release_date, 
+											:homepage,  :backdrop, :budget, genres: [])
 		end
 
 		def init_tmdb

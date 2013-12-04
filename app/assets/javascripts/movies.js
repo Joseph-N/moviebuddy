@@ -8,6 +8,11 @@ s.noConflict();
 s(document).ready(function(){
 	s('.youtube').fitVids();
 
+  //change checkbox value
+  s('#movie_facebook').click(function(){
+     s(this).is(':checked') ? s(this).val("1") : s(this).val("0");
+  });
+
 	// Isotope Portfolio
     var container = s('#isotope-portfolio-container');
     var filter = s('.portfolio-filter');
@@ -87,6 +92,7 @@ s(document).ready(function(){
 		var r_date = s('#movie_release_date').val();
 		var tagline = s('#movie_tag_line').val();
 		var backdrop = s('#movie_backdrop').val();
+    var fb_status = s('#movie_facebook').val();
 
 		s.ajax({
 			type: "POST",
@@ -94,7 +100,7 @@ s(document).ready(function(){
   			data: {"movie[tmdb_id]" : tmdb_id, "movie[title]" : title, "movie[overview]": overview, "movie[poster]": poster,
   				"movie[comment]" : comment, "movie[youtube_identifier]" : video_id,"movie[genres]": genres,
   				"movie[budget]" : budget, "movie[homepage]" : homepage, "movie[release_date]" : r_date,
-  				"movie[tag_line]" : tagline, "movie[backdrop]" : backdrop
+  				"movie[tag_line]" : tagline, "movie[backdrop]" : backdrop, "movie[facebook]" : fb_status
   			},
   			success: function(data){
   				 window.location.href = data.url;
@@ -154,12 +160,15 @@ s(document).ready(function(){
           }
       });
   };
-  s(window).load(function () {
+
+  if(s('#caroufredsel-portfolio-container').size() > 0){
+    s(window).load(function () {
       caroufredsel();
-  });
-  s(window).resize(function () {
+    });
+    s(window).resize(function () {
       caroufredsel();
-  });  
+    }); 
+  } 
 
 });
 
