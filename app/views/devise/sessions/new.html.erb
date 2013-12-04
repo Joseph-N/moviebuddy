@@ -1,8 +1,8 @@
-<% title "Sign In" %>
+<% title "Welcome, Sign In" %>
 
 <% content_for(:meta_tags) do %>
     <meta name="msvalidate.01" content="593D3D6367D78FCDDEF84B0593DFF7BF" />
-    <meta name="description" content="Movie Buddy helps you save and organise your favorite movies while engaging you with friends to discover interesting Movies. Sign up today!">
+    <meta name="description" content="MovieBuddy is a fun app that helps you save and organise your favourite movies while engaging with friends to discover interesting Movies.">
 <% end %>
 
 <% content_for(:head) do %>
@@ -49,58 +49,62 @@
          <div class="cool-block">
             <div class="cool-block-bor"> 
               <div class="row">
-                <div class="col-md-7">
-                  <h3><i class="icon-user"></i> Log in to your account</h3>
+                  <div class="col-md-6">
+                    <h4><i class="icon-double-angle-down"></i></h4>
 
-                  <% if alert %>
-                    <div class="alert alert-danger alert-dismissable">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                      <strong>Oh snap!</strong>
-                      <%= alert %>
-                    </div>
-                  <% end %>
-
-                  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:role=>"form"}) do |f| %>                      
-                   
-                   
-                    <div class="form-group">
-                      <%= f.label :email %>
-                      <%= f.email_field :email, :class=> 'form-control' %>
+                    <div class="row">
+                      <%= render 'shared/social_links' %>
                     </div>
 
-                    <div class="form-group">
-                      <%= f.label :password %>
-                      <%= f.password_field :password, :class=> 'form-control' %>
+                    <div class="row">
+                      <div class="col-md-12" style="text-align: center;">
+                        
+                        <small><b>Don't have an account?</b> <%= link_to "Sign Up", new_user_registration_path , class: "home" %></small>
+                      </div>
                     </div>
-
-                    <div class="form-group">
-                      <% if devise_mapping.rememberable? -%>
-                        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-                      <% end -%>
-                      <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right home" %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.submit 'Sign In', class: "btn btn-flat flat-inverse btn-block"%>
-                    </div>
-
-                  <% end %>   
-                  <div class="clearfix"></div>
-
-                </div>
-                <div class="col-md-5 v-ruler">
-                  <h4>OR</h4>
-
-                  <div class="row">
-                    <%= render 'shared/social_links' %>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h4>Or</h4>
-                      <small><b>Don't have an account?</b> <%= link_to "Sign Up", new_user_registration_path , class: "home" %></small>
+                    <div class="hidden-lg hidden-md">
+                      <h4>OR</h4>
                     </div>
                   </div>
+
+                  <div class="col-md-6 v-ruler">
+                    <h3><i class="icon-user"></i> Log in</h3>
+
+                    <% if alert %>
+                      <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Oh snap!</strong>
+                        <%= alert %>
+                      </div>
+                    <% end %>
+
+                    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:role=>"form"}) do |f| %>                      
+                     
+                     
+                      <div class="form-group">
+                        <%= f.label :email %>
+                        <%= f.email_field :email, :class=> 'form-control' %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :password %>
+                        <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right home" %>
+                        <%= f.password_field :password, :class=> 'form-control' %>
+                      </div>
+
+                      <div class="form-group">
+                        <% if devise_mapping.rememberable? -%>
+                          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+                        <% end -%>                      
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.submit 'Sign In', class: "btn btn-flat flat-inverse btn-block"%>
+                      </div>
+
+                    <% end %>   
+                    <div class="clearfix"></div>
+
                 </div>
               </div>
             </div>

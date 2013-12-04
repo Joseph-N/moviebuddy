@@ -49,50 +49,6 @@ s(document).ready(function(){
 	    s("#main-wrapper").addClass(cls);
 	});
 
-    // jQuery CarouFredSel
-    var caroufredsel = function () {
-        s('#caroufredsel-portfolio-container').carouFredSel({
-            responsive: true,
-            scroll: 1,
-            circular: false,
-            infinite: false,
-            items: {
-                visible: {
-                    min: 1,
-                    max: 3
-                }
-            },
-            prev: '#portfolio-prev',
-            next: '#portfolio-next',
-            auto: {
-                play: false
-            }
-        });
-        s('#caroufredsel-clients-container').carouFredSel({
-            responsive: true,
-            scroll: 1,
-            circular: false,
-            infinite: false,
-            items: {
-                visible: {
-                    min: 1,
-                    max: 4
-                }
-            },
-            prev: '#client-prev',
-            next: '#client-next',
-            auto: {
-                play: false
-            }
-        });
-    };
-    s(window).load(function () {
-        caroufredsel();
-    });
-    s(window).resize(function () {
-        caroufredsel();
-    });  
-
 
     /*
      *----------------- AJAX CALLS ------------------ *

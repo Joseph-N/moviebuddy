@@ -1,7 +1,7 @@
 <% title @movie.title %>
 
 <% content_for(:meta_tags) do %>    
-    <meta name="description" content="<%= truncate(@movie.overview, :length => 200, omission: '... (continued)') %>">
+    <meta name="description" content="<%= truncate(@movie.overview, :length => 200, omission: '... (continued)') %>" />
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
     <meta property="fb:app_id"      content="1432996973586926" /> 
     <meta property="og:type"        content="video.movie" /> 
@@ -76,7 +76,7 @@
                 <% if user_signed_in? %>
         		  <%= render 'comments/form' %>  
                 <% else %>
-                    <p> <%= link_to "Log In to leave a comment", new_user_session_path, class: "btn btn-flat flat-info" %> </p>
+                    <p> You must be logged in to comment on this movie <%= link_to "Log In", new_user_session_path, class: "home" %> </p>
                 <% end %>                          
             </div>
         </div>

@@ -241,6 +241,8 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sitemap_generator (4.3.0)
+      builder
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -317,6 +319,7 @@ DEPENDENCIES
   sdoc
   sidekiq
   sinatra
+  sitemap_generator
   slim
   thin
   thumbs_up (~> 0.6.7)

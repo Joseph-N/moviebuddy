@@ -1,4 +1,5 @@
 class UpdateCommentsController < ApplicationController
+	before_filter :authenticate_user!
 	def create
 		@update = Update.find(params[:update_id])
 		@update_comment = @update.update_comments.build(update_comment_params)

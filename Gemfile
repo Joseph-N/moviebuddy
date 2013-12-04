@@ -52,12 +52,13 @@ gem 'slim'
 gem 'foreman'
 gem "koala", "~> 1.8.0rc1"
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem "letter_opener", :group => :development
+gem 'sitemap_generator'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'capistrano'
+  gem "letter_opener"
 end
 
 group :production do

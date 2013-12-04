@@ -1,14 +1,14 @@
 <div class="col-md-12">
 	<% link_to image_tag("transparent.gif", class: "signin-facebook"), user_omniauth_authorize_path(:facebook) %>
-	<%= link_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button-facebook" %>
+	<%= link_to "#{ controller_name == 'registrations' ? 'Sign up' : 'Log in'} with facebook", user_omniauth_authorize_path(:facebook), class: "button-facebook" %>
 </div>
 
 <div class="col-md-12">
 	<% link_to image_tag("transparent.gif", class: "signin-twitter"), user_omniauth_authorize_path(:twitter) %>
-	<%= link_to "Sign in with twitter", user_omniauth_authorize_path(:twitter), class: "button-twitter" %>
+	<%= link_to "#{ controller_name == 'registrations' ? 'Sign up' : 'Log in'} with twitter", user_omniauth_authorize_path(:twitter), class: "button-twitter" %>
 </div>
 
 <div class="col-md-12">
 	<% link_to image_tag("transparent.gif", class: "signin-google"), user_omniauth_authorize_path(:google_oauth2) %>
-	<%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2), class: "button-googleplus" %>
+	<%= link_to "#{ controller_name == 'registrations' ? 'Sign up' : 'Log in'} with Google", user_omniauth_authorize_path(:google_oauth2), class: "button-googleplus" %>
 </div>

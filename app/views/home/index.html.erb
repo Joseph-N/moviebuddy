@@ -1,7 +1,4 @@
 <%= title "Home" %>
-<% content_for(:meta_tags) do %>
-    <meta name="description" content="Movie Buddy helps you save and organise your favorite movies while engaging you with friends to discover interesting Movies. Sign up today!">
-<% end %>
 
 <section id="fullwidthbanner-container" class="section fullwidthbanner-container hidden-xs">
     <div class="fullwidthbanner">
@@ -37,7 +34,7 @@
                     <%= render 'updates/form' %>
                     <div class="post-comments">
                         <h5 class="subpage-title">Recent Feed</h5>
-                        <ul class="media-list">
+                        <ul class="media-list" id="home-updates">
                             <%= render @updates unless @updates.nil? %>
                         </ul>
                         <%= link_to "More", "#", class: "btn btn-flat flat-default btn-bordered btn-lg btn-block", id: "more-updates" if @updates.any? && @updates.size >= 5 %>

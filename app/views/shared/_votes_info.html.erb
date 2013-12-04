@@ -1,19 +1,26 @@
 <div id="vote-info-<%= movie.id %>">
 	<div class="col-xs-6 col-md-5">
+		<div class="ui-group-buttons">           
 		<% if user_signed_in? %>
 		  	<% if current_user.voted_how?(movie) == true %>
-				<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , '#', class: "btn btn-flat flat-success disabled" %>
-				<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %>
+				<%= link_to raw('<span class="icon-thumbs-up"></span>') , '#', class: "btn btn-success disabled vote" %>
+				<div class="or"></div>
+				<%= link_to raw('<span class="icon-thumbs-down"></span>'), vote_movie_path(movie, vote: 'down'), class: "btn btn-danger vote" %>
 			<% elsif current_user.voted_how?(movie) == false %>
-				<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %>
-			 	<%= link_to raw('<i class="icon-thumbs-down"></i> Dislike'), '#', class: "btn btn-flat flat-danger disabled" %>
+				<%= link_to raw('<span class="icon-thumbs-up"></span>') , vote_movie_path(movie, vote: 'up'), class: "btn btn-success vote" %>
+				<div class="or"></div>
+			 	<%= link_to raw('<span class="icon-thumbs-down"></span> '), '#', class: "btn btn-danger disabled vote" %>
 			 <% else %>		 
-			 	<%= link_to raw('<i class="icon-thumbs-up"></i> Like') , vote_movie_path(movie, vote: 'up'), class: "btn btn-flat flat-success vote" %> 
-			 	<%= link_to raw('<i class="icon-thumbs-up"></i> Dislike'), vote_movie_path(movie, vote: 'down'), class: "btn btn-flat flat-danger vote" %> 
+			 	<%= link_to raw('<span class="icon-thumbs-up"></span>') , vote_movie_path(movie, vote: 'up'), class: "btn btn-success vote" %> 
+			 	<div class="or"></div>
+			 	<%= link_to raw('<span class="icon-thumbs-down"></span>'), vote_movie_path(movie, vote: 'down'), class: "btn btn-danger vote" %> 
 			<% end %>
 		<% else %>
-			 <p> <%= link_to "Log In to like", new_user_session_path, class: "btn btn-flat flat-info" %> </p>
+			<%= link_to raw('<span class="icon-thumbs-up"></span>') , vote_movie_path(movie, vote: 'up'), class: "btn btn-success" %> 
+			<div class="or"></div>
+			<%= link_to raw('<span class="icon-thumbs-down"></span>'), vote_movie_path(movie, vote: 'down'), class: "btn btn-danger" %> 
 		<% end %>
+		 </div>
 	</div>
 </div>
 

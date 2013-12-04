@@ -125,7 +125,7 @@ s(document).ready(function(){
 	});
 
 	// poll 4 changes
-	if (s('ul.media-list').children('li').size() > 0) {
+	if (s('ul#home-updates').children('li').size() > 0) {
 	    setTimeout(fetchUpdates, 20000);
 	}
 
@@ -163,6 +163,8 @@ s(document).ready(function(){
 
 
 });
+
+
 
 function fetchUpdates() {
   	var after = s('.media-list').children('li:first').attr('data-time');

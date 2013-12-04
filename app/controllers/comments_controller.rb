@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	before_filter :authenticate_user!, :except => [:index]
 	def index
 		@movie = Movie.friendly.find(params[:movie_id])
 		@comments = Comment.where("movie_id = ? and created_at > ?", @movie.id, Time.at(params[:after].to_i + 1))

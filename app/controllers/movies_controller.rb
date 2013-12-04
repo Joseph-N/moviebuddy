@@ -40,7 +40,7 @@ class MoviesController < ApplicationController
 				flash[:notice] = "Added #{@movie.title} successfully to your collection"
 				create_update(@movie)
 				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
-				ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { url: movie_url(@movie)})
+				ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
 			end
 		else
 			flash[:alert] = "#{@movie.title} is already in your collection"
