@@ -1,5 +1,6 @@
 class MailerWorker
   include Sidekiq::Worker
+  sidekiq_options retry: false
 
   def perform(user_id, identifier, options = {})
   	user = User.find(user_id)
