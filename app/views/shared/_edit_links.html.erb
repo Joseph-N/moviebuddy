@@ -1,0 +1,11 @@
+<ul class="nav nav-pills  nav-stacked">
+    <li class="<%= controller_name == "registrations" && action_name == "edit" ? "active" : "" %>">
+       <%= link_to raw('<i class="icon-user"></i> &nbsp;&nbsp; Profile Settings'), edit_user_registration_path %>
+    </li>
+    <li class="<%= controller_name == "users" && action_name == "edit" ? "active" : "" %>">
+      <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
+    </li>
+    <li class="<%= controller_name == "users" && action_name == "sharing" ? "active" : "" %>">
+       <%= link_to raw('<i class="icon-globe"></i> &nbsp;&nbsp; Sharing with Other Networks'), user_sharing_path %>
+    </li>
+</ul>

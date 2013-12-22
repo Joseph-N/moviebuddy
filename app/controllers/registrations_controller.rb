@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
   def new
-    @recent_movies = Movie.where('popular = ? and upcoming = ? and highest_rated = ?', false, false, false).last(5)
+    @recent_movies = Movie.where('popular = ? and upcoming = ? and highest_rated = ?', false, false, false).last(10)
     @random_movie = Movie.where(popular: true).sample
     @tmdb = Tmdb.new
     @image = @tmdb.imageUrl('backdrop','original', @random_movie.backdrop) if @random_movie
@@ -26,7 +26,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     if successfully_updated
-      set_flash_message :notice, :updated
+      gflash :success => "Your account was successfully updated"
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
       redirect_to after_update_path_for(@user)
@@ -34,6 +34,12 @@ class RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
+
+  protected
+
+    def after_update_path_for(resource)
+      user_show_path(resource)
+    end
 
   private
 

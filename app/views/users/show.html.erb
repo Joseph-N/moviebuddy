@@ -54,10 +54,10 @@
                                     <i class="icon-angle-left"></i>
                                 </span>
                             </h5>
-                            <div class="row">
+                            <div class="row" style="margin-bottom: 40px;">
                                 <div id="caroufredsel-portfolio-container">
                                     <% if @recent_movies.any? %>
-                                        <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: "w300" } %>
+                                        <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: "w154" } %>
                                     <% else %>
                                     <div class="col-md-12" style="margin-bottom: 40px;">
                                         <%= current_user == @user ? "Its lonely here....please add some movies" : "#{@user.name} hasn't added any movies yet" %>

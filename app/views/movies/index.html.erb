@@ -47,25 +47,37 @@
                 <%= alert %>
             </div>
         <% end %>
-        
-        <% unless params[:q] %>
-            <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
-        <% end %>
+    
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
-                <div id="isotope-portfolio-container">
-                	<% if params[:q] %>
-                		<%= render 'results' %>
-                	<% else %>
+                <div class="row">
+                <div class="col-md-3">
+                            <% unless params[:q] %>
+            <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+        <% end %>
+                </div>
+                <div class="col-md-9 v-ruler">
+                     <div class="row" id="isotope-portfolio-container">
+                    <% if params[:q] %>
+                        <%= render 'results' %>
+                    <% else %>
                         <% if @movies.any? %>
+                       
                             <%= render @movies %>
+                        
                         <% else %>
                             <h4>It's lonely here...how about you add some movies!</h4>
                         <% end %>
+                        </div>
                         <div class="clearfix"></div>
                     <% end %>
                 </div>
+            </div>
+
+  
+                	
+
                 <!-- /.isotope-portfolio-container -->
             </div>
             <!-- end content -->

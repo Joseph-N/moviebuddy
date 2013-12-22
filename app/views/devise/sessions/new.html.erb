@@ -11,7 +11,6 @@
     s(window).load(function(){
       var bg_image = '<%= @image %>';
       if(bg_image){
-        s('.loading-gif').show();
       
         var img = new Image();
         s(img).load(function() {
@@ -20,7 +19,6 @@
             "background-repeat" : "no-repeat"
           });
           
-          s('.loading-gif').hide();
         });
 
         img.src = bg_image;
@@ -38,10 +36,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-5">
-        <div class="loading-gif" style="text-align: center; display: none;">
-          <%= image_tag "ajax-loader-3.gif" %><br />
-          Waiting for image..
-        </div>                           
+                         
       </div>
 
     <div class="col-md-7">
@@ -68,7 +63,7 @@
                   </div>
 
                   <div class="col-md-6 v-ruler">
-                    <h3><i class="icon-user"></i> Log in</h3>
+                    <h3><i class="icon-user"></i> Log in with email</h3>
 
                     <% if alert %>
                       <div class="alert alert-danger alert-dismissable">
@@ -88,7 +83,7 @@
 
                       <div class="form-group">
                         <%= f.label :password %>
-                        <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right home" %>
+                        <%= link_to raw("<i class='icon-info-sign'></i> Forgot Password?"), new_password_path(resource_name), class: "pull-right home fg-password" %>
                         <%= f.password_field :password, :class=> 'form-control' %>
                       </div>
 
@@ -116,4 +111,4 @@
   </div>
   <!-- /.container -->
 </section>
-<%= render :partial => 'shared/recent_movies', locals: { size: "w300"} %>
+<%= render :partial => 'shared/recent_movies', locals: { movies: @recent_movies, size: "w154"} %>

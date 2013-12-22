@@ -1,5 +1,5 @@
 <li class="media" data-time="<%= update.created_at.to_i %>">
-    <%= link_to image_tag(update.user.avator.url(:thumb)), user_show_path(update.user), class: "pull-left" %>
+    <%= link_to image_tag(update.user.avator.url(:thumb), class: "update-img", alt: update.user.name), user_show_path(update.user), class: "pull-left" %>
     <div class="media-body">
         <h5 class="media-heading">
             <%= link_to update.user.name, user_show_path(update.user) %>  

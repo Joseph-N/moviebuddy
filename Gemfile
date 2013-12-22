@@ -53,6 +53,7 @@ gem 'foreman'
 gem "koala", "~> 1.8.0rc1"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'sitemap_generator'
+gem "gritter", "1.0.3"
 
 group :development do
   gem 'better_errors'

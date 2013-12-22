@@ -16,18 +16,9 @@
 <section id="item-content-wrapper" class="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <ul id="myTab" class="nav nav-pills nav-stacked">
-          <li class="active">
-             <%= link_to raw('<i class="icon-user"></i> &nbsp;&nbsp; Profile Settings'), edit_user_registration_path %>
-          </li>
-          <li class="">
-            <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
-          </li>
-        </ul>
-      </div>
-    <div class="col-md-8 item-details">
-    <div class="wrapper-1">
+      <div class="col-md-8 v-ruler-1">
+
+            <legend>Your Profile</legend>
 
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true, :class => "form-horizontal" }) do |f| %>  
           <%= devise_error_messages! %>                  
@@ -82,8 +73,9 @@
           </div> <!-- /.form-group -->
 
         <% end %>
-
-        </div>
+      </div>
+    <div class="col-md-4">
+    <%= render 'shared/edit_links' %>
       </div>
     </div>
   </div>

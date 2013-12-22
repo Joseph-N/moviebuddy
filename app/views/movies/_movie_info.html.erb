@@ -33,12 +33,4 @@
             <%= @movie.homepage.present? ? link_to(@movie.homepage, @movie.homepage) : "None" %>
         </div>
     </li>
-    <% if @movie.user.present? %>
-        <li>
-        	<h6><%= @movie.user.name %>'s Opinion:</h6>
-        	<div class="project-terms">
-        		<%= @movie.comment.present? ? @movie.comment : "......" %>
-        	</div>
-        </li>
-    <% end %>
 </ul>

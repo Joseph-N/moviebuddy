@@ -1,23 +1,20 @@
 <% @movies.each do |movie| %>
-    <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper nature outside">
-        <div class="portfolio-item">
-            <div class="portfolio-thumb">
-            	<% if movie["backdrop_path"] %>
-            		<%= image_tag(@tmdb.imageUrl('backdrop','w300', movie["backdrop_path"])) %>
-            		<div class="image-overlay"></div>
-            		<%= link_to raw('<i class="icon-eye-open"></i>'), @tmdb.imageUrl('backdrop','w780', movie["backdrop_path"]), rel: "prettyPhoto", class: "portfolio-zoom" %>
-            	<% else %>
-            		<%= image_tag "http://placehold.it/300x169" %>
-            		<div class="image-overlay"></div>
-            		<%= link_to raw('<i class="icon-eye-open"></i>'), "http://placehold.it/780x439", class: "portfolio-zoom" %>
-            	<% end %>         
-                <%= link_to raw('<i class="icon-link"></i>'), fetch_movie_path(movie["id"]), class: "portfolio-link" %>
-            </div>
-            <div class="portfolio-content">
-                <h5><%= movie["title"] %></h5>
-                <p><%= movie["release_date"] %></p>
-            </div>
-        </div>
-    </div>
+  <div class="col-xs-12 col-md-2 col-sm-6 portfolio-item-wrapper" id="<%= movie["id"] %>">
+    <div class="portfolio-item">
+        <div class="thumbnail">
+                <% if movie["poster_path"] %>
+                    <%= image_tag(@tmdb.imageUrl('poster','w185', movie["poster_path"]), class: "tip", "title" => movie["title"], alt: movie["original_title"], "data-url" => @tmdb.movieUrl(movie["id"])) %>            
+                <% else %>
+                    <%= image_tag "http://placehold.it/154x231" %>
+                <% end %> 
+          <div class="caption">
+            <b><%= truncate(movie["title"], length: 15) %></b>
+            <span style="display: block"><%= movie["release_date"] %></span>
+            <a href="#" class="home add-to-collection" data-url="<%= @tmdb.movieUrl(movie["id"]) %>">Add</a>
+
+      </div>
+</div>
+</div>
+  </div>
 <% end %>
 

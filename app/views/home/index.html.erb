@@ -1,35 +1,15 @@
 <%= title "Home" %>
 
-<section id="fullwidthbanner-container" class="section fullwidthbanner-container hidden-xs">
-    <div class="fullwidthbanner">
-        <ul>
-            <%= render :partial => 'slider' %>
-        </ul>
-        <div class="tp-bannertimer tp-bottom"></div>
-    </div>
-    <!-- /.fullwidthbanner -->
-</section>
-<!-- /.fullwidthbanner-container -->
+<% if @upcoming_movies.any? %>
+    <%= render :partial => 'shared/recent_movies', locals: { movies: @upcoming_movies, size: "w154" } %>
+<% end %>
+
 
 <section id="item-content-wrapper" class="section">
     <div class="container">
         <div class="row">            
-            <div class="col-md-7">
+            <div class="col-md-7 v-ruler-1">
                 <div class="portfolio-thumb wrapper-1">
-                    <% if notice %>
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <%= notice %>
-                    </div>
-                    <% elsif alert %>
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <%= alert %>
-                    </div>
-                    <% end %>
-                    <div class="widget search hidden-lg hidden-md hidden-sm">
-                         <%= render :partial => 'shared/search_form' %>
-                    </div>
                     <%= image_tag "ajax-loader-3.gif", class: "ajax-loading-gif pull-right", style: "margin-bottom: 4px; display:none" %>
                     <%= render 'updates/form' %>
                     <div class="post-comments">
@@ -46,20 +26,17 @@
                 </div>
             </div>
 
-            <div class="col-md-5 item-details v-ruler">
+            <div class="col-md-5 item-details">
                 <div class="wrapper-1">
                     <ul class="recent-posts hidden-xs">
                         <li>
                             <%= link_to image_tag(current_user.avator.url(:thumb)), user_show_path(current_user) %>
                             <h5>
                                 <%= link_to current_user.name, user_show_path(current_user) %>
-                                <small><%= link_to "Edit Profile", "#" %></small>
+                                <small><%= link_to "Edit Profile", edit_user_registration_path %></small>
                             </h5>
                         </li>
                     </ul>
-                    <div class="widget search hidden-xs">
-                         <%= render :partial => 'shared/search_form' %>
-                    </div>
 
                     <div class="widget categories">
                         <h5 class="subpage-title">Favourites</h5>
@@ -74,14 +51,6 @@
 
                 </div>
                 <hr>
-                <div class="wrapper-1">
-                    <h5 class="subpage-title">Upcoming Movies</h5>
-                        <ul class="recent-movies">
-                            <%= render :partial => 'movies', locals: { movies: @upcoming_movies } %>
-                        </ul>
-                </div>
-                <hr>
-
                 <div class="wrapper-1">
                     <h5 class="subpage-title">Popular Movies</h5>
                         <ul class="recent-movies">

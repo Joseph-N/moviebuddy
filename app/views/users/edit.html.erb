@@ -16,20 +16,9 @@
 <section id="item-content-wrapper" class="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <ul id="myTab" class="nav nav-pills nav-stacked">
-          <li class="">           
-              <%= link_to raw('<i class="icon-user"></i> &nbsp;&nbsp; Profile Settings'), edit_user_registration_path %>
-          </li>
-          <li class="active">
-            <%= link_to raw('<i class="icon-key"></i> &nbsp;&nbsp; Change Password'), password_edit_path %>
-          </li>
-        </ul>
-      </div>
+      <div class="col-md-8 v-ruler-1">
 
-      <div class="col-md-8 item-details">
-        <div class="wrapper-1">
-          <% if @user.errors.any? %>
+                  <% if @user.errors.any? %>
             <div class="alert alert-danger alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
               <strong>Oh noo!</strong>
@@ -38,6 +27,7 @@
             <% end %>
           </div>
           <% end %>
+          <legend>Change your password</legend>
           <%= form_for(@user, :url => password_edit_path, :html => {:class => 'form-horizontal'} ) do |f| %>
 
             <div class="form-group">
@@ -80,6 +70,9 @@
           <% end %>
         </div>
       </div>
+
+      <div class="col-md-4">
+        <%= render 'shared/edit_links' %>
     </div>
   </div>
 </section>

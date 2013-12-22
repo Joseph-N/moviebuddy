@@ -107,6 +107,7 @@ GEM
       actionpack (>= 3.0)
     friendly_id (5.0.1)
       activerecord (~> 4.0.0)
+    gritter (1.0.3)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -300,6 +301,7 @@ DEPENDENCIES
   devise (~> 3.1.1)
   foreman
   friendly_id (~> 5.0.0)
+  gritter (= 1.0.3)
   jbuilder (~> 1.2)
   jquery-rails
   json (~> 1.8.1)

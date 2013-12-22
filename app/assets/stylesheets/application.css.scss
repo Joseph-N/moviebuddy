@@ -1,4 +1,5 @@
 /*
+ *= require gritter
  *= require_tree ../../../vendor/assets/stylesheets/.
  */
 
@@ -7,3 +8,4 @@
 @import "movies";
 @import "update_comments";
 @import "users";
+@import "registrations";

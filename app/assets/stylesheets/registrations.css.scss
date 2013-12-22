@@ -1,0 +1,49 @@
+/* Cool block */
+
+.cool-block{
+   background:#fff;
+   border:1px solid #bbb;
+   box-shadow:0px 0px 1px #999;
+   border-radius:3px;
+}
+
+.cool-block-bor{
+   margin:3px;
+   border:1px dashed #aaa;
+   box-shadow:0px 0px 1px #999;
+   border-radius:3px;
+   padding:15px;
+}
+
+/*@media (min-width: 992px) {
+    .signin-twitter{
+        margin-left: -10px !important;
+    }
+}
+
+
+/*@media (min-width: 992px) {
+    .cool-block{
+        background-color:rgba(255,255,255,0.95);
+        color: #999;
+    }
+    .cool-block input[type=text], input[type=password], input[type=email]{
+        border: 1px #ccc grey;
+
+        color: #fff;
+    }
+    .register-login h3{
+        color: grey;
+    }
+}
+*/
+
+.intro-text {
+	margin-bottom: 30px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.home.fg-password {
+	font-size: 10px;
+}

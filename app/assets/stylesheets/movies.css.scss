@@ -53,3 +53,25 @@ textarea.cupdate{
 .ui-group-buttons .btn{float:left;border-radius:0}
 .ui-group-buttons .btn:first-child{margin-left:0;border-top-left-radius:.25em;border-bottom-left-radius:.25em;padding-right:15px}
 .ui-group-buttons .btn:last-child{border-top-right-radius:.25em;border-bottom-right-radius:.25em;padding-left:15px}
+
+#search-btn{
+  color: #393939;
+  font-size: 15px;
+  font-weight: 600;
+  position: absolute;
+  left: 420px;
+  top: -5px;
+  background: transparent;
+  transition: color 0.25s linear;
+}
+
+@media (max-width: 1024px) {
+  #search-btn {
+    left: auto;
+    right: 12px;
+  }
+}
+
+.tip:hover{
+  cursor: pointer;
+}

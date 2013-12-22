@@ -1,0 +1,10 @@
+<p>Hi <%= @user.name %>!</p>
+
+<p>You have a new follower</p>
+
+<p>Name: <%= @follower.name %></p>
+
+<p>Visit <%= link_to "#{@follower.name}'s profile", user_show_url(@follower)%></p>
+
+<p>regards<br />
+MovieBuddy</p>

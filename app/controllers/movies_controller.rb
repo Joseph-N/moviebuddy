@@ -37,19 +37,19 @@ class MoviesController < ApplicationController
 		@movie = current_user.movies.build(movie_params)
 		unless current_user.movies.where(:tmdb_id => @movie.tmdb_id).any?
 			if @movie.save
-				flash[:notice] = "Added #{@movie.title} successfully to your collection"
-				create_update(@movie)
+				gflash :success => "Added #{@movie.title} successfully to your collection"
+				current_user.updates.create(movie: @movie.id)
 				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
 				if params[:movie][:facebook] == "1"
 					ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
 				end
 			end
 		else
-			flash[:alert] = "#{@movie.title} is already in your collection"
+			gflash :notice => { :value => "#{@movie.title} is already in your collection", :time => 3000 }
 		end
 
 		respond_to do |format|
-			format.json { render json: { :url => movies_path} }
+			format.js
 			format.html { redirect_to movies_path}
 		end
 	end
@@ -83,20 +83,12 @@ class MoviesController < ApplicationController
 
 	private
 		def movie_params
-			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :comment,
-											:youtube_identifier, :tag_line, :release_date, 
-											:homepage,  :backdrop, :budget, genres: [])
+			params.require(:movie).permit(:title, :tmdb_id, :overview, :poster, :tag_line,
+											:youtube_identifier, :release_date, :homepage, 
+											 :backdrop, :budget, genres: [])
 		end
 
 		def init_tmdb
 			@tmdb = Tmdb.new
-		end
-
-		def create_update(movie)
-			if movie.comment?
-				current_user.updates.create(content: movie.comment, movie: movie.id)
-			else
-				current_user.updates.create(movie: movie.id)
-			end
 		end
 end

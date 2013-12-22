@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 	    @user = User.find(current_user.id)
 	    if @user.update_with_password(user_params)
 	      # Sign in the user by passing validation in case his password changed
-	      flash[:notice] = "Successfully updated password"
+	      gflash :success => { :value => "Your password was successfully updated", :time => 3000 }
 	      sign_in @user, :bypass => true
 	      redirect_to root_path
 	    else
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 			ActivityWorker.perform_async("User", @user.id, current_user.id, { key: "user.follow", action: "follow"} )
 			MailerWorker.perform_async(@user.id, "userFollow", { actor_id: current_user.id })
 
-			flash[:notice] = "successfully followed #{@user.name}"
+			gflash :success => { :value => "successfully followed #{@user.name}", :time => 3000, :title => "Awesome!!" }
 			respond_to do |format|
 				format.html { redirect_to url }
 				format.js
@@ -69,12 +69,18 @@ class UsersController < ApplicationController
 		if current_user.stop_following(@user)
 			#ActivityWorker.perform_async("User", @user.id, current_user.id, key = "user.unfollow", action = "unfollow")
 
-			flash[:notice] = "successfully unfollowed #{@user.name}"
+			gflash :warning => { :value => "successfully unfollowed #{@user.name}", :title => "Ooops!" }
 			respond_to do |format|
 				format.html { redirect_to url}
 				format.js
 			end
 		end
+	end
+
+	def sharing
+		@connected_twitter = current_user.authentications.where(:provider => "twitter")
+		@connected_facebook = current_user.authentications.where(:provider => "facebook")
+		@connected_google = current_user.authentications.where(:provider => "google_oauth2")
 	end
 
 	def activity

@@ -84,6 +84,13 @@ class Tmdb
 		h_rated
 	end
 
+	def movieUrl(id)
+		@params.delete("query")
+		@params.delete("include_adult")
+		@params["append_to_response"] = "trailers"
+		buildUrl("movie/#{id}",@params)
+	end
+
 	private
 
 		# Return a full valid address with parameters

@@ -1,5 +1,6 @@
-<%= form_tag(movies_path, method: :get, id: "#{ controller_name == "home" ? "" : "movie_search"}", class: "#{ controller_name == "home" ? "" : "pull-right"} search-form", :html => {:role => 'search'}) do  %>
+<%= form_tag(movies_path, method: :get, id: "#{ controller_name == "home" ? "" : "movie_search"}", :role => 'search') do  %>
 	<div class="form-group">
 		<%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search for movies to add" %>
+		<button type="submit" id="search-btn" class="btn"><i class="icon-search"></i></button>
 	</div>
 <% end %>

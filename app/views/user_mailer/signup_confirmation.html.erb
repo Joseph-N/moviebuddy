@@ -1,0 +1,13 @@
+<p>Hi <%= @user.name %></p>
+
+<p>Thank you for signing up for MovieBuddy. MovieBuddy will help you collect all your favourite movies in a single place.
+	Follow other users to see what movies they are adding to their collection. To find users to follow,  <%= link_to "click here", all_users_url  %></p>
+
+<p>You could also get started right away by adding your first movie. <%= link_to "Add your first movie here", movies_url %> </p>
+
+<p>Visit <%= link_to "Your profile here", user_show_url(@user) %></p>
+
+<p>MovieBuddy is still in development with more features being added around the clock. Stay tuned and happy moviebuddying ;-)</p>
+
+<p>Regards,<br />
+MovieBuddy</p>

@@ -1,7 +1,7 @@
 <section id="recent-works" class="section <%= controller_name == "users" || controller_name == "home"  ? "colored-wrapper": "" %>">
     <div class="container wrapper-2">
         <h5 class="subpage-title">
-            <span><%= controller_name == "home" ? "Popular Movies" : "Recent Movies" %></span>
+            <span><%= controller_name == "home" ? "Upcoming Movies" : "Recent Movies" %></span>
             <!-- Controls -->
             <span id="portfolio-next" class="next black">
                 <i class="icon-angle-right"></i>
@@ -11,9 +11,9 @@
             </span>
         </h5>
         <div class="row">
-            <div id="caroufredsel-portfolio-container">
+            <div id="<%= controller_name == "home" ? "caroufredsel-portfolio-container-home" : "caroufredsel-portfolio-container"%>">
                 
-                <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: size } %>
+                <%= render :partial => 'shared/movies', locals: { movies: movies, size: size } %>
                 <!-- /.portfolio-item-wrapper -->
             </div>
             <!-- /.caroufredsel-portfolio-container -->

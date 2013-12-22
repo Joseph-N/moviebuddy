@@ -50,6 +50,8 @@ MovieBuddy::Application.routes.draw do
   get 'users/:id/activity' => 'users#activity'
   get 'password/edit' => 'users#edit', as: :password_edit
   patch 'password/edit' => 'users#update_password'
+  get 'settings/sharing' => 'users#sharing', as: :user_sharing
+  delete 'settings/sharing' => 'authentications#destroy', as: :delete_auth
   get 'updates/more' => 'updates#more'
 
   get '/fetch/:id' => 'movies#fetch', as: :fetch_movie

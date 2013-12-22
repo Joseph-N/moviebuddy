@@ -1,0 +1,8 @@
+<p><%= @from_user.name %> commented on your <%= @update.content.nil? ? "movie activity" : "update" %></p>
+
+<p><%= @update.content.nil? ? @movie.title : @update.content %></p>
+
+<p>Comment: <%= @comment.content %></p>
+
+<p>Regards,<br />
+MovieBuddy</p>

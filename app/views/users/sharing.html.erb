@@ -1,0 +1,96 @@
+<% title "Settings - Sharing with other networks" %>
+
+ <section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
+                <h4>Settings</h4>
+            </div>
+            <!-- /.page-title -->
+            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
+            </div>
+            <!-- /.breadcrumb-wrapper -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<section id="portfolio-2" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 v-ruler-1">
+                <h5 class="subpage-title">Sharing with other networks</h5>
+                <p>To share your MovieBuddy activity with other networks, just connect your accounts below.</p>
+                <table class="table" style="margin-top: 30px;">
+                    <tbody>
+                      <tr>
+                        <td><h1><i class="icon-facebook-sign"></i></h1></td>
+                        <td>
+                         
+                        
+                            <% unless @connected_facebook.any? %>
+                            <p>By connecting your MovieBuddy account to Facebook, you'll be able to share movies you like, your reviews and movies you add to your Timeline.</p>
+                             <div class="col-md-4 col-sm-4 col-xs-12">
+                                <%= link_to "Connect Facebook", user_omniauth_authorize_path(:facebook), class: "button-facebook" %>
+                            </div>
+                            <% else %>
+                            <p>
+                                Linked to: <%= link_to @connected_facebook.first.username, @connected_facebook.first.social_url, class: "home", target: "_blank" %>
+                                
+                               <%= link_to raw("Disconnect <i class='icon-remove'></i>"), delete_auth_path(:auth => "facebook") ,  class: "home pull-right", method: :delete %></p>
+                               <p><i class="icon-info-sign"></i> Anything you publish to Facebook is viewable by anyone who can view your Facebook Timeline.</p>
+                            <% end %>
+                    
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><h1><i class="icon-twitter-sign"></i></h1></td>
+                        <td>
+                           
+                            
+                                 <% unless @connected_twitter.any? %>
+                                  <div class="col-md-4 col-sm-4 col-xs-12">
+                            <%= link_to "Connect Twitter", user_omniauth_authorize_path(:twitter), class: "button-twitter" %>
+                        </div>
+                            <% else %>
+                            <p>Linked to: <%= link_to @connected_twitter.first.username, @connected_twitter.first.social_url, class: "home", target: "_blank" %> <%= link_to raw("Disconnect <i class='icon-remove'></i>"), delete_auth_path(:auth => "twitter") ,  class: "home pull-right", method: :delete %></p>
+                               <p><i class="icon-info-sign"></i> You'll always be able to choose which movies you share on Twitter</p>
+                            <% end %>
+                        </div>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><h1><i class="icon-google-plus-sign"></i></h1></td>
+                        <td>
+                             
+                                <% unless @connected_google.any?%>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <%= link_to "Connect Google", user_omniauth_authorize_path(:google_oauth2), class: "button-googleplus" %>
+                                </div>
+                                <% else %>
+                                <p>Linked to: <%= link_to @connected_google.first.username, @connected_google.first.social_url, class: "home", target: "_blank" %>
+                                 <%= link_to raw("Disconnect <i class='icon-remove'></i>"), delete_auth_path(:auth => "google_oauth2") ,  class: "home pull-right", method: :delete %></p>
+                                  <p><i class="icon-info-sign"></i> You'll always be able to choose which movies you share on Google Plus</p>
+                                 <% end %>
+                            
+                            </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+               
+                   
+                </h1>
+
+
+            </div>
+            <div class="col-md-4">
+                <%= render 'shared/edit_links' %>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
