@@ -3,20 +3,16 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 col-sm-3 col-md-6 page-title">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="/movies" id="ios-arrow-left">Back</a> 
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
                 <% if params[:q] %>
                     <h4>Found <%= pluralize(@movies.count, "match") %></h4>
                 <% else %>
                     <div class="row">
-                        <div class="col-md-1 loading">
+                        <div class="col-md-12 loading">
                              <%= image_tag "ajax-loader.gif" %>
-                        </div>
-                        <div class="col-md-11">
-                            <div id="loading">
-                                <div class="loading">
-                                    <h4>Searching....this might take a while</h4>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <h4 id="movies">My Movies</h4>
@@ -24,7 +20,7 @@
             </div>
 
             <!-- /.page-title -->
-            <div class="col-xs-6 col-sm-9 col-md-6">
+            <div class="col-xs-4 col-sm-4 col-md-4">
                 <%= render :partial => 'shared/search_form' %>
             </div>
             <!-- /.breadcrumb-wrapper -->
@@ -36,44 +32,36 @@
 
 <section id="portfolio-2" class="section colored-wrapper">
     <div class="container">
-        <% if notice %>
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <%= notice %>
-            </div>
-        <% elsif alert %>
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <%= alert %>
-            </div>
-        <% end %>
     
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
                 <div class="row">
-                <div class="col-md-3">
-                            <% unless params[:q] %>
-            <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
-        <% end %>
-                </div>
-                <div class="col-md-9 v-ruler">
-                     <div class="row" id="isotope-portfolio-container">
                     <% if params[:q] %>
                         <%= render 'results' %>
                     <% else %>
-                        <% if @movies.any? %>
-                       
-                            <%= render @movies %>
-                        
-                        <% else %>
-                            <h4>It's lonely here...how about you add some movies!</h4>
-                        <% end %>
+                        <div class="col-md-3">
+                            
+                            <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+   
                         </div>
-                        <div class="clearfix"></div>
+                        <div class="col-md-9 v-ruler">
+                             <div class="row" id="isotope-portfolio-container">
+
+                                <% if @movies.any? %>
+                                
+                               
+                                    <%= render @movies %>
+                                
+                                <% else %>
+                                    <h4>It's lonely here...how about you add some movies!</h4>
+                                <% end %>
+                                </div>
+                                <div class="clearfix"></div>
+    
+                        </div>
                     <% end %>
                 </div>
-            </div>
 
   
                 	

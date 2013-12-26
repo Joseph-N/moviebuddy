@@ -1,36 +1,113 @@
-<div class="portfolio-thumb wrapper-1">
-	 <%= image_tag 'ajax-loader-2.gif', class: "img-responsive" unless @movie.nil? %>
-     <span class="loading-text">Waiting for image</span>
+<div class="row">
+    <div class="col-xs-4 col-md-12">
+        <div class="portfolio-thumb wrapper-1">
+        	 <%= image_tag 'ajax-loader-2.gif', class: "img-responsive" unless @movie.nil? %>
+        </div>
+                <div class="wrapper-1 hidden-xs hidden-md hidden-lg">
+
+                            <h5 class="subpage-title">Genres</h5>
+                    <ul class="tagcloud-list">
+                        <% if @movie.genres %>
+                            <% @movie.genres.each do |genre| %>
+                                <li><%= genre %> </li>
+                            <% end %>
+                        <% else %>
+                            <p> No genres Available</p>
+                        <% end %>
+                                </ul>
+        </div>
+    </div>
+    <div class="hidden-lg hidden-md col-xs-8">
+        <div class="wrapper-1">
+            <h5 class="subpage-title"><i class="icon-facetime-video"></i> Movie Overview</h5>
+            <p><%= @movie.overview %></p>
+
+            <% if @movie.tag_line.present? %>
+            <p>
+                <blockquote>
+                    <%= @movie.tag_line %>
+                    <small><cite title="Source Title">Tagline</cite></small>
+                </blockquote>
+
+            </p>
+            <% end %>
+                                    <div class="wrapper-1 hidden-lg hidden-sm hidden-xs hidden-md">
+
+                            <h5 class="subpage-title">Genres</h5>
+                    <ul class="tagcloud-list">
+                        <% if @movie.genres %>
+                            <% @movie.genres.each do |genre| %>
+                                <li><%= genre %> </li>
+                            <% end %>
+                        <% else %>
+                            <p> No genres Available</p>
+                        <% end %>
+                                </ul>
+        </div>
+            <div class="wrapper-1 hidden-xs">
+
+        <h5 class="subpage-title">Facts</h5>
+        <ul class="project-details-list ">
+            <li>
+                <h6>Release date:</h6>
+                <div class="project-terms">
+                    <%= @movie.release_date %>
+                </div>
+            </li>
+            <li>
+                <h6>Budget:</h6>
+                <div class="project-terms">
+                   <%= number_to_currency @movie.budget %>
+                </div>
+            </li>
+            <li>
+                <h6>Homepage:</h6>
+                <div class="project-terms">
+                    <%= @movie.homepage.present? ? link_to(raw("Click here <i class='icon-external-link-sign'></i>"), @movie.homepage, target: "_blank") : "None" %>
+                </div>
+            </li>
+        </ul>
+    </div>
+        </div>
+    </div>
+    <div class="col-xs-12 cleartags hidden-sm">
+                                            <div class="wrapper-1">
+
+                            <h5 class="subpage-title">Genres</h5>
+                    <ul class="tagcloud-list">
+                        <% if @movie.genres %>
+                            <% @movie.genres.each do |genre| %>
+                                <li><%= genre %> </li>
+                            <% end %>
+                        <% else %>
+                            <p> No genres Available</p>
+                        <% end %>
+                                </ul>
+        </div>
+
+        <div class="wrapper-1">
+
+        <h5 class="subpage-title">Facts</h5>
+        <ul class="project-details-list ">
+            <li>
+                <h6>Release date:</h6>
+                <div class="project-terms">
+                    <%= @movie.release_date %>
+                </div>
+            </li>
+            <li>
+                <h6>Budget:</h6>
+                <div class="project-terms">
+                   <%= number_to_currency @movie.budget %>
+                </div>
+            </li>
+            <li>
+                <h6>Homepage:</h6>
+                <div class="project-terms">
+                    <%= @movie.homepage.present? ? link_to(raw("Click here <i class='icon-external-link-sign'></i>"), @movie.homepage, target: "_blank") : "None" %>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
-<ul class="project-details-list">
-    <li>
-        <h6>Name:</h6>
-        <div class="project-terms">
-            <%= @movie.title %>
-        </div>
-    </li>
-    <li>
-        <h6>Genres:</h6>
-        <div class="project-terms">
-            <%= @movie.genres ? @movie.genres.join(',') : "No genres available" %>
-        </div>
-    </li>
-    <li>
-        <h6>Release date:</h6>
-        <div class="project-terms">
-            <%= @movie.release_date %>
-        </div>
-    </li>
-    <li>
-        <h6>Budget:</h6>
-        <div class="project-terms">
-           <%= number_to_currency @movie.budget %>
-        </div>
-    </li>
-    <li>
-        <h6>Homepage:</h6>
-        <div class="project-terms">
-            <%= @movie.homepage.present? ? link_to(@movie.homepage, @movie.homepage) : "None" %>
-        </div>
-    </li>
-</ul>
+</div>

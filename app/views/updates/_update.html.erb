@@ -25,15 +25,15 @@
         <%= render :partial => 'updates/comment_stats', locals: {update: update} %>
 
         <!-- Nested media object -->
-        <% @update_comments = update.update_comments %>
-        <%= render @update_comments %>
+        <% @comments = update.comments %>
+        <%= render @comments %>
 
         <div class="media update-comment-form" id="form-<%= update.id %>">
             <%= link_to image_tag(current_user.avator.url(:thumb), width: "50px", height: "50px"), user_show_path(current_user), class: "pull-left" %>
             <div class="media-body">
                 <div class="row">
                     <div class="col-md-9">
-                        <%= form_for([update, update.update_comments.build], :html => {:id => "update_" + update.id.to_s }) do |f| %>
+                        <%= form_for([update, update.comments.build], :html => {:id => "update_" + update.id.to_s }) do |f| %>
                         <%= f.text_area :content, class: "cupdate btn-block", id: "cupdate_" + update.id.to_s %>                       
                     </div>
                     <div class="col-md-3">

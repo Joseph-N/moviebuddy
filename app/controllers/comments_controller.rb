@@ -1,34 +1,24 @@
 class CommentsController < ApplicationController
-	before_filter :authenticate_user!, :except => [:index]
-	def index
-		@movie = Movie.friendly.find(params[:movie_id])
-		@comments = Comment.where("movie_id = ? and created_at > ?", @movie.id, Time.at(params[:after].to_i + 1))
-    end
-
+	before_filter :authenticate_user!
 	def create
-		@movie = Movie.friendly.find(params[:movie_id])
-		@comment = @movie.comments.build(comment_params)
+		@update = Update.find(params[:update_id])
+		@comment = @update.comments.build(update_comment_params)
 		@comment.user_id = current_user.id
 		if @comment.save
-			ActivityWorker.perform_async("Comment", @comment.id, current_user.id)	
-			ShareWorker.perform_async("facebook", "Comment", current_user.id, @comment.id, { activity: "movie.comment", url: movie_url(@movie)})
-			MailerWorker.perform_async(@movie.user.id, "movieComment", { actor_id: current_user.id, movie_id: @movie.id, comment_id: @comment.id })
+			ActivityWorker.perform_async("Comment", @comment.id, current_user.id)
+			MailerWorker.perform_async(@update.user.id, "Comment", { actor_id: current_user.id, update_id: @update.id, comment_id: @comment.id })
 
 			respond_to do |format|
-				format.html { redirect_to movie_path(@movie) }
+				format.html { redirect_to root_path }
 				format.js
 			end
 		else
-			@movie = Movie.friendly.find(params[:movie_id])
-			@tmdb = Tmdb.new
-			@comments = @movie.comments
-			@trailer = youtubeVideo(@movie.youtube_id)
-			render 'movies/show'
+			render 'home/index'
 		end
 	end
 
 	private
-		def comment_params
-			params.require(:comment).permit(:body)
+		def update_comment_params
+			params.require(:comment).permit(:content)
 		end
 end

@@ -1,5 +1,6 @@
 var s = jQuery;
 s.noConflict();
 
-s('ul#comments').append('<%= escape_javascript(render(:partial => @comment)) %>');
-s('#new_comment')[0].reset();
+s('#cupdate_<%= @update.id %>').parents().eq(4).before('<%= escape_javascript(render(:partial => @comment )) %>');
+s('#update_<%= @update.id %>')[0].reset();
+s('#stats-<%= @update.id %>').html("<%= escape_javascript(render(:partial => 'updates/comment_stats', locals: {update: @comment.update })) %>");

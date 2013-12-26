@@ -27,8 +27,14 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                <h4><%= @movie.title %> &rarr; <small> <%= @movie.tag_line %></small></h4>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="javascript:history.go(-1)" id="ios-arrow-left">Back</a> 
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
+                <h4><%= @movie.title %></h4>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <%= render :partial => 'shared/search_form' %>
             </div>
             <!-- /.page-title -->
         </div>
@@ -44,6 +50,23 @@
                 <%= render :partial => 'movie_info' %>
             </div>
             <div class="col-md-8 item-details">
+                <div class="wrapper-1 hidden-xs hidden-sm">
+                    <h5 class="subpage-title"><i class="icon-facetime-video"></i> Movie Overview</h5>
+                    <p><%= @movie.overview %></p>
+
+                    <% if @movie.tag_line.present? %>
+
+            <p>
+                <blockquote>
+                    <%= @movie.tag_line %>
+                    <small><cite title="Source Title">Tagline</cite></small>
+                </blockquote>
+
+            </p>
+                    <% end %>
+                </div>
+
+
             	<div class="wrapper-1 youtube">
             		<h5 class="subpage-title"><i class="icon-youtube-play"></i> Youtube Trailer</h5>
             		<%= raw(@trailer) %>
@@ -57,31 +80,56 @@
 
                     </div>
             	</div>
-
-                <div class="wrapper-1">
-                    <h5 class="subpage-title"><i class="icon-facetime-video"></i> Movie Overview</h5>
-                    <p><%= @movie.overview %></p>
-                </div>
-
-                 <!-- comments -->
-                <div class="post-comments">
-                    <h5 class="subpage-title" id="comment-count">
-                        <i class="icon-comments"></i> <%= @comments.count %> Comments
-                    </h5>
-                    <ul class="media-list" id="comments">
-                    	<%= render @comments unless @comments.nil? %>
-					</ul>
-					<!-- end comments -->
-                </div>
-                <% if user_signed_in? %>
-        		  <%= render 'comments/form' %>  
-                <% else %>
-                    <p> You must be logged in to comment on this movie <%= link_to "Log In", new_user_session_path, class: "home" %> </p>
-                <% end %>                          
+                    
             </div>
+            <div class="clearfix"></div>
+                             <!-- comments -->
+                 <div class="col-md-12 wrapper-1">
+                        
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                            <li class=""><a href="#cast" class="cast" data-toggle="tab">Cast</a></li>
+                            <li class=""><a href="#similar" class="similar-movies" data-toggle="tab">Similar Movies</a></li>
+                            <li class=""><a href="#downloads" class="download" data-toggle="tab">Download</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="reviews">
+                                <div class="post-comments">
+                                    <h5 class="subpage-title" id="review-count">
+                                        <i class="icon-comments"></i> <%= @reviews.count %> Reviews
+                                    </h5>
+                                    <ul class="media-list" id="reviews">
+                                        <%= render @reviews unless @reviews.nil? %>
+                                    </ul>
+                                    <!-- end comments -->
+                                </div>
+
+                                <% if user_signed_in? %>
+                                  <%= render 'reviews/form' %>  
+                                <% else %>
+                                    <p> You must be logged in to review on this movie <%= link_to "Log In", new_user_session_path, class: "home" %> </p>
+                                <% end %>
+                            </div>
+
+                            <div class="tab-pane" id="cast">
+                                <div class="gif-loader" style="display: none;">
+                                     <%= image_tag 'ajax-loader-2.gif' %>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="similar">
+                                <div class="gif-loader" style="display: none;">
+                                     <%= image_tag 'ajax-loader-2.gif' %>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="downloads">
+                                <p>No download link at the moment for this movie..</p>
+                            </div>
+                        </div>
+                    </div> 
         </div>
     </div>
 </section>
 
-<!-- used by ajax to poll for comments -->
-<div id="comments-path"><%= movie_comments_path(params[:id]) %></div>
+<!-- used by ajax to poll for reviews -->
+<div id="reviews-path"><%= movie_reviews_path(params[:id]) %></div>
+<span id="tmdb_id"><%= @movie.tmdb_id %></span>

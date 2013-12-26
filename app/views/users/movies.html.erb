@@ -3,11 +3,12 @@
  <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 page-title">
-                <h4><%= @user.name %>'s Movies</h4>
+            <div class="col-xs-6 col-sm-6 col-md-6 page-title">
+                <a href="javascript:history.go(-1)" id="ios-arrow-left">Back</a>                    
             </div>
             <!-- /.page-title -->
-            <div class="col-xs-6 hidden-xs breadcrumb-wrapper">
+            <div class="col-xs-6 breadcrumb-wrapper">
+                <h4 class="pull-right"> <%= @user.name.split(" ").first %>'s Movies</h4>
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>
@@ -18,12 +19,16 @@
 
 <section id="portfolio-2" class="section colored-wrapper">
     <div class="container">
-        <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
         <div class="row">
-            <div id="isotope-portfolio-container">
+            <div class="col-md-3">
+                <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+            </div>
+            <div class="col-md-9">
+                <div id="isotope-portfolio-container">
 
-                <%= render @movies %>
+                    <%= render @movies %>
 
+                </div>
             </div>
             <!-- /.isotope-portfolio-container -->
         </div>

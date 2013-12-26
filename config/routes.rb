@@ -3,6 +3,7 @@ MovieBuddy::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  post '/rate' => 'rater#create', :as => 'rate'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -29,14 +30,14 @@ MovieBuddy::Application.routes.draw do
                       }
 
   resources :movies do
-    resources :comments
+    resources :reviews
     member do
       get 'vote'
     end
   end
 
   resources :updates, :only => [:create, :index] do
-    resources :update_comments, :only => [:create]
+    resources :comments, :only => [:create]
     member do
       get 'vote'
     end
@@ -54,7 +55,6 @@ MovieBuddy::Application.routes.draw do
   delete 'settings/sharing' => 'authentications#destroy', as: :delete_auth
   get 'updates/more' => 'updates#more'
 
-  get '/fetch/:id' => 'movies#fetch', as: :fetch_movie
   get '/follow' => 'users#follow', as: :user_follow
   get '/unfollow' => 'users#unfollow', as: :user_unfollow
 

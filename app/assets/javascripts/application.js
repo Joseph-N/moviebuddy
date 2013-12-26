@@ -13,10 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require comments
+//= require reviews
 //= require home
 //= require movies
-//= require update_comments
+//= require comments
 //= require updates
 //= require users
 //= require gritter
+//= require jquery.raty
+//= require letsrate

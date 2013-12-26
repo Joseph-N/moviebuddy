@@ -1,0 +1,15 @@
+
+<% unless review.body.blank? %>
+    <li class="media" data-time="<%= review.created_at.to_i %>">
+        <%= link_to image_tag(review.user.avator.url(:thumb)), user_show_path(review.user), class: "pull-left" %>
+        <div class="media-body">
+            <h5 class="media-heading">
+                <%= link_to review.user.name, user_show_path(review.user) %>
+                <span class="comment-date"><%= format_time(review.created_at) %></span>
+                
+            </h5>
+            <p><%= review.body %></p>
+        </div>
+    </li>
+<% end %>
+

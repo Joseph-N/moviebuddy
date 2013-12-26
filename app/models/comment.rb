@@ -1,7 +1,8 @@
 class Comment < ActiveRecord::Base
 	include PublicActivity::Common
-
-	belongs_to :movie
+	
+	belongs_to :update
 	belongs_to :user
-	validates_presence_of :movie_id, :user_id, :body
+
+	validates_presence_of :update_id, :user_id, :content
 end

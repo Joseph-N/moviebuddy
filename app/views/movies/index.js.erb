@@ -2,5 +2,5 @@ var s = jQuery;
 s.noConflict();
 
 s('#content').html('<%= escape_javascript(render(:partial => "results")) %>');
-s('#loading').html('<h4>Found <%= pluralize(@movies.count, "result") %></h4>');
+s('h4#movies').text('Found <%= pluralize(@movies.count, "result") %>');
 s('.portfolio-filter.nav.nav-pills').hide();

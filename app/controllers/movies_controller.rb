@@ -18,19 +18,9 @@ class MoviesController < ApplicationController
 
 	def show
 		@movie = Movie.friendly.find(params[:id])
-		@comment = @movie.comments.build
-		@comments = @movie.comments
+		@review = @movie.reviews.build
+		@reviews = @movie.reviews
 		@trailer = youtubeVideo(@movie.youtube_identifier)
-	end
-
-	def fetch
-		@movie = @tmdb.movieInfo(params[:id])
-		@trailer = @tmdb.movieTrailer(@movie["id"])
-		genres = []
-  		@movie["genres"].each do |genre|
-        	genres.push(genre["name"])
-		end
-		@genres = genres
 	end
 
 	def create
@@ -45,6 +35,7 @@ class MoviesController < ApplicationController
 				end
 			end
 		else
+			@movie = current_user.movies.find_by_tmdb_id(@movie.tmdb_id)
 			gflash :notice => { :value => "#{@movie.title} is already in your collection", :time => 3000 }
 		end
 
@@ -79,6 +70,10 @@ class MoviesController < ApplicationController
 			format.html { redirect_to movie_path(@movie) }
 			format.js
 		end
+	end
+
+	def genre_movies
+		@genre = params[:name]
 	end
 
 	private

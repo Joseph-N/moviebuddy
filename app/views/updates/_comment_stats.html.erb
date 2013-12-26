@@ -9,7 +9,7 @@
 	<span style="margin-left: 5px;"> . 
 		<i class="icon-thumbs-up"></i>
 			<%= update.votes_for %> &nbsp; . &nbsp;	<i class="icon-comments"></i>
-			<%= update.update_comments.count %>
+			<%= update.comments.count %>
 	</span>
 	&nbsp; . &nbsp;
 	<span class="comment-date"><%= time_ago_in_words(update.created_at) %> ago</span>

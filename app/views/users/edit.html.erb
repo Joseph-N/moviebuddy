@@ -16,7 +16,10 @@
 <section id="item-content-wrapper" class="section">
   <div class="container">
     <div class="row">
-      <div class="col-md-8 v-ruler-1">
+    <div class="col-md-4">
+        <%= render 'shared/edit_links' %>
+    </div>
+      <div class="col-md-8 v-ruler-2">
 
                   <% if @user.errors.any? %>
             <div class="alert alert-danger alert-dismissable">
@@ -71,8 +74,6 @@
         </div>
       </div>
 
-      <div class="col-md-4">
-        <%= render 'shared/edit_links' %>
-    </div>
+
   </div>
 </section>

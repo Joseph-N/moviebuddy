@@ -1,0 +1,5 @@
+var s = jQuery;
+s.noConflict();
+
+s('ul#reviews').append("<%= escape_javascript(render(:partial => @reviews))%>");
+s('#review-count').html('<i class="icon-comments"></i> ' +  s('.media').size() + ' Reviews');

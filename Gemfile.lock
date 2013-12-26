@@ -23,6 +23,12 @@ GIT
     omniauth-facebook (1.5.0)
       omniauth-oauth2 (~> 1.1)
 
+GIT
+  remote: https://github.com/murrekatt/letsrate.git
+  revision: c682fff6d7da8a13e7fd4a7324c36b4c44aa0e8e
+  specs:
+    letsrate (1.0.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -306,6 +312,7 @@ DEPENDENCIES
   jquery-rails
   json (~> 1.8.1)
   koala (~> 1.8.0rc1)
+  letsrate!
   letter_opener
   omniauth (~> 1.1.4)
   omniauth-facebook!

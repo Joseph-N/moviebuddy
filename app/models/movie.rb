@@ -12,9 +12,10 @@ class Movie < ActiveRecord::Base
 
   	before_save :check_genres
 	acts_as_voteable
+	letsrate_rateable "engagement"
 
 	belongs_to :user
-	has_many :comments, dependent: :destroy
+	has_many :reviews, dependent: :destroy
 
 	validates_presence_of :user_id, :unless => [:not_popular?, :upcoming?, :highest_rated?]
 
@@ -29,7 +30,7 @@ class Movie < ActiveRecord::Base
 	def highest_rated?
 		self.highest_rated == true
 	end
-
+	
 	private
 	def check_genres
 		if self.genres.nil?

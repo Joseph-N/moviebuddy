@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222162516) do
+ActiveRecord::Schema.define(version: 20131224070734328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,14 +81,14 @@ ActiveRecord::Schema.define(version: 20131222162516) do
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
-    t.text     "body"
+    t.text     "content"
+    t.integer  "update_id"
     t.integer  "user_id"
-    t.integer  "movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["movie_id"], name: "index_comments_on_movie_id", using: :btree
+  add_index "comments", ["update_id"], name: "index_comments_on_update_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "follows", force: true do |t|
@@ -128,16 +128,41 @@ ActiveRecord::Schema.define(version: 20131222162516) do
   add_index "movies", ["popular"], name: "index_movies_on_popular", using: :btree
   add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
 
-  create_table "update_comments", force: true do |t|
-    t.text     "content"
-    t.integer  "update_id"
-    t.integer  "user_id"
+  create_table "rates", force: true do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "update_comments", ["update_id"], name: "index_update_comments_on_update_id", using: :btree
-  add_index "update_comments", ["user_id"], name: "index_update_comments_on_user_id", using: :btree
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: true do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+
+  create_table "reviews", force: true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "updates", force: true do |t|
     t.text     "content"

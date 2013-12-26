@@ -8,7 +8,7 @@ class Update < ActiveRecord::Base
 	acts_as_voteable
 	
 	belongs_to :user
-	has_many :update_comments
+	has_many :comments
 
 	validates_presence_of :user_id
 	validates_presence_of :content, :if => :not_from_movie?

@@ -1,1 +1,3 @@
-s('#<%= @movie.tmdb_id %>').fadeOut();
+s('#<%= @movie.tmdb_id %>').tooltipster('destroy');
+s('#image-<%= @movie.tmdb_id %>').parent().attr('href', '<%= movie_path(@movie) %>');
+s('#add-<%= @movie.tmdb_id %>').removeClass('btn-info').addClass('btn-success').html("<i class='icon-check-sign'></i> Added!")
