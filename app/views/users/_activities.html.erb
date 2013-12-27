@@ -3,8 +3,8 @@
         <td width="50%">
             <%= render :partial => 'activity_icon', locals: { activity: activity } %>
             <%= activity.owner.name %>
-            <% if activity.trackable_type == "Comment"%>
-                commented on a <%= link_to "Movie", movie_path(activity.trackable.movie), class: "home" %>
+            <% if activity.trackable_type == "Review"%>
+                reviewed a <%= link_to "Movie", movie_path(activity.trackable.movie), class: "home" %>
 
                 <blockquote style="margin-top: 15px;">
                     <p><%= activity.trackable.body %></p>
@@ -52,7 +52,7 @@
             <td align="right">
                 <%= link_to image_tag(activity.trackable.avator.url(:thumb)), user_show_path(activity.trackable) %>                          
             </td>
-        <% elsif activity.trackable_type == "UpdateComment" %>     
+        <% elsif activity.trackable_type == "Comment" %>     
             commented on an <%= link_to "update", '#', class: "home" %>
 
             <blockquote style="margin-top: 15px;">

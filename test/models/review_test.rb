@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UpdateCommentTest < ActiveSupport::TestCase
+class ReviewTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

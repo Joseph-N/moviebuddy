@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 	before_filter :authenticate_user!
 	def create
 		@update = Update.find(params[:update_id])
-		@comment = @update.comments.build(update_comment_params)
+		@comment = @update.comments.build(comment_params)
 		@comment.user_id = current_user.id
 		if @comment.save
 			ActivityWorker.perform_async("Comment", @comment.id, current_user.id)
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 	end
 
 	private
-		def update_comment_params
+		def comment_params
 			params.require(:comment).permit(:content)
 		end
 end

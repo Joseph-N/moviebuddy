@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
 		if @review.save
 			ActivityWorker.perform_async("Review", @review.id, current_user.id)	
 			ShareWorker.perform_async("facebook", "Review", current_user.id, @review.id, { activity: "movie.review", url: movie_url(@movie)})
-			MailerWorker.perform_async(@movie.user.id, "movieReview", { actor_id: current_user.id, movie_id: @movie.id, comment_id: @review.id })
+			MailerWorker.perform_async(@movie.user.id, "movieReview", { actor_id: current_user.id, movie_id: @movie.id, review_id: @review.id })
 
 			respond_to do |format|
 				format.html { redirect_to movie_path(@movie) }

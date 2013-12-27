@@ -1,10 +1,8 @@
-<p><%= @from_user.name %> commented on your movie</p>
+<p><%= @from_user.name %> commented on your <%= @update.content.nil? ? "movie activity" : "update" %></p>
 
-<p>Movie: <%= @movie.title %></p>
+<p><%= @update.content.nil? ? "Movie: #{@movie.title}" : @update.content %></p>
 
-<p>Comment: <%= @comment.body %></p>
-
-<p>View comment at <%= movie_url(@movie) %></p>
+<p>Comment: <%= @comment.content %></p>
 
 <p>Regards,<br />
 MovieBuddy</p>

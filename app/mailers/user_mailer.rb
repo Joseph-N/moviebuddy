@@ -7,11 +7,11 @@ class UserMailer < ActionMailer::Base
     mail to: user.email, subject: "Thanks for signing up"
   end
 
-  def comment_notification(to_user, from_user, movie, comment)
+  def review_notification(to_user, from_user, movie, review)
     @to_user = to_user
     @from_user = from_user
     @movie = movie
-    @comment = comment
+    @review = review
 
     mail to: to_user.email, subject: "New Comment"
   end
@@ -24,7 +24,7 @@ class UserMailer < ActionMailer::Base
     mail to: to_user.email, subject: "New Like"
   end
 
-  def update_comment_notification(user, actor, update, comment)
+  def comment_notification(user, actor, update, comment)
     @to_user = user
     @from_user = actor
     @update = update

@@ -171,7 +171,7 @@ s(document).ready(function(){
 
   // poll 4 changes
   if (s('ul#reviews').children().size() > 0) {
-    setTimeout(updateComments, 20000);
+    setTimeout(updateReviews, 20000);
   }
 
   // jQuery CarouFredSel
@@ -234,7 +234,7 @@ s(document).ready(function(){
 });
 
 
-function updateComments() {
+function updateReviews() {
   var after = s('.media:last').attr('data-time');
   s.ajax({
     type: "GET",
@@ -243,7 +243,7 @@ function updateComments() {
     data: {"after" : after },
     dataType: "script",
   });
-  setTimeout(updateComments, 20000);
+  setTimeout(updateReviews, 20000);
 }
 
 function setTooltips(){
@@ -358,7 +358,7 @@ function similarMovies(data){
         div.append('<div class="col-md-2 col-sm-4 col-xs-6 portfolio-item-wrapper-similar" id="' + id +'">' + 
                     '<div class="portfolio-item">' +
                         '<div class="thumbnail">' +
-                          '<a href=""><img src="http://image.tmdb.org/t/p/w154/' + poster + '" id="image-'+ id +'" class="tip" title="'+ title +'" data-url="http://api.themoviedb.org/3/movie/'+ id +'?api_key=29588c40b1a3ef6254fd1b6c86fbb9a9&append_to_response=trailers" /></a>' +
+                          '<a href="#"><img src="http://image.tmdb.org/t/p/w154/' + poster + '" id="image-'+ id +'" class="tip" title="'+ title +'" data-url="http://api.themoviedb.org/3/movie/'+ id +'?api_key=29588c40b1a3ef6254fd1b6c86fbb9a9&append_to_response=trailers" /></a>' +
                           '<div class="caption">' +
                             '<b>' + truncateString(title, 12) + '</b>' +
                             '<span style="display: block" id="release-year-' + id +'">' +year + '</span>' +
