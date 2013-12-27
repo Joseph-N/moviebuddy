@@ -138,6 +138,9 @@ GEM
     kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     koala (1.8.0rc1)
       addressable
       faraday
@@ -311,6 +314,8 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   json (~> 1.8.1)
+  kaminari
+  kaminari-bootstrap (~> 3.0.1)
   koala (~> 1.8.0rc1)
   letsrate!
   letter_opener

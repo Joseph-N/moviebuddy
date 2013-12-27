@@ -1,13 +1,13 @@
 class MoviesController < ApplicationController
 	before_filter :authenticate_user!, :except => [:show]
-	before_action :init_tmdb, only: [:index, :show, :fetch]
+	before_action :init_tmdb, only: [:index, :show, :fetch, :more_movies]
 
 	def index
 		if params[:q]
 			raw_movies = @tmdb.searchMovie(params[:q])
-			@movies = raw_movies["results"].delete_if { |x| x.nil? }
+			@movies = raw_movies["results"].delete_if { |x| x.nil? }	
 		else
-			@movies = current_user.movies
+			@movies = current_user.movies.page(params[:page]).per(8)
 			@genres = user_movie_genres(current_user)
 		end
 		respond_to do |format|
@@ -70,10 +70,6 @@ class MoviesController < ApplicationController
 			format.html { redirect_to movie_path(@movie) }
 			format.js
 		end
-	end
-
-	def genre_movies
-		@genre = params[:name]
 	end
 
 	private

@@ -60,6 +60,8 @@ gem "koala", "~> 1.8.0rc1"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'sitemap_generator'
 gem "gritter", "1.0.3"
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 
 group :development do
   gem 'better_errors'

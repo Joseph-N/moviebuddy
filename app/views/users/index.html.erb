@@ -38,6 +38,9 @@
                     <%= render :partial => 'users', locals: { users: @users } %>  
                 </div>
                 <!-- /.isotope-portfolio-container -->
+                <div class="clearfix">
+                    <%= paginate @users %>
+                </div>
             </div>
             <!-- end content -->
         </div>

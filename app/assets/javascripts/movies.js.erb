@@ -36,6 +36,22 @@ s(document).ready(function(){
             filter.find('a').parent().removeClass('active');
             s(this).parent().addClass('active');
         });
+
+        //infinite scroll
+        container.infinitescroll({
+          navSelector  : 'ul.pagination',    // selector for the paged navigation 
+          nextSelector : 'li.next a',  // selector for the NEXT link (to page 2)
+          itemSelector : '.portfolio-item-wrapper',     // selector for all items you'll retrieve
+          loading: {
+              finishedMsg: 'No more movies to load.',
+              img: '<%= asset_path("ajax-loader-2.gif") %>'
+            }
+          },
+          // call Isotope as a callback
+          function( newElements ) {
+            container.isotope( 'appended', s( newElements ) ); 
+          }
+        );
     });
     s(window).smartresize(function () {
         container.isotope('reLayout');
@@ -65,7 +81,7 @@ s(document).ready(function(){
      			                    				  */
 
 	// when a user searches for movies
-	s('#movie_search').submit(function(){
+	s('#movie_searchee').submit(function(){
     s('h4#movies').text('Searching.....');
 
 		s.ajax({
