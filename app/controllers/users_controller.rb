@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 		if current_user == @user
 			redirect_to movies_path
 		else
-			@movies = @user.movies
+			@movies = @user.movies.page(params[:page]).per(8)
 			@tmdb = Tmdb.new
 		end
 	end
