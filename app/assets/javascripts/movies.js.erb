@@ -50,6 +50,7 @@ s(document).ready(function(){
           // call Isotope as a callback
           function( newElements ) {
             container.isotope( 'appended', s( newElements ) ); 
+            container.isotope('reLayout');
           }
         );
     });
