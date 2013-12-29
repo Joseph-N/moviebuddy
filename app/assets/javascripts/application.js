@@ -20,5 +20,4 @@
 //= require updates
 //= require users
 //= require gritter
-//= require jquery.raty
-//= require letsrate
+//= require tv_shows

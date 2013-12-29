@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
 
 		respond_to do |format|
 			format.js
-			format.html { redirect_to movies_path}
+			format.html { redirect_to movies_path }
 		end
 	end
 

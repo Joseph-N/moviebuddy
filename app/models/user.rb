@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 	acts_as_voter 
 	acts_as_followable
 	acts_as_follower
-	letsrate_rater
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -19,6 +18,7 @@ class User < ActiveRecord::Base
 	has_many :comments, through: :movies
 	has_many :updates, dependent: :destroy
 	has_many :comments, through: :updates	
+	has_many :tv_shows, dependent: :destroy
 
 	has_attached_file :avator, :styles => { :small => "32x32#", :thumb => "64x64#", :profile => "290x290#", :medium => "210x180#" },
 		:url => "/assets/users/:id/:style/:basename.:extension",

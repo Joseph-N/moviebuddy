@@ -1,0 +1,88 @@
+<% title "Tv Shows" %>
+
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <h4 id="movies">Tv Shows</h4>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
+
+                    
+
+            </div>
+
+            <!-- /.page-title -->
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <%= form_tag(tv_shows_path, method: :get, id: "tv-shows") do  %>
+                    <div class="form-group">
+                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Tv Shows to add" %>
+                        <button type="submit" id="search-btn" class="btn"><i class="icon-search"></i></button>
+                    </div>
+                <% end %>
+            </div>
+            <!-- /.breadcrumb-wrapper -->
+        </div>
+        <!-- /.row -->
+    </div>
+<!-- /.container -->
+</section>
+
+<section id="portfolio-2" class="section colored-wrapper">
+    <div class="container">
+    
+        <!-- /.portfolio-filter -->
+        <div class="row">
+            <div id="content">
+                <div class="row">
+                    
+                    <div class="col-md-9">
+                    <% if params[:q] %>
+                        <%= render 'results' %>
+                    <% else %>
+                        <div id="isotope-portfolio-container">
+
+                        <% if @tv_shows.any? %>
+                            <% for show in @tv_shows %>
+                              <div class="col-xs-4 col-md-3 col-sm-3 portfolio-item-wrapper" data-time="<%= show.created_at.to_i %>">
+    <div class="portfolio-item">
+        <div class="thumbnail">
+    <%= link_to image_tag(@tmdb.imageUrl('poster','w154', show.poster), class: 'img-responsive'), tv_show_path(show), title: show.name %>
+          <div class="caption" style="text-align: center;">
+            <h5><%= truncate(show.name, length: 25) %></h5>
+      </div>
+</div>
+</div>
+  </div>
+
+                            <% end %>
+                            <div class="clearfix"></div>
+
+                                                </div>   
+                                                <%= paginate @tv_shows %>                           
+                        <% else %>
+                            <h4>It's lonely here...how about you add some shows!</h4>
+                        <% end %>
+                     <% end %>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="subpage-title">Sponsored</h5>
+                    <%= render 'shared/google_ads' %>
+                </div>
+                </div>
+                <!-- /.isotope-portfolio-container -->
+                <div class="clearfix">
+                   
+                </div>  
+             </div>
+            <!-- end content -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+
+
+
+

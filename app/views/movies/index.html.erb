@@ -37,12 +37,19 @@
         <div class="row">
             <div id="content">
                 <div class="row">
+                    <% unless @movies.any? %>
+                         <h4>It's lonely here...how about you add some movies!</h4>
+                    <% end %>
                     <% if params[:q] %>
                         <%= render 'results' %>
                     <% else %>
                         <div class="col-md-3">
-                            
+                            <% if @movies.any?  %>
                             <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+
+                    <h5 class="subpage-title" style="clear: both;">Sponsored</h5>
+                    <%= render 'shared/google_ads' %>
+                    <% end %>
    
                         </div>
                         <div class="col-md-9 v-ruler">
@@ -52,9 +59,7 @@
                                 
                                
                                     <%= render @movies %>
-                                
-                                <% else %>
-                                    <h4>It's lonely here...how about you add some movies!</h4>
+  
                                 <% end %>
                                 </div>
                                 <div class="clearfix">

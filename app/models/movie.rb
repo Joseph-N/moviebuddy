@@ -12,7 +12,6 @@ class Movie < ActiveRecord::Base
 
   	before_save :check_genres
 	acts_as_voteable
-	letsrate_rateable "engagement"
 
 	belongs_to :user
 	has_many :reviews, dependent: :destroy

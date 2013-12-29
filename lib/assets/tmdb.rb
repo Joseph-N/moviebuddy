@@ -25,7 +25,11 @@ class Tmdb
 		config = JSON.parse(@@config)
 		base_url = config['images']['base_url']
 		if config['images'][type + '_sizes'].include?(size)
-			base_url + size + file_path
+			begin
+				base_url + size + file_path
+			rescue
+				"http://placehold.it/342x503"
+			end
 		end
 	end
 
@@ -89,6 +93,13 @@ class Tmdb
 		@params.delete("include_adult")
 		@params["append_to_response"] = "trailers"
 		buildUrl("movie/#{id}",@params)
+	end
+
+	# tv shows
+	def searchTv(title)
+		@params["query"] = title
+		url = buildUrl("search/tv", @params)
+		JSON.parse(RestClient.get url)
 	end
 
 	private

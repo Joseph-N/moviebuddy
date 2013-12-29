@@ -3,7 +3,6 @@ MovieBuddy::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  post '/rate' => 'rater#create', :as => 'rate'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -35,6 +34,8 @@ MovieBuddy::Application.routes.draw do
       get 'vote'
     end
   end
+
+  resources :tv_shows
 
   resources :updates, :only => [:create, :index] do
     resources :comments, :only => [:create]

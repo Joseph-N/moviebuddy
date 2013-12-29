@@ -1,0 +1,128 @@
+<% title @tv_show.name %>
+
+<% content_for(:meta_tags) do %>    
+    <meta name="description" content="" />
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
+    <meta property="fb:app_id"      content="1432996973586926" /> 
+    <meta property="og:type"        content="video.movie" /> 
+    <meta property="og:url"         content="<%= request.url %>" /> 
+    <meta property="og:title"       content="<%= @tv_show.name %>" /> 
+    <meta property="og:image"       content="<%= @tmdb.imageUrl("poster", "w342", @tv_show.poster)%>" /> 
+    <meta property="og:description" content="" /> 
+<% end %>
+
+<% content_for(:head) do %>
+    <script>
+        s(window).load(function(){
+            var img = new Image();
+            s(img).load(function() {
+              s(".loader.img-responsive").attr("src",img.src);
+            });
+            img.src = '<%= @tmdb.imageUrl("poster", "w342", @tv_show.poster) %>';
+        });
+    </script>
+<% end %>
+ 
+<section id="page-title-wrapper" class="section page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <a href="javascript:history.go(-1)" id="ios-arrow-left">Back</a> 
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
+                <h4><%= @tv_show.name %></h4>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+              
+            </div>
+            <!-- /.page-title -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<section id="item-content-wrapper" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <%= image_tag 'ajax-loader-2.gif', class: "loader img-responsive" %>
+                <div class="row wrapper-1">
+                    <div class="col-md-12">
+                        <h5 class="subpage-title">Information</h5>
+                            <ul class="project-details-list ">
+            <li>
+                <h6>Name:</h6>
+                <div class="project-terms" id="tv_show_name">
+                    
+                </div>
+            </li>
+            <li>
+                <h6>First Aired:</h6>
+                <div class="project-terms" id="tv_show_first_aired">
+                    
+                </div>
+            </li>
+            <li>
+                <h6>Last Aired:</h6>
+                <div class="project-terms" id="tv_show_last_aired">
+                    
+                </div>
+            </li>
+            <li>
+                <h6>In Production: </h6>
+                <div class="project-terms" id="tv_show_production">
+                    
+                    
+                </div>
+            </li>
+            <li>
+                <h6>Seasons:</h6>
+                <div class="project-terms" id="tv_show_seasons_no">
+                   
+                </div>
+            </li>
+            <li>
+                <h6>Status:</h6>
+                <div class="project-terms" id="tv_show_status">
+                   
+                </div>
+            </li>
+            <li>
+                <h6>Homepage:</h6>
+                <div class="project-terms" id="tv_show_homepage">
+                   
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+                </div>
+                <h5 class="subpage-title clearfix">Sponsored</h5>
+                    <%= render 'shared/google_ads' %>
+            </div>
+            <div class="col-md-8">
+                <div class="wrapper-1">
+                     <h5 class="subpage-title">Overview</h5>
+                     <p class="overview" id="<%= @tv_show.tmdbid %>">Loading.....</p>
+                </div>
+
+                <div class="wrapper-1">
+                    <h5 class="subpage-title">Seasons</h5>
+                    <div class="panel-group" id="accordion">
+
+
+                    </div>
+
+            	</div>
+                    
+            </div>
+            <div class="clearfix"></div>
+                             <!-- comments -->
+                 <div class="col-md-12 wrapper-1">
+                        
+                    </div> 
+        </div>
+    </div>
+</section>

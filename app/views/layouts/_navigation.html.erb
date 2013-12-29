@@ -15,9 +15,10 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
             	<% if user_signed_in? %>
-                <li class="<%= controller_name == 'home' ? "active" : '' %>"><%= link_to raw("<i class='icon-home'></i> Home"), root_path %></li>
-                <li class="<%= controller_name == 'users' && action_name == "index" ? "active" : "" %>"><%= link_to raw("<i class='icon-group'></i> Users"), all_users_path %></li>
-            	<li class="<%= controller_name == 'movies' ? "active" : '' %>"><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
+                <li class="<%= current_page?(controller: 'home') ? "active" : "" %>"><%= link_to raw("<i class='icon-home'></i> Home"), root_path %></li>
+                <li class="<%= current_page?(controller: 'users', action: 'index') ? "active" : "" %>"><%= link_to raw("<i class='icon-group'></i> Users"), all_users_path %></li>
+            	<li class="<%= current_page?(controller: 'movies') ? "active" : "" %>"><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
+                <li class=""><%= link_to raw('<i class="icon-desktop"></i> Tv Shows'), tv_shows_path %></li>
                 <li class="dropdown <%= controller_name == 'users' && action_name == "show" ? "active" : "" %>">
                     <a href="#" class="profile-pic dropdown-toggle" data-toggle="dropdown">
                         <%= image_tag(current_user.avator.url(:small), alt: current_user.name, class: "profile-img", width: "32px", height: "32px") + " " + current_user.name.split(" ").first %>
@@ -31,8 +32,8 @@
                     </ul>
                 </li>       	
             	<% else %>
-                <li class="<%= controller_name == 'sessions' ? "active" : '' %>"><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
-					<li class="<%= controller_name == 'registrations' ? "active" : '' %>"><%= link_to(raw("<i class='icon-ticket'></i> Join MovieBuddy"), new_user_registration_path)  %></li> 
+                <li class="<%= current_page?(controller: 'sessions', action: 'new') ? "active" : "" %>"><%= link_to(raw("<i class='icon-signin'></i> Sign in"), new_user_session_path)  %></li>
+					<li class="<%= current_page?(controller: 'registrations', action: 'new') ? "active" : "" %>"><%= link_to(raw("<i class='icon-ticket'></i> Join MovieBuddy"), new_user_registration_path)  %></li> 
                 <% end %>                      
             </ul>
             <!-- /.nav -->

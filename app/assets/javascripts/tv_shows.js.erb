@@ -1,0 +1,160 @@
+s(document).ready(function(){
+	s('p.overview').each(function(){
+		var id = s(this).attr('id');
+		s.ajax({
+			type: "GET",
+  			url: "http://api.themoviedb.org/3/tv/"+ id +"",
+  			data: { api_key: "29588c40b1a3ef6254fd1b6c86fbb9a9" },
+  			dataType: "JSON",
+  			global: false,
+  			success: function(data){
+  				s('#' + id).text(data.overview);
+  				s('#tv_show_name').text(data.name);
+  				s('#tv_show_first_aired').text(data.first_air_date)
+  				s('#tv_show_last_aired').text(data.last_air_date);
+  				s('#tv_show_seasons_no').text(data.number_of_seasons);
+  				s('#tv_show_status').text(data.status);
+  				s('#tv_show_production').text(data.in_production == false ? "No" : "Yes");
+  				s('#tv_show_homepage').html('<a href="' + data.homepage + '" target="_blank">Click here <i class="icon-external-link-sign"></i></a>');
+
+  				tvSeasons(data);
+
+  			}
+		});
+	});
+
+	s('button.tv-show').click(function(){
+		var id = s(this).attr('data-id');
+		s.ajax({
+			type: "GET",
+  			url: "http://api.themoviedb.org/3/tv/"+ id +"",
+  			data: { api_key: "29588c40b1a3ef6254fd1b6c86fbb9a9" },
+  			dataType: "JSON",
+  			global: false,
+  			success: function(data){
+  				addTvshow(data);
+
+  			}
+		});
+	});
+
+	//for accordions
+	s(document).on('click','.accordion-toggle', function(){
+
+		var season_id = s(this).attr('data-season-id');
+		var season_number = s(this).attr('data-season-no');
+
+		// prevent ajax call from duplicating
+		if(s('#season-' + season_number).find('.col-md-4').size() == 0){
+			s('.loader-gif').show();
+
+			s.ajax({
+			    type: "GET",
+			    url: 'http://api.themoviedb.org/3/tv/' + season_id +'/season/'+ season_number,
+			    data: { api_key: "29588c40b1a3ef6254fd1b6c86fbb9a9" },
+			    global: false,
+			    dataType: "JSON",
+			    success: function(data){
+			    	s('.loader-gif').hide();
+			    	tvEpisodes(data);
+			    	s('.tip').tooltipster({
+			    		maxWidth: 500,
+				      	position: 'top',
+				      	animation: 'slide'
+				    });
+
+			    }
+			}); 
+		}
+	});
+});
+
+// this function saves a record for a tv show for a user
+function addTvshow(data){
+  s.ajax({
+    type: "POST",
+    url: '/tv_shows',
+    data: { "tv_show[tmdbid]" : data.id, "tv_show[name]" : data.name, "tv_show[poster]" : data.poster_path },
+  }); 
+}
+
+// this function populates the accordion div with seasons of a particular tv show
+function tvSeasons(data){
+	data.seasons.forEach(function(season){
+
+		// there is a season 0 and it doesn't seem to make much sense
+		if(season.season_number > 0){
+			s('#accordion').append('<div class="panel panel-default">' +
+			                        	'<div class="panel-heading">' +
+			                            	'<h4 class="panel-title">' +
+			                                	'<a class="accordion-toggle collapsed" data-season-id="'+ data.id +'" data-season-no="'+ season.season_number +'" data-toggle="collapse" data-parent="#accordion" href="#collapse'+  season.season_number +'">' +
+			                                		'Season '+ season.season_number  +''+
+			                                	'</a>' +
+			                            	'</h4>' +
+			                        	'</div>' +
+			                        	'<div id="collapse'+  season.season_number +'" class="panel-collapse collapse" style="height: 0px;">' +
+			                            	'<div class="panel-body" id="season-'+ season.season_number +'">' +
+			                                	'<div class="row">' +
+			                                		'<div class="col-md-3">' +
+			                                			'<img src="http://image.tmdb.org/t/p/w154'+ season.poster_path +'" class="img-responsive" />' +
+			                                		'</div>' +
+			                                		'<div class="col-md-9">' +
+			                                			'<strong>Aired </strong>: '+ season.air_date +'' +
+			                                			'<p id="overview-'+ season.season_number +'">Loading....</p>'+
+			                                		'</div>' +
+			                                	'</div>' +
+			                                	'<hr class="polished">' +
+			                                	'<%= image_tag "ajax-loader-2.gif", style: "display:none", class: "loader-gif" %>' +
+			                            	'</div>' +
+			                        	'</div>' +
+			                    	'</div>');
+		}
+
+	});
+
+}
+
+// this function will retrieve and update the respective season accordion with its episodes
+function tvEpisodes(data){
+	var count = 0;
+	data.episodes.forEach(function(episode){
+		// dont display null episodes
+		if(episode.episode_number != null){
+			count += 1;
+			// update overview of season which initially was empty when the season was loaded
+			s('p#overview-' + data.season_number).text(data.overview).jTruncate({length: 430 }); 
+
+			s('#season-' + data.season_number).append('<div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">' +
+														    '<div class="portfolio-item">' +
+														        '<div class="portfolio-thumb">' +
+														           '<img src="'+ stillImage(episode.still_path) +'" class="tip img-responsive" title="<b>'+  episode.name + '</b><br />' + episode.overview +'" />'+
+														    
+														        '</div>' +
+														        '<div class="portfolio-content">' +
+														            '<h5 style="font-size: 10px;">'+ truncateString(episode.name, 17)  +'</h5>' +
+														            '<p>Episode: '+ episode.episode_number  +'</p>' +
+														        '</div>' +
+														    '</div>' +
+														'</div>');
+			if(count % 3 == 0){
+	          s('#season-' + data.season_number).append('<div class="clearfix" style="margin-bottom: 10px;"></div>');
+	        }
+		}
+
+	});
+
+}
+
+
+// this function will return the default picture or placeholder picture
+function stillImage(url){
+	if(url == null){
+		return "http://placehold.it/154x105"
+	}
+	else{
+		return "http://image.tmdb.org/t/p/w154/" + url
+	}
+}
+
+
+

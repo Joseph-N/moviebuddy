@@ -23,17 +23,6 @@
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
-                 <% if notice %>
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <%= notice %>
-                    </div>
-                    <% elsif alert %>
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <%= alert %>
-                    </div>
-                <% end %>
                 <div id="isotope-portfolio-container">
                     <%= render :partial => 'users', locals: { users: @users } %>  
                 </div>

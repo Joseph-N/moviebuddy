@@ -1,0 +1,8 @@
+s('#tv-show-<%= @tv_show.tmdbid %>').removeClass('btn-primary')
+									.addClass('btn-success disabled')
+									.html("<i class='icon-check-sign'></i> Added!")
+									.parent().parent()
+									.append('<div class="col-xs-12 col-sm-4 col-md-3 wrapper-3"><%= link_to "View Show", tv_show_path(@tv_show), class: "btn btn-info btn-lg" %></div>');
+
+
+
