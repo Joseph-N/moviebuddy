@@ -5,16 +5,17 @@ You can use CoffeeScript in this file: http://coffeescript.org/ */
 var s = jQuery;
 s.noConflict();
 
-if(s('#caroufredsel-portfolio-container-home').size() > 0 ){
-	s(window).load(function () {
-	  caroufredselhome();
-	});
-	s(window).resize(function () {
-	  caroufredselhome();
-	}); 
-}
-
 s(document).ready(function(){
+
+	if(s('#caroufredsel-portfolio-container-home').size() > 0 ){
+		s(window).load(function () {
+		  caroufredselhome();
+		});
+		s(window).resize(function () {
+		  caroufredselhome();
+		}); 
+	}
+
 
     // Revolution Slider
     if (s.fn.cssOriginal != undefined)
