@@ -1,11 +1,14 @@
-  <div class="col-xs-6 col-md-3 col-sm-6 portfolio-item-wrapper <%= movie.genres.split.join(" ").downcase %>" data-time="<%= movie.created_at.to_i %>">
-    <div class="portfolio-item">
-        <div class="thumbnail">
-    <%= link_to image_tag(@tmdb.imageUrl('poster','w154', movie.poster)),movie_path(movie), title: movie.title %>
-          <div class="caption">
-            <b><%= truncate(movie.title, length: 17) %></b>
-            <span style="display: block"><%= movie.release_date %></span>
-      </div>
+<div class="col-xs-4 col-sm-4 col-md-3 portfolio-item-wrapper <%= movie.genres.split.join(" ").downcase %>" data-time="<%= movie.created_at.to_i %>">
+<div class="portfolio-item">
+    <div class="portfolio-thumb">
+            <%= link_to image_tag(@tmdb.imageUrl('poster','w185', movie.poster)),movie_path(movie), title: movie.title %>
+        
+    </div>
+
+    <div class="portfolio-content">
+        <h5><%= movie.title %></h5>
+        <p><%= movie.release_date %></p>
+    </div>
+
 </div>
 </div>
-  </div>

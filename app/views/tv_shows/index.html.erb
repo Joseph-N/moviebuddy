@@ -44,16 +44,20 @@
 
                         <% if @tv_shows.any? %>
                             <% for show in @tv_shows %>
-                              <div class="col-xs-4 col-md-3 col-sm-3 portfolio-item-wrapper" data-time="<%= show.created_at.to_i %>">
-    <div class="portfolio-item">
-        <div class="thumbnail">
-    <%= link_to image_tag(@tmdb.imageUrl('poster','w154', show.poster), class: 'img-responsive'), tv_show_path(show), title: show.name %>
-          <div class="caption" style="text-align: center;">
-            <h5><%= truncate(show.name, length: 25) %></h5>
-      </div>
+
+  <div class="col-xs-4 col-sm-4 col-md-3 portfolio-item-wrapper" data-time="<%= show.created_at.to_i %>">
+<div class="portfolio-item">
+    <div class="portfolio-thumb">
+            <%= link_to image_tag(@tmdb.imageUrl('poster','w154', show.poster), class: 'img-responsive'), tv_show_path(show), title: show.name %>
+    </div>
+
+    <div class="portfolio-content">
+        <h5><%= truncate(show.name, length: 25) %></h5>
+    </div>
+
 </div>
 </div>
-  </div>
+
 
                             <% end %>
                             <div class="clearfix"></div>
@@ -66,8 +70,12 @@
                      <% end %>
                 </div>
                 <div class="col-md-3">
-                    <h5 class="subpage-title">Sponsored</h5>
+                     <% if @tv_shows.any? %>
+                     <div class="wrapper-1">
+                    <h5 class="subpage-title">Advertisement</h5>
                     <%= render 'shared/google_ads' %>
+                </div>
+                    <% end %>
                 </div>
                 </div>
                 <!-- /.isotope-portfolio-container -->

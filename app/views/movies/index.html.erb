@@ -45,10 +45,14 @@
                     <% else %>
                         <div class="col-md-3">
                             <% if @movies.any?  %>
+                            <div class="wrapper-1">
                             <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
+                        </div>
 
-                    <h5 class="subpage-title" style="clear: both;">Sponsored</h5>
-                    <%= render 'shared/google_ads' %>
+                            <div class="wrapper-1">
+                                <h5 class="subpage-title">Advertisement</h5>
+                                <%= render 'shared/google_ads' %>
+                            </div>
                     <% end %>
    
                         </div>

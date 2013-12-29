@@ -5,6 +5,15 @@ You can use CoffeeScript in this file: http://coffeescript.org/ */
 var s = jQuery;
 s.noConflict();
 
+if(s('#caroufredsel-portfolio-container-home').size() > 0 ){
+	s(window).load(function () {
+	  caroufredselhome();
+	});
+	s(window).resize(function () {
+	  caroufredselhome();
+	}); 
+}
+
 s(document).ready(function(){
 
     // Revolution Slider
@@ -53,6 +62,7 @@ s(document).ready(function(){
 
         shadow: 0
     });
+
 
 	//apply backdrop
 	s('.section.colored-wrapper.b').addClass('backdrop');
@@ -185,5 +195,25 @@ function ajaxOverlay(){
 
    	s("#overlay").show();
 }
+
+var caroufredselhome = function () {
+  s('#caroufredsel-portfolio-container-home').carouFredSel({
+      responsive: true,
+      scroll : 3,
+      circular: true,
+      infinite: true,
+      items: {
+          visible: {
+              min: 3,
+              max: 6
+          }
+      },
+      prev: '#portfolio-prev',
+      next: '#portfolio-next',
+      auto: {
+          play: false
+      }
+  });
+};
 
 

@@ -95,10 +95,10 @@ function tvSeasons(data){
 			                        	'<div id="collapse'+  season.season_number +'" class="panel-collapse collapse" style="height: 0px;">' +
 			                            	'<div class="panel-body" id="season-'+ season.season_number +'">' +
 			                                	'<div class="row">' +
-			                                		'<div class="col-md-3">' +
+			                                		'<div class="col-md-3 col-xs-4">' +
 			                                			'<img src="http://image.tmdb.org/t/p/w154'+ season.poster_path +'" class="img-responsive" />' +
 			                                		'</div>' +
-			                                		'<div class="col-md-9">' +
+			                                		'<div class="col-md-9 col-xs-8">' +
 			                                			'<strong>Aired </strong>: '+ season.air_date +'' +
 			                                			'<p id="overview-'+ season.season_number +'">Loading....</p>'+
 			                                		'</div>' +
@@ -131,7 +131,7 @@ function tvEpisodes(data){
 														    
 														        '</div>' +
 														        '<div class="portfolio-content">' +
-														            '<h5 style="font-size: 10px;">'+ truncateString(episode.name, 17)  +'</h5>' +
+														            '<h5>'+ truncateString(episode.name, 17)  +'</h5>' +
 														            '<p>Episode: '+ episode.episode_number  +'</p>' +
 														        '</div>' +
 														    '</div>' +
@@ -152,7 +152,7 @@ function stillImage(url){
 		return "http://placehold.it/154x105"
 	}
 	else{
-		return "http://image.tmdb.org/t/p/w154/" + url
+		return "http://image.tmdb.org/t/p/w154" + url
 	}
 }
 

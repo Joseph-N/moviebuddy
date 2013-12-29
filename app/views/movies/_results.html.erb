@@ -1,19 +1,24 @@
 <% @movies.each do |movie| %>
-  <div class="col-xs-6 col-md-2 col-sm-3 portfolio-item-wrapper" id="<%= movie["id"] %>">
-    <div class="portfolio-item">
-        <div class="thumbnail">
-                <% if movie["poster_path"] %>
+<div class="col-xs-6 col-sm-3 col-md-2 portfolio-item-wrapper" id="<%= movie["id"] %>">
+<div class="portfolio-item">
+    <div class="portfolio-thumb">
+                          <% if movie["poster_path"] %>
                     <%= link_to (image_tag(@tmdb.imageUrl('poster','w185', movie["poster_path"]), id: "image-#{movie["id"]}", class: "tip", "title" => movie["title"], alt: movie["original_title"], "data-url" => @tmdb.movieUrl(movie["id"]))), '#' %>            
                 <% else %>
                     <%= image_tag "http://placehold.it/154x231" %>
                 <% end %> 
-          <div class="caption">
-            <b><%= truncate(movie["title"], length: 15) %></b>
-            <span style="display: block" id="release-year-<%= movie["id"] %>"><%= movie["release_date"] %></span>
-            <hr /><a href="#" class="add-to-collection btn btn-default btn-xs btn-info btn-block" data-url="<%= @tmdb.movieUrl(movie["id"]) %>" id="add-<%= movie["id"] %>">Add</a>
-      </div>
+        
+    </div>
+
+    <div class="portfolio-content">
+        <h5 style="font-size: 10px;"><%= truncate(movie["title"], length: 15) %></h5>
+        <p><a href="#" class="add-to-collection btn btn-default btn-xs btn-info btn-block" data-url="<%= @tmdb.movieUrl(movie["id"]) %>" id="add-<%= movie["id"] %>">Add</a></p>
+    </div>
+
 </div>
 </div>
-  </div>
+
 <% end %>
+
+
 

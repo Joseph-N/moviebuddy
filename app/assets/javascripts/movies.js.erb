@@ -26,7 +26,7 @@ s(document).ready(function(){
         container.isotope({
             itemSelector: '.portfolio-item-wrapper'
         });
-        s('.tagcloud-list a').click(function () {
+        s('.portfolio-filter a').click(function () {
             var selector = s(this).attr('data-filter');
             container.isotope({ filter: selector });
             return false;
@@ -49,8 +49,7 @@ s(document).ready(function(){
           },
           // call Isotope as a callback
           function( newElements ) {
-            container.isotope( 'appended', s( newElements ) ); 
-            container.isotope('reLayout');
+            container.isotope( 'insert', s( newElements ) ); 
           }
         );
     });
@@ -212,39 +211,13 @@ s(document).ready(function(){
       });
   };
 
-  var caroufredselhome = function () {
-      s('#caroufredsel-portfolio-container-home').carouFredSel({
-          responsive: true,
-          scroll : {
-            items           : 1,
-            easing          : "elastic",
-            duration        : 1000,                         
-            pauseOnHover    : true
-          },
-          circular: true,
-          infinite: true,
-          items: {
-              visible: {
-                  min: 3,
-                  max: 6
-              }
-          },
-          prev: '#portfolio-prev',
-          next: '#portfolio-next',
-          auto: {
-              play: true
-          }
-      });
-  };
 
-  if(s('#caroufredsel-portfolio-container').size() > 0 || s('#caroufredsel-portfolio-container-home').size() > 0 ){
+  if(s('#caroufredsel-portfolio-container').size() > 0 ){
     s(window).load(function () {
       caroufredsel();
-      caroufredselhome();
     });
     s(window).resize(function () {
       caroufredsel();
-      caroufredselhome();
     }); 
   } 
 

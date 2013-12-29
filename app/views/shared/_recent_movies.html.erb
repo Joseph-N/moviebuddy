@@ -1,4 +1,4 @@
-<section id="recent-works" class="section <%= controller_name == "users" || controller_name == "home"  ? "colored-wrapper": "" %>">
+<section id="recent-works" class="section <%= controller_name == "users" ? "colored-wrapper": "" %>">
     <div class="container wrapper-2">
         <h5 class="subpage-title">
             <span><%= controller_name == "home" ? "Upcoming Movies" : "Recent Movies" %></span>
@@ -22,3 +22,5 @@
     </div>
     <!-- /.container -->
 </section>
+
+
