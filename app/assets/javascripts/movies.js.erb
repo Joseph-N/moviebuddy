@@ -8,6 +8,9 @@ s.noConflict();
 s(document).ready(function(){
 	s('.youtube').fitVids();
 
+  //truncate movie overviews
+  s('#movie-overview').jTruncate({length: 360 }); 
+
   //when searching if .tips are present add tooltipser
   if(s('.tip').size() > 0){
     setTooltips();
