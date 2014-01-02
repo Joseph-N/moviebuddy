@@ -5,12 +5,6 @@ class ApplicationController < ActionController::Base
 
 	before_filter :configure_permitted_parameters, if: :devise_controller?
 
-	def accounts
-		@connected_twitter = current_user.authentications.where(:provider => "twitter")
-		@connected_facebook = current_user.authentications.where(:provider => "facebook")
-		@connected_google = current_user.authentications.where(:provider => "google_oauth2")
-	end
-
 	protected
 
 	def configure_permitted_parameters

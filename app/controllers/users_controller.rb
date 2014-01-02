@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 		@recent_shows = @user.tv_shows.first(6)
 		@tmdb = Tmdb.new
 		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(5)
-		accounts
+		
+		# for social networks
+		@connected_twitter = @user.authentications.where(:provider => "twitter")
+		@connected_facebook = @user.authentications.where(:provider => "facebook")
+		@connected_google = @user.authentications.where(:provider => "google_oauth2")
 	end
 
 	def edit
@@ -90,7 +94,9 @@ class UsersController < ApplicationController
 	end
 
 	def sharing
-		accounts
+		@connected_twitter = current_user.authentications.where(:provider => "twitter")
+		@connected_facebook = current_user.authentications.where(:provider => "facebook")
+		@connected_google = current_user.authentications.where(:provider => "google_oauth2")
 	end
 
 	def activity
