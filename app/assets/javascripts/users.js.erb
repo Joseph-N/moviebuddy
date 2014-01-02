@@ -18,6 +18,7 @@ s(document).ready(function(){
 	  			url: window.location.href + '/activity',
 	  			data: {"activity_id" : id },
 	  			dataType: "script",
+	  			global: false,
 	  			success: function(){
 	  				s('div.more').hide();
 	  				link.show();

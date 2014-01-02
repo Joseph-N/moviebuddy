@@ -61,6 +61,10 @@ s(document).ready(function(){
             container.isotope( 'insert', s( newElements ),function(){
                container.isotope('reLayout');
             }); 
+            s("a[rel^='prettyPhoto']").prettyPhoto({
+                theme: 'facebook',
+                social_tools: false
+            });
           }
         );
     });

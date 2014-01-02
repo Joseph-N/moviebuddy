@@ -163,6 +163,7 @@ s(document).ready(function(){
 	  			url: '/updates/more',
 	  			data: {"after" : after },
 	  			dataType: "script",
+	  			global: false,
 	  			success: function(){
 	  				s('div.more').hide();
 	  				link.show();
@@ -175,10 +176,10 @@ s(document).ready(function(){
 
 	//show overlay for any ajax request
 	s('body').ajaxStart(function() {
-		ajaxOverlay();
+		s("body").append("<div id='overlay'></div>");
+   		s("#overlay").show();
 	}).ajaxStop(function(){
 		s('#overlay').hide();
-
 	});
 
 
@@ -196,14 +197,6 @@ function fetchUpdates() {
 		dataType: "script",
 	});
 	setTimeout(fetchUpdates, 20000);            
-}
-
-function ajaxOverlay(){
-	var docHeight = s(document).height();
-
-   	s("body").append("<div id='overlay'></div>");
-
-   	s("#overlay").show();
 }
 
 var caroufredselhome = function () {
