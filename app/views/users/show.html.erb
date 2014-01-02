@@ -27,51 +27,115 @@
 
 <section id="item-content-wrapper" class="section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="portfolio-thumb wrapper-1">
-                    <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
-                </div>
-                <%= render :partial => 'follow_stats' %>
-            </div>
-            <div class="col-md-8 item-details">
-            	<div class="wrapper-1 youtube">
-            		<h2><%= @user.name %></h2>
+        <div class="row stickem-container">
+                    <div class="col-md-4 stickem">
+                        <div class="team-member-wrapper">
+                        <div class="team-member">
+                            <div class="team-member-thumb">
+                                 <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
+                                <div class="overlay"></div>
+                                <ul class="member-social">
+                                    <li><%= link_to raw('<i class="icon-facebook"></i>'), @connected_facebook.any? ? @connected_facebook.first.social_url : "#" %></li>
+                                    <li><%= link_to raw('<i class="icon-twitter"></i>'), @connected_twitter.any? ? @connected_twitter.first.social_url : "#"  %></li>
+                                    <li><%= link_to raw('<i class="icon-google-plus"></i>'), @connected_google.any? ? @connected_google.first.social_url : "#" %></li>
+                                </ul>
+                            </div>
+                            <div class="team-member-info">
+                                <h5><%= @user.name %></h5>
+                            </div>
+                        </div>
 
-                    <div id="user-stats">
-                        <%= render :partial => 'user_stats', locals: {user: @user } %>
                     </div>
-                    <div class="row">
-                    <section id="recent-works">
-                        <div class="container wrapper-2">
-                            <h5 class="subpage-title">
-                                <span>Recent Movies</span>
-                                <!-- Controls -->
-                                <span id="portfolio-next" class="next black">
-                                    <i class="icon-angle-right"></i>
-                                </span>
-                                <span id="portfolio-prev" class="prev black">
-                                    <i class="icon-angle-left"></i>
-                                </span>
-                            </h5>
-                            <div class="row" style="margin-bottom: 40px;">
-                                <div id="caroufredsel-portfolio-container">
-                                    <% if @recent_movies.any? %>
-                                        <%= render :partial => 'shared/movies', locals: { movies: @recent_movies, size: "w154" } %>
+                        <div class="wrapper-1">
+                            <div class="row">
+                            <div class="col-md-12 col-sm-6">
+                                <div class="wrapper-1">
+                                <h5 class="subpage-title">Followers 
+                                    <small class="pull-right"><%= link_to "see all", user_followers_path(@user), class: "see-all" %></small>
+                                </h5>
+                                <% for user in @user.followers.shuffle[0..7] %>
+                                    <%= link_to image_tag(user.avator.url(:small), alt: user.name, title: user.name, class: "update-img user"), user_show_path(user) %>
+                                <% end %>
+                            </div>
+
+                            </div>
+                            
+                            <div class="col-md-12 col-sm-6">
+                                <div class="wrapper-1">
+                                <h5 class="subpage-title">Following 
+                                    <small class="pull-right"><%= link_to "see all", user_follows_path(@user), class: "see-all" %></small>
+                                </h5>
+                                <% for user in @user.follows.shuffle[0..7] %>
+                                    <%= link_to image_tag(user.followable.avator.url(:small), alt: user.followable.name, title: user.followable.name,  class: "update-img user"), user_show_path(user.followable) %>
+                                <% end %>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-8">
+
+                    
+                        <div class="wrapper-1">
+                            
+
+                            <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-6 v-ruler-1 profile-stats">
+                                <span><%= link_to @user.movies.count, user_movies_path(@user) %></span>Movies
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 v-ruler-1 profile-stats">
+                                 <span><%= link_to @user.tv_shows.count, user_tv_shows_path(@user) %></span>TV Shows
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 profile-stats">
+                                 <span><%= link_to @user.followers.count, user_followers_path(@user) %></span>Followers
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 v-ruler-2 profile-stats">
+                                 <span><%= link_to @user.follows.count, user_follows_path(@user) %></span>Following
+                            </div>
+                        </div>
+                                                    <div class="clearfix"></div>
+                            <hr class="polished">
+
+                </div>
+                
+                <div class="row wrapper-1">
+                    <div class="col-md-12">
+                        <h5 class="subpage-title">Recent Movies 
+                            <small class="pull-right"><%= link_to "see all", user_movies_path(@user), class: "see-all" %></small>
+                        </h5>
+                    </div>
+                                                            <% if @recent_movies.any? %>
+                                        <%= render :partial => 'shared/thumbnails', locals: { collection: @recent_movies, size: "w92", resource: "Movie" } %>
                                     <% else %>
-                                    <div class="col-md-12" style="margin-bottom: 40px;">
+                                    <div class="col-md-12">
                                         <%= current_user == @user ? "Its lonely here....please add some movies" : "#{@user.name} hasn't added any movies yet" %>
                                     </div>
                                     <% end %>
-                                    <!-- /.portfolio-item-wlrapper -->
-                                </div>
-                                <!-- /.caroufredsel-portfolio-container -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.container -->
-                    </section>
-                        <div class="col-md-12">
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="subpage-title">Recent Tv Shows
+                            <small class="pull-right"><%= link_to "see all", user_tv_shows_path(@user), class: "see-all" %></small>
+                        </h5>
+                    </div>
+
+                                                            <% if @recent_shows.any? %>
+                                        <%= render :partial => 'shared/thumbnails', locals: { collection: @recent_shows, size: "w92", resource: "TvShow" } %>
+                                    <% else %>
+                                    <div class="col-md-12">
+                                        <%= current_user == @user ? "Its lonely here....please add some shows" : "#{@user.name} hasn't added any shows yet" %>
+                                    </div>
+                                    <% end %>
+
+
+                </div>
+                <div class="wrapper-1">
+                <div class="row">
+                                            <div class="col-md-12">
                             <h5 class="subpage-title">Recent Activity</h5>
                             <% if current_user.following?(@user) || @user == current_user %>
                                 <% if @activities.any? %>
@@ -91,11 +155,11 @@
                                 <p class="post-title">Follow <%= @user.name %> to see his/her recent activity </p>
                             <% end %>                            
                         </div>
-
-                    </div>
-            	</div>
+                </div>
             </div>
 
+
+                    </div>
         </div>
     </div>
 </section>

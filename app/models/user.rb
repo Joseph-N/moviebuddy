@@ -164,11 +164,16 @@ class User < ActiveRecord::Base
 	end
 
 	def facebook
-		Koala::Facebook::API.new(self.authentications.find_by_provider("facebook").token)
+		token = self.authentications.find_by_provider("facebook").token
+		Koala::Facebook::API.new(token)
 	end
 
-	def connected_socially?
-		self.provider && self.uid != ""
+	def granted_permission?
+		facebook.get_connections("me","permissions")[0]['publish_stream'].to_i  == 1 ? true : false 
+	end
+
+	def connected_facebook?
+		self.authentications.where(provider: "facebook").first.present?
 	end
 
 end

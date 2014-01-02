@@ -1,0 +1,12 @@
+  <div class="col-xs-4 col-sm-4 col-md-3 portfolio-item-wrapper" data-time="<%= tv_show.created_at.to_i %>">
+<div class="portfolio-item">
+    <div class="portfolio-thumb">
+            <%= link_to image_tag(@tmdb.imageUrl('poster','w154', tv_show.poster), class: 'img-responsive'), tv_show_path(tv_show), title: tv_show.name %>
+    </div>
+
+    <div class="portfolio-content">
+        <h5><%= truncate(tv_show.name, length: 25) %></h5>
+    </div>
+
+</div>
+</div>

@@ -6,6 +6,7 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
+	s('#main-wrapper').addClass('color-skin-14');
 
 	if(s('#caroufredsel-portfolio-container-home').size() > 0 ){
 		s(window).load(function () {
@@ -16,6 +17,14 @@ s(document).ready(function(){
 		}); 
 	}
 
+	// Isotope Portfolio
+    var container = s('#upcoming-movies');
+    s(window).load(function () {
+        // Initialize Isotope
+        container.isotope({
+            itemSelector: '.portfolio-item-wrapper'
+     	});
+    });
 
     // Revolution Slider
     if (s.fn.cssOriginal != undefined)

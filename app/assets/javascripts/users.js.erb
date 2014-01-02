@@ -2,6 +2,9 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
+	//set tooltips for followers and following
+	s('.user').tooltip();
+
 	if(s('table.recent-activity').size() > 0){
 
 		s('#more-activity').click(function(){

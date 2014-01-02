@@ -33,6 +33,12 @@
                 <h4><%= @tv_show.name %></h4>
             </div>
             <div class="col-md-4 col-xs-4 col-sm-4">
+                <%= form_tag(tv_shows_path, method: :get, id: "tv-shows") do  %>
+                    <div class="form-group">
+                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Tv Shows to add" %>
+                        <button type="submit" id="search-btn" class="btn"><i class="icon-search"></i></button>
+                    </div>
+                <% end %>
               
             </div>
             <!-- /.page-title -->

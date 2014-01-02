@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <%= link_to raw("<i class='icon-film'> </i> Movie<span>Buddy</span> <em><small style='color: grey; text-transform: lowercase; font-size: 11px;'>(Alpha)</small></em>"), root_path, class: "navbar-brand" %>
+            <%= link_to raw("Movie<span>Buddy</span>"), root_path, class: "navbar-brand" %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,9 +17,9 @@
             	<% if user_signed_in? %>
                 <li class="<%= current_page?(controller: 'home') ? "active" : "" %>"><%= link_to raw("<i class='icon-home'></i> Home"), root_path %></li>
                 <li class="<%= current_page?(controller: 'users', action: 'index') ? "active" : "" %>"><%= link_to raw("<i class='icon-group'></i> Users"), all_users_path %></li>
-            	<li class="<%= current_page?(controller: 'movies') ? "active" : "" %>"><%= link_to raw("<i class='icon-facetime-video'></i> My Movies"), movies_path %></li>
+            	<li class="<%= current_page?(controller: 'movies') ? "active" : "" %>"><%= link_to raw("<i class='icon-facetime-video'></i> Movies"), movies_path %></li>
                 <li class=""><%= link_to raw('<i class="icon-desktop"></i> Tv Shows'), tv_shows_path %></li>
-                <li class="dropdown <%= controller_name == 'users' && action_name == "show" ? "active" : "" %>">
+                <li class="dropdown <%= controller_name == 'users' || controller_name =="registrations" ? "active" : "" %>">
                     <a href="#" class="profile-pic dropdown-toggle" data-toggle="dropdown">
                         <%= image_tag(current_user.avator.url(:small), alt: current_user.name, class: "profile-img", width: "32px", height: "32px") + " " + current_user.name.split(" ").first %>
                     </a>

@@ -8,6 +8,12 @@ s.noConflict();
 s(document).ready(function(){
 	s('.youtube').fitVids();
 
+  //make profile stats div clickable
+  s(".profile-stats").click(function(){
+       window.location=s(this).find("a").attr("href"); 
+       return false;
+  });
+
   //truncate movie overviews
   s('#movie-overview').jTruncate({length: 360 }); 
 
@@ -52,7 +58,9 @@ s(document).ready(function(){
           },
           // call Isotope as a callback
           function( newElements ) {
-            container.isotope( 'insert', s( newElements ) ); 
+            container.isotope( 'insert', s( newElements ),function(){
+               container.isotope('reLayout');
+            }); 
           }
         );
     });
@@ -348,17 +356,17 @@ function similarMovies(data){
       if(poster != undefined){
         count += 1;
 
-        div.append('<div class="col-md-2 col-sm-4 col-xs-6 portfolio-item-wrapper-similar" id="' + id +'">' + 
-                    '<div class="portfolio-item">' +
-                        '<div class="thumbnail">' +
+        div.append('<div class="col-md-2 col-sm-3 col-xs-6 portfolio-item-wrapper-similar" id="' + id +'">'+
+                      '<div class="portfolio-item">'+
+                          '<div class="portfolio-thumb">' +
                           '<a href="#"><img src="http://image.tmdb.org/t/p/w154/' + poster + '" id="image-'+ id +'" class="tip" title="'+ title +'" data-url="http://api.themoviedb.org/3/movie/'+ id +'?api_key=29588c40b1a3ef6254fd1b6c86fbb9a9&append_to_response=trailers" /></a>' +
-                          '<div class="caption">' +
-                            '<b>' + truncateString(title, 12) + '</b>' +
-                            '<span style="display: block" id="release-year-' + id +'">' +year + '</span>' +
-                            '<hr /><a href="#" class="add-to-collection btn btn-info btn-default btn-xs btn-block" data-url="http://api.themoviedb.org/3/movie/'+ id +'?api_key=29588c40b1a3ef6254fd1b6c86fbb9a9&append_to_response=trailers" id="add-'+ id +'">Add</a>' +
-                        '</div>' +
-                      '</div>' +
-                    '</div>' +
+                          '</div>'+
+                          '<div class="portfolio-content">'+
+                              '<h5>'+ truncateString(title, 12) +'</h5>'+
+                              '<span id="release-year-' + id +'">' +year + '</span>' +
+                              '<p><a href="#" class="add-to-collection btn btn-info btn-default btn-xs btn-block" data-url="http://api.themoviedb.org/3/movie/'+ id +'?api_key=29588c40b1a3ef6254fd1b6c86fbb9a9&append_to_response=trailers" id="add-'+ id +'">Add</a></p>' +
+                          '</div>'+
+                      '</div>'+
                   '</div>');
         if(count % 6 == 0){
           div.append('<div class="clearfix" style="margin-bottom: 10px;"></div>');

@@ -34,7 +34,7 @@
         </td>
 
         <td align="right">
-            <%= link_to image_tag(@tmdb.imageUrl('poster', 'w92',activity.trackable.poster)), movie_path(activity.trackable), class: "home" %>
+            <%= link_to image_tag(@tmdb.imageUrl('poster', 'w92',activity.trackable.poster)), movie_path(activity.trackable) %>
         
             <% elsif activity.trackable_type == "Update" %>
                 updated his status
@@ -69,6 +69,15 @@
             <td align="right">
                 <%= activity.trackable.content %>                          
             </td>
+        <% elsif activity.trackable_type == "TvShow" %>     
+                added a new <%= link_to "tv show", tv_show_path(activity.trackable), class: "home" %> to his collection
+
+                <blockquote style="margin-top: 15px;">
+                    <p><%= activity.trackable.name %></p>
+                </blockquote>
+                <td align="right">
+                     <%= link_to image_tag(@tmdb.imageUrl('poster', 'w92',activity.trackable.poster)), tv_show_path(activity.trackable) %>                          
+                </td>
         <% end %>  
     </tr>
 <% end %>

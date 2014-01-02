@@ -44,9 +44,16 @@
                         </ul>
                     </div>
 
+                    <div class="wrapper-1">
+                        <h5 class="subpage-title">Upcoming Movies</h5>
+                    <div class="row" id="upcoming-movies">
+                        
                                     <% if @upcoming_movies.any? %>
-    <%= render :partial => 'shared/recent_movies', locals: { movies: @upcoming_movies, size: "w154" } %>
+    <%= render :partial => 'shared/thumbnails', locals: { collection: @upcoming_movies, size: "w92", resource: "Movie" } %>
 <% end %>
+                    </div>
+                </div>
+
 
 
                 </div>

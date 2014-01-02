@@ -6,9 +6,11 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.friendly.find(params[:id])
-		@recent_movies = @user.movies.first(5)
+		@recent_movies = @user.movies.first(6)
+		@recent_shows = @user.tv_shows.first(6)
 		@tmdb = Tmdb.new
 		@activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.id, owner_type: "User").limit(5)
+		accounts
 	end
 
 	def edit
@@ -38,14 +40,24 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def tv_shows
+		@user = User.friendly.find(params[:id])
+		if current_user == @user
+			redirect_to tv_shows_path
+		else
+			@tv_shows = @user.tv_shows.page(params[:page]).per(8)
+			@tmdb = Tmdb.new
+		end
+	end
+
 	def following
 		@user = User.friendly.find(params[:id])
-		@following = @user.all_following
+		@following = Kaminari.paginate_array(@user.all_following).page(params[:page]).per(8)
 	end
 
 	def followers
 		@user = User.friendly.find(params[:id])
-		@followers = @user.followers
+		@followers = Kaminari.paginate_array(@user.followers).page(params[:page]).per(8)
 	end
 
 	def follow
@@ -78,9 +90,7 @@ class UsersController < ApplicationController
 	end
 
 	def sharing
-		@connected_twitter = current_user.authentications.where(:provider => "twitter")
-		@connected_facebook = current_user.authentications.where(:provider => "facebook")
-		@connected_google = current_user.authentications.where(:provider => "google_oauth2")
+		accounts
 	end
 
 	def activity

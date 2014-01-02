@@ -13,7 +13,7 @@
         <div class="row">
             <div id="<%= controller_name == "home" ? "caroufredsel-portfolio-container-home" : "caroufredsel-portfolio-container"%>">
                 
-                <%= render :partial => 'shared/movies', locals: { movies: movies, size: size } %>
+                <%= render :partial => 'shared/thumbnails', locals: { collection: movies, size: size, resource: "Movie" } %>
                 <!-- /.portfolio-item-wrapper -->
             </div>
             <!-- /.caroufredsel-portfolio-container -->

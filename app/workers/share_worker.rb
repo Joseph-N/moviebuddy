@@ -9,8 +9,9 @@ class ShareWorker
 		if user.connected_socially?
 		  	record =  resource.safe_constantize.find(resource_id)
 
-		  	if service == "facebook" && user.provider == "facebook"
+		  	if service == "facebook" && user.connected_facebook? && user.granted_permission?
 		  		graph = user.facebook
+
 		  		# graph.put_connections("me","feed", :message => content, :link => options["url"])  
 
 			  	if resource == "Movie"

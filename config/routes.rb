@@ -50,6 +50,7 @@ MovieBuddy::Application.routes.draw do
   get 'users/:id/following' => 'users#following', as: :user_follows
   get 'users/:id/followers' => 'users#followers', as: :user_followers
   get 'users/:id/activity' => 'users#activity'
+  get 'users/:id/tv_shows' => 'users#tv_shows', as: :user_tv_shows
   get 'password/edit' => 'users#edit', as: :password_edit
   patch 'password/edit' => 'users#update_password'
   get 'settings/sharing' => 'users#sharing', as: :user_sharing

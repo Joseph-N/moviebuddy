@@ -1,0 +1,22 @@
+<% unless collection.nil? %>
+    <% for item in collection %>
+<div class="col-xs-3 col-sm-2 <%= controller_name == "home" ? "col-md-3" : "col-md-2" %> portfolio-item-wrapper">
+<div class="portfolio-item">
+    <div class="portfolio-thumb">
+        <% if resource == "Movie" %>
+             <%= link_to image_tag(@tmdb.imageUrl('poster',size, item.poster), class: "img-responsive"), movie_path(item) %>
+        <% elsif resource == "TvShow" %>
+             <%= link_to image_tag(@tmdb.imageUrl('poster',size, item.poster), class: "img-responsive"), tv_show_path(item) %>
+        <% end %>
+            
+        
+    </div>
+    <% unless current_page?(controller: "home", action: "index") || controller_name == "users" && action_name == "show" %>
+    <div class="portfolio-content">
+        <h5><%= item.title %></h5>
+    </div>
+    <% end %>
+</div>
+</div>
+    <% end %>
+<% end %>

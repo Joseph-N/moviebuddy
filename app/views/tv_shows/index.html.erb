@@ -7,8 +7,7 @@
                 <h4 id="movies">Tv Shows</h4>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4 page-title">
-
-                    
+                <%= "<h4>Found #{@tv_shows.count} shows</h4>".html_safe if params[:q] %></h4>
 
             </div>
 
@@ -40,35 +39,21 @@
                     <% if params[:q] %>
                         <%= render 'results' %>
                     <% else %>
-                        <div id="isotope-portfolio-container">
+                        
 
                         <% if @tv_shows.any? %>
-                            <% for show in @tv_shows %>
-
-  <div class="col-xs-4 col-sm-4 col-md-3 portfolio-item-wrapper" data-time="<%= show.created_at.to_i %>">
-<div class="portfolio-item">
-    <div class="portfolio-thumb">
-            <%= link_to image_tag(@tmdb.imageUrl('poster','w154', show.poster), class: 'img-responsive'), tv_show_path(show), title: show.name %>
-    </div>
-
-    <div class="portfolio-content">
-        <h5><%= truncate(show.name, length: 25) %></h5>
-    </div>
-
-</div>
-</div>
-
-
-                            <% end %>
+                        <div id="isotope-portfolio-container">
+                                <%= render @tv_shows if @tv_shows.any? %>
                             <div class="clearfix"></div>
 
                                                 </div>   
-                                                <%= paginate @tv_shows %>                           
+                                                <%= paginate @tv_shows %>  
+                        </div>                         
                         <% else %>
                             <h4>It's lonely here...how about you add some shows!</h4>
                         <% end %>
                      <% end %>
-                </div>
+                
                 <div class="col-md-3">
                      <% if @tv_shows.any? %>
                      <div class="wrapper-1">

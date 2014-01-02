@@ -1,4 +1,4 @@
-<% title "#{@user.name} Followers" %>
+<% title "#{@user.name}'s Shows" %>
 
  <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
@@ -8,11 +8,7 @@
             </div>
             <!-- /.page-title -->
             <div class="col-xs-6 breadcrumb-wrapper">
-                <% if @user == current_user %>
-                    <h4 class="pull-right">Your Followers</h4>
-                <% else %>
-                    <h4 class="pull-right"><%= @user.name.split(" ").first %>'s Followers</h4>
-                <% end %>
+                <h4 class="pull-right"> <%= @user.name.split(" ").first %>'s Shows</h4>
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>
@@ -20,14 +16,29 @@
     </div>
     <!-- /.container -->
 </section>
+
 <section id="portfolio-2" class="section colored-wrapper">
     <div class="container">
         <div class="row">
-            <div id="isotope-portfolio-container">
-                <%= render :partial => 'users', locals: { users: @followers } %>          	
+            <div class="col-md-3">
+                <% if @tv_shows.any? %>
+                    <div class="wrapper-1">
+                        <h5 class="subpage-title">Advertisement</h5>
+                        <%= render 'shared/google_ads' %>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-md-9 v-ruler">
+                <div id="isotope-portfolio-container">
+
+                    <%= render @tv_shows if @tv_shows.any? %>
+
+                </div>
+                <div class="clearfix">
+                    <%= paginate @tv_shows %>
+                </div>
             </div>
             <!-- /.isotope-portfolio-container -->
-            <%= paginate @followers %>  
         </div>
         <!-- /.row -->
     </div>
