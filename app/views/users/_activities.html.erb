@@ -1,8 +1,8 @@
 <% activities.each do |activity| %>
     <tr data-id="<%= activity.id %>">
-        <td width="50%">
+        <td width="70%">
             <%= render :partial => 'activity_icon', locals: { activity: activity } %>
-            <%= activity.owner.name %>
+            <%= activity.owner.name.split(" ").first %>
             <% if activity.trackable_type == "Review"%>
                 reviewed a <%= link_to "Movie", movie_path(activity.trackable.movie), class: "home" %>
 

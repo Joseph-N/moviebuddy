@@ -8,7 +8,16 @@ class Movie < ActiveRecord::Base
   	default_scope -> { order('created_at desc') }
 
 	extend FriendlyId
-  	friendly_id :title, use: :slugged
+  	friendly_id :slug_candidates, use: :slugged
+
+	# Try building a slug based on the following fields in
+	# increasing order of specificity.
+	def slug_candidates
+	[
+	  :title,
+	  [:id, :title]
+	]
+	end
 
   	before_save :check_genres
 	acts_as_voteable

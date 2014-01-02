@@ -3,6 +3,15 @@ class User < ActiveRecord::Base
 
 	extend FriendlyId
   	friendly_id :name, use: :slugged
+
+	# Try building a slug based on the following fields in
+	# increasing order of specificity.
+	def slug_candidates
+	[
+	  :name,
+	  [:id, :name]
+	]
+	end
 	
 	acts_as_voter 
 	acts_as_followable
