@@ -131,7 +131,7 @@ class UsersController < ApplicationController
 	def custom_json_for(value)
 	  list = value.map do |user|
 	    { :permalink => user_show_path(user),
-	      :image => user.avator.url(:thumb),
+	      :image => user.avator.url(:thumb) == "thumb_default.png" ? ActionController::Base.helpers.asset_path('thumb_default.png') : user.avator.url(:thumb),
 	      :title => user.name
 	    }
 	  end

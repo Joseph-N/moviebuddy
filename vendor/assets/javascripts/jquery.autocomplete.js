@@ -350,6 +350,8 @@ $.Autocompleter = function(input, options) {
 			success(term, data);
 		// if an AJAX url has been supplied, try loading the data now
 		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
+			//for my customizations
+			s('#search-btn').hide();
 			
 			var extraParams = {
 				timestamp: +new Date()
@@ -374,6 +376,7 @@ $.Autocompleter = function(input, options) {
 					var parsed = options.parse && options.parse(data) || parse(data);
 					cache.add(term, parsed);
 					success(term, parsed);
+					s('#search-btn').show();
 				}
 			});
 		} else {
