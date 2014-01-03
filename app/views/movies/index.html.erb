@@ -36,7 +36,6 @@
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
-                <div class="row">
                     <% unless @movies.any? %>
                          <h4>It's lonely here...how about you add some movies!</h4>
                     <% end %>
@@ -53,9 +52,9 @@
                                 <h5 class="subpage-title">Advertisement</h5>
                                 <%= render 'shared/google_ads' %>
                             </div>
+                        </div>
                     <% end %>
    
-                        </div>
                         <div class="col-md-9 v-ruler">
                              <div class="row" id="isotope-portfolio-container">
 
@@ -72,7 +71,7 @@
     
                         </div>
                     <% end %>
-                </div>
+
 
   
                 	

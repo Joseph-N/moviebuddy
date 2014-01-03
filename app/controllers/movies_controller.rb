@@ -35,7 +35,7 @@ class MoviesController < ApplicationController
 				end
 			end
 		else
-			@movie = current_user.movies.find_by_tmdb_id(@movie.tmdb_id)
+			@movie = current_user.movies.find_by tmdb_id: @movie.tmdb_id
 			gflash :notice => { :value => "#{@movie.title} is already in your collection", :time => 3000 }
 		end
 

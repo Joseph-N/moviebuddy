@@ -3,13 +3,21 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 col-sm-3 col-md-6 page-title">
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
                <h4>Browse Users</h4>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 page-title">
+                <h4><%= "Found #{pluralize(@users.count, 'match')}" if params[:search] %></h4>               
             </div>
 
             <!-- /.page-title -->
-            <div class="col-xs-6 col-sm-9 col-md-6">
-                <% render :partial => 'shared/search_form' %>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <%= form_tag(all_users_path, method: :get, id: "search-users") do  %>
+                    <div class="form-group">
+                        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search users" %>
+                        <button type="submit" id="search-btn" class="btn"><i class="icon-search"></i></button>
+                    </div>
+                <% end %>
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>
@@ -18,17 +26,35 @@
 <!-- /.container -->
 </section>
 
+<section id="new-icons" class="section">
+            <div class="container wrapper-1">
+                <h5 class="subpage-title">
+                    <span>Advertisment</span>
+                    <!-- Controls -->
+                    <span id="client-next" class="next"><i class="icon-angle-right"></i></span>
+                    <span id="client-prev" class="prev"><i class="icon-angle-left"></i></span>
+
+                </h5>
+                <div class="row">
+                    <div id="clients-wrapper">
+
+                     <div class="col-xs-12 col-sm-12 col-md-6 client-wrapper">
+                       <%= render 'shared/google_ads' %>
+                    </div>
+                     <div class="col-xs-12 col-sm-6 col-md-6 client-wrapper">
+                        <%= render 'shared/google_ads_1' %>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </section>
+
 <section id="portfolio-2" class="section colored-wrapper">
     <div class="container">
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
-                <div class="wrapper-1">
-                    <div class="col-md-12">
-                        <h5 class="subpage-title">Advertisement</h5>
-                        <%= render 'shared/google_ads' %>
-                    </div>
-                </div>
                 <div id="isotope-portfolio-container">
                     <%= render @users if @users.any? %>  
                 </div>

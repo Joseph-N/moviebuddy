@@ -172,8 +172,15 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def self.search(query)
+		conditions = <<-EOS
+					    	to_tsvector('english', name) @@ to_tsquery('english', ?)
+					  	EOS
+	  	where(conditions, query + ':*')
+	end
+
 	def facebook
-		token = self.authentications.find_by_provider("facebook").token
+		token = self.authentications.find_by provider: "facebook".token
 		Koala::Facebook::API.new(token)
 	end
 
@@ -183,6 +190,11 @@ class User < ActiveRecord::Base
 
 	def connected_facebook?
 		self.authentications.where(provider: "facebook").first.present?
+	end
+
+	private
+	def conditions
+
 	end
 
 end

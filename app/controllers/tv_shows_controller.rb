@@ -29,7 +29,7 @@ class TvShowsController < ApplicationController
 				end
 			end
 		else
-			@tv_show = TvShow.find_by_tmdbid(@tv_show.tmdbid)
+			@tv_show = TvShow.find_by tmdbid: @tv_show.tmdbid
 		end
 	end
 

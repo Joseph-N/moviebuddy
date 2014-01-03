@@ -1,7 +1,20 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!
 	def index
-		@users = User.where('id != ?', current_user.id).page(params[:page]).per(8)
+		if params[:q]
+			@users = User.search(params[:q])
+		elsif params[:search]
+			results = User.search(params[:search])
+			@users = Kaminari.paginate_array(results).page(params[:page]).per(8)				
+		else
+			@users = User.where('id != ?', current_user.id).page(params[:page]).per(8)
+		end
+		respond_to do |format|
+		    format.html
+		    format.json do
+		      render :json => custom_json_for(@users)
+		    end
+		end
 	end
 
 	def show
@@ -113,5 +126,15 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.required(:user).permit(:password, :password_confirmation, :current_password)
+	end
+
+	def custom_json_for(value)
+	  list = value.map do |user|
+	    { :permalink => user_show_path(user),
+	      :image => user.avator.url(:thumb),
+	      :title => user.name
+	    }
+	  end
+	  list.to_json
 	end
 end
