@@ -4,7 +4,7 @@
     <meta name="description" content="" />
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
     <meta property="fb:app_id"      content="1432996973586926" /> 
-    <meta property="og:type"        content="video.movie" /> 
+    <meta property="og:type"        content="video.tv_show" /> 
     <meta property="og:url"         content="<%= request.url %>" /> 
     <meta property="og:title"       content="<%= @tv_show.name %>" /> 
     <meta property="og:image"       content="<%= @tmdb.imageUrl("poster", "w342", @tv_show.poster)%>" /> 
@@ -33,12 +33,6 @@
                 <h4><%= @tv_show.name %></h4>
             </div>
             <div class="col-md-4 col-xs-4 col-sm-4">
-                <%= form_tag(tv_shows_path, method: :get, id: "tv-shows") do  %>
-                    <div class="form-group">
-                        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search Tv Shows to add" %>
-                        <button type="submit" id="search-btn" class="btn"><i class="icon-search"></i></button>
-                    </div>
-                <% end %>
               
             </div>
             <!-- /.page-title -->

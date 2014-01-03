@@ -33,11 +33,13 @@
                         <div class="team-member">
                             <div class="team-member-thumb">
                                  <%= image_tag @user.avator.url(:profile), class: "img-responsive" %>
-                                <div class="overlay"></div>
+
+                                <div class="overlay"></div>                                
                                 <ul class="member-social">
                                     <li><%= link_to raw('<i class="icon-facebook"></i>'), @connected_facebook.any? ? @connected_facebook.first.social_url : "#" %></li>
                                     <li><%= link_to raw('<i class="icon-twitter"></i>'), @connected_twitter.any? ? @connected_twitter.first.social_url : "#"  %></li>
                                     <li><%= link_to raw('<i class="icon-google-plus"></i>'), @connected_google.any? ? @connected_google.first.social_url : "#" %></li>
+                                    <li><%= link_to raw('<i class="icon-zoom-in"></i>'),@user.avator.url, rel: "prettyPhoto" %></li>
                                 </ul>
                             </div>
                             <div class="team-member-info">

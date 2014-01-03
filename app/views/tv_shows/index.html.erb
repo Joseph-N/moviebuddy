@@ -35,13 +35,19 @@
             <div id="content">
                 <div class="row">
                     
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                     <% if params[:q] %>
                         <%= render 'results' %>
                     <% else %>
                         
 
                         <% if @tv_shows.any? %>
+                <div class="wrapper-1">
+                    <div class="col-md-12">
+                        <h5 class="subpage-title">Advertisement</h5>
+                        <%= render 'shared/google_ads' %>
+                    </div>
+                </div>
                         <div id="isotope-portfolio-container">
                                 <%= render @tv_shows if @tv_shows.any? %>
                             <div class="clearfix"></div>
@@ -54,14 +60,6 @@
                         <% end %>
                      <% end %>
                 
-                <div class="col-md-3">
-                     <% if @tv_shows.any? %>
-                     <div class="wrapper-1">
-                    <h5 class="subpage-title">Advertisement</h5>
-                    <%= render 'shared/google_ads' %>
-                </div>
-                    <% end %>
-                </div>
                 </div>
                 <!-- /.isotope-portfolio-container -->
                 <div class="clearfix">

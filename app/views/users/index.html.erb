@@ -23,8 +23,14 @@
         <!-- /.portfolio-filter -->
         <div class="row">
             <div id="content">
+                <div class="wrapper-1">
+                    <div class="col-md-12">
+                        <h5 class="subpage-title">Advertisement</h5>
+                        <%= render 'shared/google_ads' %>
+                    </div>
+                </div>
                 <div id="isotope-portfolio-container">
-                    <%= render :partial => 'users', locals: { users: @users } %>  
+                    <%= render @users if @users.any? %>  
                 </div>
                 <!-- /.isotope-portfolio-container -->
                 <div class="clearfix">

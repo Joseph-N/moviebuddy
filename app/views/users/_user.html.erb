@@ -1,7 +1,18 @@
-<li>
-	<%= link_to image_tag(user.avator.url(:thumb)), user_show_path(user) %>
-    <h5>
-    	<%= link_to user.name, user_show_path(user) %>
-        <small><%= user.followers.count %> Followers | <%= user.movies.count %> Movies</small>
-    </h5>
-</li>
+<div class="col-xs-6 col-sm-4 col-md-3 portfolio-item-wrapper">
+    <div class="portfolio-item">
+        <div class="portfolio-thumb">
+            <%= link_to (image_tag user.avator.url(:medium), class: "img-responsive"),  user_show_path(user) %>
+        </div>
+        <div class="portfolio-content">
+            <h5><%= user.name %></h5>
+            <span><%= user.movies.count %> Movies</span><br /><br />
+            <% unless current_user == user %>
+                <% if current_user.following?(user) %>
+                    <%= link_to "unfollow" ,user_unfollow_path(id: user.id), class: "btn btn-flat flat-danger btn-sm btn-block follow-unfollow", id: user.id %>
+                <% else %>
+                    <%= link_to "follow" ,user_follow_path(id: user.id), class: "btn btn-flat flat-info btn-sm btn-block follow-unfollow", id: user.id %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,9 @@ s(document).ready(function(){
   				s('#tv_show_status').text(data.status);
   				s('#tv_show_production').text(data.in_production == false ? "No" : "Yes");
   				s('#tv_show_homepage').html('<a href="' + data.homepage + '" target="_blank">Click here <i class="icon-external-link-sign"></i></a>');
+  				//update meta tags
+  				s("meta[property=og\\:description]").attr('content', truncateString(data.overview, 500));
+  				s("meta[name=description]").attr('content', truncateString(data.overview, 200));
 
   				tvSeasons(data);
 
