@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div id="isotope-portfolio-container">
-                <%= render :partial => 'users', locals: { users: @following } %>  
+                <%= render :partial => 'user',:collection => @following %>  
             </div>
             <!-- /.isotope-portfolio-container -->
             <%= paginate @following %> 
