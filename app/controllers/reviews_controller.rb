@@ -8,8 +8,8 @@ class ReviewsController < ApplicationController
 	def create
 		@movie = Movie.friendly.find(params[:movie_id])
 		@review = @movie.reviews.build(review_params)
-		@review.user_id = current_user.id
-		share_facebook = params[:user][:connected_facebook] == "1" ? true : false 
+		@review.user_id = current_user.id		
+		share_facebook = params[:user][:connected_facebook] == "1" ? true : false if params[:user].present?
 		if @review.save
 			ActivityWorker.perform_async("Review", @review.id, current_user.id)	
 			ShareWorker.perform_async("facebook", "Review", current_user.id, @review.id, { activity: "movie.review", url: movie_url(@movie), facebook: share_facebook})

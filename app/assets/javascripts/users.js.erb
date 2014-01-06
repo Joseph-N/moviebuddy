@@ -30,7 +30,7 @@ s(document).ready(function(){
 	}
 
 	//when a user follows or unfollows another user
-	s('.follow-unfollow').click(function(e){
+	s(document).on('click','.follow-unfollow', function(e){
 		e.preventDefault();
 		s.ajax({
 		  type: "GET",
