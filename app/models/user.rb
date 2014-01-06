@@ -2,15 +2,11 @@ class User < ActiveRecord::Base
 	include PublicActivity::Common
 
 	extend FriendlyId
-  	friendly_id :name, use: :slugged
+  	friendly_id :slug_name, use: :slugged
 
-	# Try building a slug based on the following fields in
-	# increasing order of specificity.
-	def slug_candidates
-	[
-	  :name,
-	  [:id, :name]
-	]
+	# custom method for friendly id
+	def slug_name
+		"#{rand(36**5).to_s(36)}-#{name}"
 	end
 	
 	acts_as_voter 
@@ -180,8 +176,8 @@ class User < ActiveRecord::Base
 	end
 
 	def facebook
-		token = self.authentications.find_by provider: "facebook".token
-		Koala::Facebook::API.new(token)
+		auth = self.authentications.find_by provider: "facebook"
+		Koala::Facebook::API.new(auth.token)
 	end
 
 	def granted_permission?
@@ -190,11 +186,6 @@ class User < ActiveRecord::Base
 
 	def connected_facebook?
 		self.authentications.where(provider: "facebook").first.present?
-	end
-
-	private
-	def conditions
-
 	end
 
 end

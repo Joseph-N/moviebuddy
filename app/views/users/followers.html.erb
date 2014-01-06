@@ -3,16 +3,17 @@
  <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 page-title">
-                <a href="javascript:history.go(-1)" id="ios-arrow-left">Back</a>                    
+            <div class="col-xs-6 col-sm-4 col-md-4 page-title">
+                <% if @user == current_user %>
+                    <h4>Your Followers</h4>
+                <% else %>
+                    <h4><%= @user.name.split(" ").first %>'s Followers</h4>
+                <% end %>
+                    
             </div>
             <!-- /.page-title -->
             <div class="col-xs-6 breadcrumb-wrapper">
-                <% if @user == current_user %>
-                    <h4 class="pull-right">Your Followers</h4>
-                <% else %>
-                    <h4 class="pull-right"><%= @user.name.split(" ").first %>'s Followers</h4>
-                <% end %>
+
             </div>
             <!-- /.breadcrumb-wrapper -->
         </div>

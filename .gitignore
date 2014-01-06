@@ -15,6 +15,7 @@
 /vendor/bundle/
 /vendor/ruby/
 
+
 # minimal Rails specific artifacts
 db/*.sqlite3
 /log/*
@@ -28,6 +29,9 @@ db/*.sqlite3
 #   git config --global core.excludesfile ~/.gitignore_global
 #
 # Here are some files you may want to ignore globally:
+
+# ignore temporal files
+*~
 
 # scm revert files
 **.orig
@@ -57,3 +61,6 @@ dump.rdb
 *.project
 temp*.rdb
 nohup.out
+
+# Ignore application.yml
+config/application.yml

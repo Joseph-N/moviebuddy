@@ -14,7 +14,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = ENV["SUPPORT_EMAIL"]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -261,14 +261,14 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   # config for facebook
-  config.omniauth :facebook, "1432996973586926", "fb4eedfa886fae39eed6bca70b59253f",
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"],
   {
     :image_size => {:width => 290, :height => 290 },
     :scope => 'email, publish_stream'
   }
 
   # config for google
-  config.omniauth :google_oauth2, "716264842816.apps.googleusercontent.com", "-QDZoTN2WlAMdjdDdrL_UVDE", 
+  config.omniauth :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"], 
   { 
     :access_type => "offline",
     :approval_prompt => "",
@@ -277,7 +277,7 @@ Devise.setup do |config|
   }
 
   # config for twitter
-  config.omniauth :twitter ,"ZVr2HVObe2nUROkEC8u2A", "UvYQ6sCD3SgJN0kRJbvlGj4rm528XP55nug1jbxCaM",
+  config.omniauth :twitter ,ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"],
   {
     :image_size => 'original'
   }

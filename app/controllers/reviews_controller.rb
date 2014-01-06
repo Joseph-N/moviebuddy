@@ -7,11 +7,12 @@ class ReviewsController < ApplicationController
 
 	def create
 		@movie = Movie.friendly.find(params[:movie_id])
-		@review = @movie.reviews.build(comment_params)
+		@review = @movie.reviews.build(review_params)
 		@review.user_id = current_user.id
+		share_facebook = params[:user][:connected_facebook] == "1" ? true : false 
 		if @review.save
 			ActivityWorker.perform_async("Review", @review.id, current_user.id)	
-			ShareWorker.perform_async("facebook", "Review", current_user.id, @review.id, { activity: "movie.review", url: movie_url(@movie)})
+			ShareWorker.perform_async("facebook", "Review", current_user.id, @review.id, { activity: "movie.review", url: movie_url(@movie), facebook: share_facebook})
 			MailerWorker.perform_async(@movie.user.id, "movieReview", { actor_id: current_user.id, movie_id: @movie.id, review_id: @review.id })
 
 			respond_to do |format|
@@ -28,7 +29,7 @@ class ReviewsController < ApplicationController
 	end
 
 	private
-		def comment_params
+		def review_params
 			params.require(:review).permit(:body)
 		end
 end

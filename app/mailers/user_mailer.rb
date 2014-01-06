@@ -1,10 +1,10 @@
 class UserMailer < ActionMailer::Base
-  default from: "MovieBuddy Notifications <notifications.at.moviebuddy@gmail.com>"
+  default from: ENV["NOTIFICATION_EMAIL"]
 
   def signup_confirmation(user)
     @user = user
 
-    mail to: user.email, subject: "Thanks for signing up"
+    mail to: user.email, subject: "Welcome to MovieBuddy"
   end
 
   def review_notification(to_user, from_user, movie, review)
@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
     @movie = movie
     @review = review
 
-    mail to: to_user.email, subject: "New Comment"
+    mail to: to_user.email, subject: "New Review"
   end
 
   def like_notification(to_user, from_user, movie)

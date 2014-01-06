@@ -3,9 +3,6 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4">
-                <a href="/movies" id="ios-arrow-left">Back</a> 
-            </div>
             <div class="col-xs-4 col-sm-4 col-md-4 page-title">
                 <% if params[:q] %>
                     <h4>Found <%= pluralize(@movies.count, "match") %></h4>
@@ -18,6 +15,10 @@
                     <h4 id="movies">My Movies</h4>
                 <% end %>
             </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-4">
+            </div>
+
 
             <!-- /.page-title -->
             <div class="col-xs-4 col-sm-4 col-md-4">
@@ -42,7 +43,7 @@
                     <% if params[:q] %>
                         <%= render 'results' %>
                     <% else %>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <% if @movies.any?  %>
                             <div class="wrapper-1">
                             <%= render :partial => 'shared/genres', locals: { genres: @genres } %>
@@ -55,8 +56,8 @@
                         </div>
                     <% end %>
    
-                        <div class="col-md-9 v-ruler">
-                             <div class="row" id="isotope-portfolio-container">
+                        <div class="col-md-8 v-ruler">
+                             <div id="isotope-portfolio-container">
 
                                 <% if @movies.any? %>
                                 

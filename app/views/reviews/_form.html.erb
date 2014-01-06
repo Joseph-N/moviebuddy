@@ -13,6 +13,12 @@
     <%= f.text_area :body, placeholder: "Watched this movie? leave a review....", class: "form-control", rows: 3 %>
   </div>
   <div class="form-group">
+    Share: 
+    <% if current_user.connected_facebook? %>
+  	<i class="icon-facebook-sign" style="font-size: 16px; margin-top:"></i> <%= check_box "user", "connected_facebook?" %>
+    <% else %>
+    <%= link_to raw('<i class="icon-facebook-sign" style="font-size: 16px; margin-top:"></i>'), user_omniauth_authorize_path(:facebook), class: "social-share", title: "You have not yet connected your Facebook account. Clicking the logo will connect your Facebook account after which your review can be shared on Facebook" %>
+    <% end %>
     <%= f.submit "Comment", class: "btn btn-flat btn-sm flat-inverse pull-right" %>
   </div>
   <div class="clearfix"></div>  

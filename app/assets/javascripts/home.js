@@ -6,7 +6,6 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
-	s('#main-wrapper').addClass('color-skin-14');
 
 	if(s('#caroufredsel-portfolio-container-home').size() > 0 ){
 		s(window).load(function () {

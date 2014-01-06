@@ -21,6 +21,7 @@ class MoviesController < ApplicationController
 		@review = @movie.reviews.build
 		@reviews = @movie.reviews
 		@trailer = youtubeVideo(@movie.youtube_identifier)
+		@user = current_user
 	end
 
 	def create
@@ -30,9 +31,10 @@ class MoviesController < ApplicationController
 				gflash :success => "Added #{@movie.title} successfully to your collection"
 				current_user.updates.create(movie: @movie.id)
 				ActivityWorker.perform_async("Movie", @movie.id, current_user.id)
-				if params[:movie][:facebook] == "1"
-					ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
-				end
+				# if params[:movie][:facebook] == "1"
+				# 	ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
+				# end
+				ShareWorker.perform_async("facebook", "Movie", current_user.id, @movie.id, { activity: "movie.create", url: movie_url(@movie)})
 			end
 		else
 			@movie = current_user.movies.find_by tmdb_id: @movie.tmdb_id

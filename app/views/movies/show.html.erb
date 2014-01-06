@@ -27,12 +27,13 @@
 <section id="page-title-wrapper" class="section page-title-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-4">
-                <a href="javascript:history.go(-1)" id="ios-arrow-left">Back</a> 
-            </div>
             <div class="col-xs-4 col-sm-4 col-md-4 page-title">
                 <h4><%= @movie.title %></h4>
             </div>
+            
+            <div class="col-md-4 col-sm-4 col-xs-4">
+            </div>
+
             <div class="col-md-4 col-xs-4 col-sm-4">
                 <%= render :partial => 'shared/search_form' %>
             </div>
@@ -97,6 +98,8 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="reviews">
+                                <div class="row">
+                                    <div class="col-md-7">
                                 <div class="post-comments">
                                     <h5 class="subpage-title" id="review-count">
                                         <i class="icon-comments"></i> <%= @reviews.count %> Reviews
@@ -112,6 +115,14 @@
                                 <% else %>
                                     <p> You must be logged in to review on this movie <%= link_to "Log In", new_user_session_path, class: "home" %> </p>
                                 <% end %>
+                                    </div>
+                                    <div class="col-md-5">
+                                            <div class="wrapper-1">
+                                                <h5 class="subpage-title">Advertisement</h5>
+                                                <%= render 'shared/google_ads_1' %>
+                                            </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="tab-pane" id="cast">

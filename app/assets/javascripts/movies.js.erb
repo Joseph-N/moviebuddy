@@ -6,7 +6,11 @@ var s = jQuery;
 s.noConflict();
 
 s(document).ready(function(){
+  //responsive youtube iframe
 	s('.youtube').fitVids();
+
+  //set tooltip for social share
+  s('.social-share').tooltip();
 
   //make profile stats div clickable
   s(".profile-stats").click(function(){
@@ -23,7 +27,7 @@ s(document).ready(function(){
   }
 
   //change checkbox value
-  s('#movie_facebook').click(function(){
+  s('#review_facebook').click(function(){
      s(this).is(':checked') ? s(this).val("1") : s(this).val("0");
   });
 

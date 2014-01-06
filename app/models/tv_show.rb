@@ -6,14 +6,10 @@ class TvShow < ActiveRecord::Base
   	validates_presence_of :user_id, :name, :tmdbid
 
 	extend FriendlyId
-	friendly_id :slug_candidates, use: :slugged
+	friendly_id :slug_name, use: :slugged
 
-	# Try building a slug based on the following fields in
-	# increasing order of specificity.
-	def slug_candidates
-	[
-	  :name,
-	  [:id, :name]
-	]
+	# custom method for friendly id
+	def slug_name
+		"#{rand(36**5).to_s(36)}-#{name}"
 	end
 end

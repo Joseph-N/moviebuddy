@@ -80,16 +80,16 @@ MovieBuddy::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # mailer url
-  config.action_mailer.default_url_options = { :host => 'http://moviebuddy.info' }
+  config.action_mailer.default_url_options = { :host => ENV["MAILER_HOST"] }
 
   # mailer configurations
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
+    address:              'smtp.live.com',
     port:                 587,
     domain:               'moviebuddy.info',
-    user_name:            'notifications.at.moviebuddy@gmail.com',
-    password:             'HVJ4^3_>v/+*-LUE.,)4i5eDe',
+    user_name:            ENV["NOTIFICATION_EMAIL"],
+    password:             ENV["EMAIL_PASSWORD"],
     authentication:       'plain',
     enable_starttls_auto: true 
   }

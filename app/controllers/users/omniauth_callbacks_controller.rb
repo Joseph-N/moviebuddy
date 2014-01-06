@@ -6,7 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       if current_user
         gflash :success => {:title => "Great!", :value => "Successfully connected Facebook"}
-        redirect_to user_sharing_path
+        redirect_to request.referer
       else
         sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       end
@@ -24,7 +24,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       if current_user
         gflash :success => {:title => "Great!", :value => "Successfully connected Twitter"}
-        redirect_to user_sharing_path
+        redirect_to request.referer
       else
         gflash :success => "Successfully Authenticated from Twitter"
         sign_in_and_redirect @user, :event => :authentication
@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       if current_user
         gflash :success => {:title => "Great!", :value => "Successfully connected Google"}
-        redirect_to user_sharing_path
+        redirect_to request.referer
       else
         gflash :success => "Successfully Authenticated from Google"
         sign_in_and_redirect @user, :event => :authentication
